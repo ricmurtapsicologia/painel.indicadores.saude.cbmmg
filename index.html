@@ -3,86 +3,102 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Protótipo executivo do Painel Estratégico de Inteligência em Saúde Mental do PSOBM." />
+  <meta name="description" content="Protótipo metodológico do Painel Estratégico de Inteligência em Saúde Mental do PSOBM." />
   <title>Painel Estratégico de Inteligência em Saúde Mental do PSOBM</title>
   <style>
     :root {
-      --bg: #071421;
-      --bg-2: #0b1f33;
-      --panel: #ffffff;
-      --panel-soft: #f4f7fb;
-      --text: #162033;
-      --muted: #5b677a;
-      --line: #d9e1ee;
-      --blue-900: #062345;
-      --blue-800: #0b355f;
-      --blue-700: #14518d;
-      --blue-500: #1d75c2;
-      --cyan: #14b8d4;
-      --red-800: #8d1117;
-      --red-600: #c81e2b;
+      --bg: #061426;
+      --bg-soft: #0a223e;
+      --nav: #061d38;
+      --surface: #ffffff;
+      --surface-soft: #f5f8fc;
+      --surface-blue: #edf6ff;
+      --text: #142033;
+      --muted: #65738a;
+      --line: #d9e2ee;
+      --blue-950: #04172e;
+      --blue-900: #06264b;
+      --blue-800: #0a3a68;
+      --blue-600: #1769b3;
+      --blue-500: #1f7acb;
+      --cyan: #18bad2;
+      --red-900: #6e0f15;
+      --red-700: #a91520;
+      --red-600: #cc2230;
       --red-500: #ef3340;
-      --green: #22a06b;
-      --yellow: #f4b740;
+      --green: #1f9d67;
+      --yellow: #f4bd3f;
       --orange: #f97316;
-      --gray-100: #f7f9fc;
-      --gray-200: #edf1f7;
-      --gray-700: #39465a;
-      --shadow: 0 18px 50px rgba(3, 12, 28, .18);
-      --radius: 18px;
+      --gray-50: #f9fbfe;
+      --gray-100: #f2f5fa;
+      --gray-200: #e8eef6;
+      --gray-700: #39475c;
+      --shadow: 0 18px 45px rgba(2, 10, 28, .18);
+      --shadow-soft: 0 8px 20px rgba(16, 31, 52, .08);
+      --radius-lg: 24px;
+      --radius: 16px;
       --radius-sm: 12px;
-      --font: Inter, Segoe UI, Roboto, Arial, sans-serif;
+      --font: Inter, "Segoe UI", Roboto, Arial, sans-serif;
     }
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: var(--font);
-      background:
-        radial-gradient(circle at 20% 0%, rgba(29, 117, 194, .26), transparent 32%),
-        radial-gradient(circle at 100% 10%, rgba(239, 51, 64, .22), transparent 33%),
-        linear-gradient(135deg, #071421 0%, #0b1f33 52%, #08131e 100%);
-      color: var(--text);
       min-height: 100vh;
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 5%, rgba(31, 122, 203, .26), transparent 32%),
+        radial-gradient(circle at 90% 4%, rgba(239, 51, 64, .20), transparent 32%),
+        linear-gradient(135deg, #04101f 0%, #08233e 52%, #071426 100%);
     }
 
-    button, select { font: inherit; }
+    button { font: inherit; }
+    button:focus-visible,
+    a:focus-visible {
+      outline: 3px solid rgba(244, 189, 63, .95);
+      outline-offset: 3px;
+    }
+
     .app {
       min-height: 100vh;
       display: grid;
-      grid-template-columns: 86px minmax(0, 1fr);
+      grid-template-columns: 92px minmax(0, 1fr);
     }
 
     .sidebar {
       position: sticky;
       top: 0;
       height: 100vh;
-      background: linear-gradient(180deg, #052345, #071421 78%);
-      border-right: 1px solid rgba(255,255,255,.08);
-      padding: 16px 10px;
-      color: #fff;
-      z-index: 10;
+      z-index: 20;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 14px;
+      padding: 16px 10px;
+      background: linear-gradient(180deg, #052c52 0%, #061426 82%);
+      border-right: 1px solid rgba(255, 255, 255, .10);
+      color: #fff;
     }
 
-    .brand-mark {
-      width: 58px;
-      height: 58px;
+    .brand {
+      width: 62px;
+      height: 62px;
       border-radius: 50%;
-      background: conic-gradient(from 0deg, #ef3340, #ef3340 33%, #f4b740 33%, #f4b740 45%, #0b5cab 45%, #0b5cab 78%, #ef3340 78%);
       display: grid;
       place-items: center;
-      border: 3px solid rgba(255,255,255,.92);
-      box-shadow: 0 10px 30px rgba(0,0,0,.32);
-      font-size: 10px;
-      font-weight: 900;
-      letter-spacing: .04em;
       text-align: center;
+      font-size: 9px;
+      font-weight: 900;
       line-height: 1.05;
+      letter-spacing: .03em;
+      color: #fff;
+      border: 3px solid rgba(255,255,255,.90);
+      background:
+        radial-gradient(circle at 50% 48%, #0b5cab 0 34%, transparent 35%),
+        conic-gradient(#ef3340 0 32%, #f4bd3f 32% 46%, #0b5cab 46% 75%, #ef3340 75% 100%);
+      box-shadow: 0 12px 28px rgba(0,0,0,.34);
     }
 
     .nav {
@@ -90,274 +106,399 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      margin-top: 10px;
     }
 
     .nav-btn {
-      border: 0;
       width: 100%;
-      min-height: 62px;
-      border-radius: 14px;
+      min-height: 66px;
+      border: 0;
+      border-radius: 15px;
+      background: rgba(255,255,255,.07);
       color: rgba(255,255,255,.78);
-      background: rgba(255,255,255,.06);
       cursor: pointer;
       display: grid;
       place-items: center;
-      gap: 5px;
-      transition: transform .18s ease, background .18s ease, color .18s ease;
+      gap: 4px;
+      transition: transform .18s ease, background .18s ease, color .18s ease, box-shadow .18s ease;
       outline: 1px solid rgba(255,255,255,.06);
     }
-
-    .nav-btn:hover { transform: translateY(-1px); background: rgba(255,255,255,.12); color: #fff; }
+    .nav-btn:hover { transform: translateY(-1px); color: #fff; background: rgba(255,255,255,.13); }
     .nav-btn.active {
-      background: linear-gradient(135deg, var(--blue-500), var(--cyan));
       color: #fff;
-      outline-color: rgba(255,255,255,.28);
-      box-shadow: 0 12px 26px rgba(20, 184, 212, .22);
+      background: linear-gradient(135deg, var(--blue-500), var(--cyan));
+      box-shadow: 0 14px 26px rgba(24, 186, 210, .22);
+      outline-color: rgba(255,255,255,.34);
     }
-    .nav-btn .ico { font-size: 20px; line-height: 1; }
-    .nav-btn .label { font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; }
+    .nav-ico { font-size: 21px; line-height: 1; }
+    .nav-label { font-size: 9px; text-transform: uppercase; font-weight: 900; letter-spacing: .04em; }
 
-    .main {
-      padding: 22px;
-      min-width: 0;
-    }
+    .main { min-width: 0; padding: 22px; }
 
-    .dashboard-shell {
-      max-width: 1480px;
+    .shell {
+      max-width: 1510px;
+      min-height: calc(100vh - 44px);
       margin: 0 auto;
-      background: rgba(255,255,255,.96);
-      border-radius: 24px;
       overflow: hidden;
-      box-shadow: var(--shadow);
+      background: rgba(255,255,255,.97);
       border: 1px solid rgba(255,255,255,.42);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
     }
 
     .topbar {
-      color: #fff;
-      padding: 18px 22px;
-      background:
-        linear-gradient(90deg, rgba(6, 35, 69, .98), rgba(11, 53, 95, .96) 52%, rgba(141, 17, 23, .96));
       display: grid;
       grid-template-columns: auto minmax(0, 1fr) auto;
-      align-items: center;
       gap: 18px;
+      align-items: center;
+      padding: 18px 22px;
+      color: #fff;
+      background:
+        linear-gradient(90deg, rgba(6, 38, 75, .98), rgba(10, 58, 104, .97) 54%, rgba(110, 15, 21, .97));
     }
 
-    .topbar .seal {
+    .seal {
       width: 58px;
       height: 58px;
-      border-radius: 16px;
-      background: rgba(255,255,255,.13);
+      border-radius: 18px;
       display: grid;
       place-items: center;
-      border: 1px solid rgba(255,255,255,.22);
-      font-weight: 900;
+      font-weight: 950;
       letter-spacing: -.03em;
+      background: rgba(255,255,255,.13);
+      border: 1px solid rgba(255,255,255,.22);
     }
 
-    .title-wrap h1 {
+    .title h1 {
       margin: 0;
       font-size: clamp(18px, 2.2vw, 30px);
-      line-height: 1.1;
-      text-transform: uppercase;
+      line-height: 1.08;
       letter-spacing: .01em;
+      text-transform: uppercase;
     }
-    .title-wrap p {
-      margin: 6px 0 0;
+    .title p {
+      margin: 7px 0 0;
       color: rgba(255,255,255,.82);
       font-size: 14px;
+      line-height: 1.35;
     }
 
-    .period-box {
-      display: grid;
-      grid-template-columns: repeat(3, auto);
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
       gap: 8px;
-      align-items: center;
     }
-
     .chip {
-      padding: 8px 10px;
+      padding: 8px 11px;
       border-radius: 999px;
       background: rgba(255,255,255,.13);
-      border: 1px solid rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.19);
       color: rgba(255,255,255,.92);
-      font-size: 12px;
-      font-weight: 700;
       white-space: nowrap;
+      font-size: 12px;
+      font-weight: 850;
     }
 
     .view {
       display: none;
-      padding: 20px;
-      background: linear-gradient(180deg, #fff, #f5f8fc);
+      padding: 18px;
+      background: linear-gradient(180deg, #ffffff 0%, #f6f9fd 100%);
     }
     .view.active { display: block; }
 
     .section-head {
-      display: flex;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
       gap: 18px;
-      align-items: flex-start;
-      margin-bottom: 16px;
+      align-items: start;
+      margin-bottom: 14px;
     }
     .section-head h2 {
       margin: 0;
-      font-size: clamp(18px, 1.7vw, 24px);
       color: var(--blue-900);
+      font-size: clamp(18px, 1.7vw, 24px);
+      line-height: 1.15;
     }
     .section-head p {
+      max-width: 920px;
       margin: 6px 0 0;
       color: var(--muted);
-      max-width: 850px;
-      line-height: 1.55;
+      line-height: 1.48;
+      font-size: 14px;
     }
-
-    .note-pill {
-      flex: 0 0 auto;
+    .pill {
+      justify-self: end;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
       padding: 10px 12px;
       border-radius: 999px;
-      font-size: 12px;
-      font-weight: 800;
+      background: #eaf5ff;
+      border: 1px solid #cae3ff;
       color: var(--blue-900);
-      background: #e9f4ff;
-      border: 1px solid #cbe5ff;
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
     }
 
-    .grid { display: grid; gap: 16px; }
-    .grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .grid.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .story {
+      border: 1px solid #d0e5fb;
+      border-radius: var(--radius);
+      background:
+        linear-gradient(135deg, rgba(31, 122, 203, .11), rgba(24, 186, 210, .07)),
+        #fff;
+      padding: 14px 16px;
+      color: var(--gray-700);
+      font-size: 14px;
+      line-height: 1.55;
+      margin-bottom: 14px;
+    }
+    .story b { color: var(--blue-900); }
 
     .kpi-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-      margin-bottom: 16px;
+      gap: 13px;
+      margin-bottom: 14px;
     }
 
-    .kpi-card {
-      min-height: 134px;
+    .kpi {
+      min-height: 128px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
       border: 1px solid var(--line);
       border-radius: var(--radius);
       background: #fff;
-      padding: 15px;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 10px 28px rgba(16, 31, 52, .07);
-      transition: transform .18s ease, box-shadow .18s ease, border .18s ease;
+      padding: 14px 14px 13px;
+      box-shadow: var(--shadow-soft);
+      transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
     }
-    .kpi-card::before {
+    .kpi::before {
       content: "";
       position: absolute;
       inset: 0 0 auto 0;
       height: 5px;
       background: var(--accent, var(--blue-500));
     }
-    .kpi-card:hover { transform: translateY(-3px); box-shadow: 0 18px 36px rgba(16, 31, 52, .14); border-color: rgba(29, 117, 194, .36); }
-    .kpi-card .meta {
+    .kpi:hover, .kpi:focus-visible {
+      transform: translateY(-2px);
+      border-color: color-mix(in srgb, var(--accent, var(--blue-500)) 45%, #fff);
+      box-shadow: 0 16px 34px rgba(16, 31, 52, .14);
+    }
+    .kpi .sub {
       color: var(--muted);
       font-size: 11px;
-      text-transform: uppercase;
+      font-weight: 900;
       letter-spacing: .05em;
-      font-weight: 900;
-      margin-bottom: 10px;
+      text-transform: uppercase;
+      margin: 2px 0 9px;
     }
-    .kpi-card .value {
-      font-size: clamp(24px, 3vw, 38px);
-      line-height: 1;
-      font-weight: 900;
+    .kpi .value {
       color: var(--blue-900);
-      letter-spacing: -.04em;
+      font-size: clamp(24px, 2.8vw, 36px);
+      font-weight: 950;
+      letter-spacing: -.05em;
+      line-height: 1;
       margin-bottom: 8px;
     }
-    .kpi-card .name {
+    .kpi .name {
       color: var(--text);
-      font-size: 14px;
-      font-weight: 800;
-      line-height: 1.25;
+      font-size: 13px;
+      font-weight: 850;
+      line-height: 1.24;
     }
-    .kpi-card .hint {
-      margin-top: 10px;
+    .kpi .kpi-note {
+      margin-top: 9px;
       color: var(--muted);
-      font-size: 12px;
+      font-size: 11px;
       line-height: 1.35;
     }
+    .kpi .click {
+      margin-top: 8px;
+      display: inline-flex;
+      color: var(--accent, var(--blue-600));
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .grid { display: grid; gap: 14px; }
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 
     .panel {
-      background: #fff;
+      min-width: 0;
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      padding: 16px;
-      box-shadow: 0 10px 28px rgba(16, 31, 52, .06);
-      min-width: 0;
+      background: #fff;
+      padding: 14px;
+      box-shadow: var(--shadow-soft);
     }
     .panel h3 {
-      margin: 0 0 12px;
-      color: var(--blue-900);
-      font-size: 16px;
+      margin: 0 0 10px;
       display: flex;
       justify-content: space-between;
       gap: 10px;
       align-items: center;
+      color: var(--blue-900);
+      font-size: 15px;
+      line-height: 1.2;
     }
-    .panel h3 span { color: var(--muted); font-size: 12px; font-weight: 700; }
-
-    .chart-box {
-      width: 100%;
-      min-height: 250px;
+    .panel h3 span {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      text-align: right;
     }
-    svg { max-width: 100%; height: auto; display: block; }
+    .chart { min-height: 228px; width: 100%; }
+    svg { display: block; max-width: 100%; height: auto; }
 
-    .story-card {
-      padding: 18px;
+    .submodules {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 14px 0;
+    }
+    .submodule {
+      min-height: 150px;
+      overflow: hidden;
+      position: relative;
       border-radius: var(--radius);
-      background:
-        linear-gradient(135deg, rgba(20, 81, 141, .12), rgba(20, 184, 212, .10)),
-        #fff;
-      border: 1px solid #cde4fb;
-      line-height: 1.62;
-      color: var(--gray-700);
-      font-size: 14px;
+      padding: 17px;
+      color: #fff;
     }
-    .story-card strong { color: var(--blue-900); }
+    .submodule.cronico { background: linear-gradient(135deg, #06335f, #1f7acb); }
+    .submodule.agudo { background: linear-gradient(135deg, #841219, #ef3340); }
+    .submodule h3 { margin: 0 0 7px; font-size: 18px; }
+    .submodule p { max-width: 760px; margin: 0; color: rgba(255,255,255,.84); line-height: 1.45; font-size: 13px; }
+    .submodule strong { display: block; margin-top: 16px; font-size: 34px; letter-spacing: -.04em; }
+    .submodule::after {
+      content: "";
+      position: absolute;
+      right: -55px;
+      bottom: -75px;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.11);
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .mini-chart {
+      min-height: 210px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: #fff;
+      padding: 12px;
+    }
+    .mini-chart h4 {
+      margin: 0 0 8px;
+      color: var(--blue-900);
+      font-size: 13px;
+      line-height: 1.25;
+    }
+    .mini-chart small { color: var(--muted); display: block; margin-top: -3px; margin-bottom: 4px; }
+
+    .decision-list {
+      display: grid;
+      gap: 12px;
+      counter-reset: step;
+    }
+    .decision {
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--accent, var(--green));
+      border-radius: 14px;
+      background: var(--gray-50);
+      padding: 14px 15px;
+      color: var(--gray-700);
+      line-height: 1.45;
+    }
+    .decision b { color: var(--blue-900); }
 
     .callout {
-      border-left: 5px solid var(--accent, var(--blue-500));
-      background: var(--panel-soft);
+      border-left: 6px solid var(--accent, var(--blue-500));
       border-radius: 14px;
-      padding: 14px 16px;
+      background: var(--gray-50);
+      padding: 13px 15px;
       color: var(--gray-700);
-      line-height: 1.55;
-      font-size: 14px;
+      font-size: 13px;
+      line-height: 1.48;
     }
 
-    .ficha-layout {
-      display: grid;
-      grid-template-columns: 340px minmax(0, 1fr);
-      gap: 16px;
-      align-items: start;
+    .detail-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      margin-top: 14px;
+      border: 1px dashed #b8c9dd;
+      border-radius: var(--radius);
+      background: #f8fbff;
+      color: var(--muted);
+      font-size: 13px;
     }
-
-    .ficha-picker {
-      display: grid;
-      gap: 9px;
-    }
-    .indicator-list-btn {
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: #fff;
+    .detail-strip button {
+      border: 0;
+      border-radius: 999px;
+      padding: 9px 12px;
+      background: var(--blue-600);
+      color: #fff;
+      font-weight: 900;
       cursor: pointer;
-      padding: 11px 12px;
-      text-align: left;
-      color: var(--text);
-      transition: background .18s ease, border .18s ease, transform .18s ease;
     }
-    .indicator-list-btn:hover { transform: translateX(2px); border-color: #aacbec; background: #f8fbff; }
-    .indicator-list-btn.active { border-color: var(--accent, var(--blue-500)); background: #edf7ff; box-shadow: 0 0 0 3px rgba(29,117,194,.10); }
-    .indicator-list-btn b { display: block; font-size: 13px; margin-bottom: 3px; color: var(--blue-900); }
-    .indicator-list-btn small { display: block; color: var(--muted); font-size: 11px; line-height: 1.35; }
+
+    .drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: none;
+      background: rgba(2, 9, 20, .48);
+      backdrop-filter: blur(3px);
+    }
+    .drawer-backdrop.open { display: block; }
+    .drawer {
+      position: fixed;
+      inset: 0 0 0 auto;
+      z-index: 70;
+      width: min(720px, calc(100vw - 22px));
+      transform: translateX(105%);
+      transition: transform .2s ease;
+      background: #fff;
+      box-shadow: -24px 0 55px rgba(2, 10, 28, .28);
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+    }
+    .drawer.open { transform: translateX(0); }
+    .drawer-head {
+      display: flex;
+      gap: 14px;
+      justify-content: space-between;
+      align-items: start;
+      padding: 18px 18px 14px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--blue-900), var(--accent, var(--blue-600)));
+    }
+    .drawer-head h3 { margin: 0; font-size: 18px; line-height: 1.2; }
+    .drawer-head p { margin: 5px 0 0; color: rgba(255,255,255,.82); font-size: 13px; }
+    .drawer-close {
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 12px;
+      background: rgba(255,255,255,.12);
+      color: #fff;
+      width: 42px;
+      height: 42px;
+      cursor: pointer;
+      font-size: 22px;
+      line-height: 1;
+    }
+    .drawer-body { overflow: auto; padding: 16px; }
 
     .ficha-table {
       width: 100%;
@@ -373,128 +514,57 @@
       padding: 11px 12px;
       border-bottom: 1px solid var(--line);
       vertical-align: top;
-      line-height: 1.45;
       font-size: 13px;
+      line-height: 1.42;
     }
     .ficha-table tr:last-child th,
     .ficha-table tr:last-child td { border-bottom: 0; }
     .ficha-table th {
-      width: 230px;
-      background: #f0f4fa;
+      width: 228px;
       text-align: left;
       color: var(--blue-900);
-      font-weight: 900;
-    }
-
-    .submodule-strip {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-      margin: 14px 0 16px;
-    }
-    .submodule-card {
-      border-radius: var(--radius);
-      padding: 18px;
-      color: #fff;
-      min-height: 180px;
-      overflow: hidden;
-      position: relative;
-    }
-    .submodule-card h3 { margin: 0 0 8px; font-size: 19px; }
-    .submodule-card p { margin: 0; color: rgba(255,255,255,.85); line-height: 1.55; max-width: 720px; font-size: 14px; }
-    .submodule-card.cronico { background: linear-gradient(135deg, #06345f, #1d75c2); }
-    .submodule-card.agudo { background: linear-gradient(135deg, #8d1117, #ef3340); }
-    .submodule-card .big-number {
-      margin-top: 18px;
-      font-size: 38px;
-      font-weight: 900;
-      letter-spacing: -.05em;
-    }
-    .submodule-card::after {
-      content: "";
-      position: absolute;
-      right: -44px;
-      bottom: -55px;
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.12);
-    }
-
-    .toolbar {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: flex-end;
-    }
-    .select {
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: #fff;
-      color: var(--blue-900);
-      padding: 9px 12px;
-      font-weight: 800;
-      max-width: 100%;
-    }
-
-    .status-dot {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      color: var(--muted);
-      font-weight: 800;
-    }
-    .status-dot::before {
-      content: "";
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--accent, var(--blue-500));
-      display: inline-block;
+      background: #f0f4fa;
+      font-weight: 950;
     }
 
     .footer {
-      padding: 12px 20px;
-      color: rgba(255,255,255,.72);
-      background: #061324;
       display: flex;
+      gap: 14px;
       justify-content: space-between;
-      gap: 16px;
+      padding: 12px 20px;
+      background: #061324;
+      color: rgba(255,255,255,.73);
       font-size: 11px;
       line-height: 1.4;
     }
 
-    .hidden { display: none !important; }
-
     @media (max-width: 1180px) {
-      .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .grid.cols-3, .grid.cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .ficha-layout { grid-template-columns: 1fr; }
+      .kpi-grid, .grid.four { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .grid.three { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .topbar { grid-template-columns: auto minmax(0, 1fr); }
+      .chips { grid-column: 1 / -1; justify-content: flex-start; }
     }
 
     @media (max-width: 760px) {
       .app { grid-template-columns: 1fr; }
       .sidebar {
-        position: sticky;
-        top: 0;
         height: auto;
-        padding: 10px;
         flex-direction: row;
+        align-items: center;
         overflow-x: auto;
+        padding: 10px;
       }
-      .brand-mark { width: 46px; height: 46px; flex: 0 0 auto; font-size: 8px; }
-      .nav { flex-direction: row; margin-top: 0; min-width: 660px; }
-      .nav-btn { min-height: 52px; }
+      .brand { width: 46px; height: 46px; flex: 0 0 auto; font-size: 8px; }
+      .nav { min-width: max-content; flex-direction: row; }
+      .nav-btn { min-width: 92px; min-height: 54px; }
       .main { padding: 10px; }
-      .topbar { grid-template-columns: 1fr; text-align: left; }
-      .topbar .seal { display: none; }
-      .period-box { grid-template-columns: 1fr; }
+      .shell { min-height: calc(100vh - 20px); border-radius: 18px; }
+      .topbar { grid-template-columns: 1fr; padding: 16px; }
+      .seal { display: none; }
       .view { padding: 12px; }
-      .section-head { display: block; }
-      .note-pill { display: inline-flex; margin-top: 10px; }
-      .kpi-grid, .grid.cols-2, .grid.cols-3, .grid.cols-4, .submodule-strip { grid-template-columns: 1fr; }
+      .section-head { grid-template-columns: 1fr; }
+      .pill { justify-self: start; }
+      .kpi-grid, .grid.two, .grid.three, .grid.four, .submodules, .mini-grid { grid-template-columns: 1fr; }
       .ficha-table th, .ficha-table td { display: block; width: 100%; }
       .ficha-table th { border-bottom: 0; padding-bottom: 4px; }
       .ficha-table td { padding-top: 4px; }
@@ -504,593 +574,304 @@
 </head>
 <body>
   <div class="app">
-    <aside class="sidebar" aria-label="Navegação do painel">
-      <div class="brand-mark" title="CBMMG / PSOBM">PSOBM<br>CBMMG</div>
-      <nav class="nav">
-        <button class="nav-btn active" type="button" data-target="view-resumo" aria-label="Abrir resumo executivo"><span class="ico">⌂</span><span class="label">Resumo</span></button>
-        <button class="nav-btn" type="button" data-target="view-cronico" aria-label="Abrir rotina ocupacional"><span class="ico">▣</span><span class="label">Crônico</span></button>
-        <button class="nav-btn" type="button" data-target="view-agudo" aria-label="Abrir alerta e demanda aguda"><span class="ico">▲</span><span class="label">Agudo</span></button>
-        <button class="nav-btn" type="button" data-target="view-prevencao" aria-label="Abrir prevenção e educação"><span class="ico">◆</span><span class="label">Prevenção</span></button>
+    <aside class="sidebar" aria-label="Navegação principal do painel">
+      <div class="brand" aria-label="Marca visual do Painel Estratégico de Inteligência em Saúde Mental do PSOBM" title="Painel Estratégico de Inteligência em Saúde Mental do PSOBM">PAINEL<br>ESTRAT.</div>
+      <nav class="nav" aria-label="Campos do painel">
+        <button class="nav-btn active" type="button" data-view="resumo" aria-label="Abrir resumo executivo"><span class="nav-ico">⌂</span><span class="nav-label">Resumo</span></button>
+        <button class="nav-btn" type="button" data-view="cronico" aria-label="Abrir monitoramento crônico"><span class="nav-ico">▣</span><span class="nav-label">Crônico</span></button>
+        <button class="nav-btn" type="button" data-view="agudo" aria-label="Abrir alerta e demanda aguda"><span class="nav-ico">▲</span><span class="nav-label">Agudo</span></button>
+        <button class="nav-btn" type="button" data-view="prevencao" aria-label="Abrir prevenção e educação"><span class="nav-ico">◆</span><span class="nav-label">Prevenção</span></button>
       </nav>
     </aside>
 
     <main class="main">
-      <section class="dashboard-shell" aria-label="Painel Estratégico de Inteligência em Saúde Mental do PSOBM">
+      <section class="shell" aria-label="Painel Estratégico de Inteligência em Saúde Mental do PSOBM">
         <header class="topbar">
-          <div class="seal">BI</div>
-          <div class="title-wrap">
+          <div class="seal" aria-hidden="true">BI</div>
+          <div class="title">
             <h1>Painel Estratégico de Inteligência em Saúde Mental do PSOBM</h1>
-            <p>Indicadores qualificados para apoio à decisão e aperfeiçoamento da gestão</p>
+            <p>Modelagem técnico-metodológica de indicadores qualificados para apoio à decisão</p>
           </div>
-          <div class="period-box" aria-label="Período de referência">
+          <div class="chips" aria-label="Avisos metodológicos">
             <span class="chip">Protótipo metodológico</span>
             <span class="chip">Dados demonstrativos</span>
-            <span class="chip">Atualização: mensal</span>
+            <span class="chip">Agregado · não identificável</span>
           </div>
         </header>
 
-        <section id="view-resumo" class="view active" data-view-title="Resumo Executivo">
+        <section id="resumo" class="view active" aria-labelledby="resumo-title">
           <div class="section-head">
             <div>
-              <h2>Resumo executivo</h2>
-              <p>Visão única do painel: sintetiza os dois submódulos modelados, cruza fluxo crônico e alerta agudo e mantém o eixo preventivo como campo de leitura para decisões futuras.</p>
+              <h2 id="resumo-title">Resumo executivo</h2>
+              <p>Visão única da modelagem: oito indicadores, dois submódulos analíticos e campo preventivo para leitura decisória futura.</p>
             </div>
-            <span class="note-pill">8 indicadores · 4 crônicos · 4 agudos</span>
+            <span class="pill">8 indicadores · 4 crônicos · 4 agudos</span>
           </div>
-          <div class="story-card">
-            <strong>Leitura executiva:</strong> o painel parte do monitoramento programado, verifica se o fluxo conclui no tempo esperado, observa recorrência e continuidade do cuidado, identifica pressão aguda, mede a rapidez do acolhimento e traduz afastamentos em impacto funcional agregado. O objetivo é transformar registros administrativos em informação gerencial, conhecimento institucional e decisão orientada por dados.
-          </div>
-          <div id="summary-kpis" class="kpi-grid" aria-label="Cartões dos indicadores principais"></div>
-          <div class="submodule-strip">
-            <article class="submodule-card cronico">
-              <h3>Submódulo 1 · Monitoramento programado</h3>
-              <p>Leitura do fluxo crônico do PSOBM: conclusão, tempo de ciclo, recorrência assistencial e continuidade do cuidado.</p>
-              <div class="big-number">72,7%</div>
+          <div class="story"><b>Leitura executiva:</b> o painel modela a leitura integrada do PSOBM: acompanha o fluxo crônico, observa tempo, recorrência e continuidade, identifica pressão aguda, mede resposta institucional e traduz afastamentos em impacto funcional agregado.</div>
+          <div id="cards-resumo" class="kpi-grid" aria-label="Cartões dos oito indicadores"></div>
+          <div class="submodules">
+            <article class="submodule cronico">
+              <h3>Submódulo crônico</h3>
+              <p>Conclusão, tempo de ciclo, recorrência assistencial e continuidade do cuidado.</p>
+              <strong>4 indicadores</strong>
             </article>
-            <article class="submodule-card agudo">
-              <h3>Submódulo 2 · Alerta e demanda aguda</h3>
-              <p>Leitura da pressão assistencial aguda: demanda proporcional, tempo até acolhimento, afastamentos e dias perdidos.</p>
-              <div class="big-number">43,2 h</div>
+            <article class="submodule agudo">
+              <h3>Submódulo agudo</h3>
+              <p>Demanda urgente, tempo de acolhimento, afastamento e impacto funcional.</p>
+              <strong>4 indicadores</strong>
             </article>
           </div>
-          <div class="grid cols-3">
-            <div class="panel"><h3>Evolução do monitoramento <span>Taxa de conclusão</span></h3><div id="chart-resumo-line" class="chart-box"></div></div>
-            <div class="panel"><h3>Distribuição dos submódulos <span>4 × 4</span></h3><div id="chart-resumo-donut" class="chart-box"></div></div>
-            <div class="panel"><h3>Velocímetro de acolhimento <span>horas</span></h3><div id="chart-resumo-gauge" class="chart-box"></div></div>
+          <div class="grid three">
+            <div class="panel"><h3>Composição dos submódulos <span>quantidade</span></h3><div id="chart-donut" class="chart"></div></div>
+            <div class="panel"><h3>Índice normalizado crônico <span>base 100</span></h3><div id="chart-normal-cronico" class="chart"></div></div>
+            <div class="panel"><h3>Índice normalizado agudo <span>base 100</span></h3><div id="chart-normal-agudo" class="chart"></div></div>
           </div>
-          <div class="panel" style="margin-top:16px">
-            <h3>Ficha técnica do indicador <span>clique em um cartão ou selecione abaixo</span></h3>
-            <div id="ficha-resumo"></div>
-          </div>
-        </section>
-
-        <section id="view-cronico" class="view" data-view-title="Crônico / Monitoramento programado">
-          <div class="section-head">
-            <div>
-              <h2>Submódulo crônico · Monitoramento programado</h2>
-              <p>Este campo responde se o fluxo regular do PSOBM está funcionando: finalização, tempo, concentração da demanda e continuidade assistencial.</p>
-            </div>
-            <span class="note-pill">Processo · Tempestividade · Acompanhamento · Resultado</span>
-          </div>
-          <div id="cronico-kpis" class="kpi-grid"></div>
-          <div class="grid cols-2">
-            <div class="panel"><h3>Tendência dos indicadores crônicos <span>série mensal</span></h3><div id="chart-cronico-line" class="chart-box"></div></div>
-            <div class="panel"><h3>Comparação do fluxo crônico <span>valor demonstrativo</span></h3><div id="chart-cronico-bars" class="chart-box"></div></div>
-          </div>
-          <div class="panel" style="margin-top:16px">
-            <h3>Ficha técnica do indicador <span>seleção do submódulo crônico</span></h3>
-            <div id="ficha-cronico" class="ficha-layout"></div>
+          <div class="detail-strip">
+            <span>Detalhamento técnico disponível para consulta do indicador selecionado.</span>
+            <button type="button" data-open-ficha="i1">Ver ficha técnica</button>
           </div>
         </section>
 
-        <section id="view-agudo" class="view" data-view-title="Agudo / Alerta e demanda aguda">
+        <section id="cronico" class="view" aria-labelledby="cronico-title">
           <div class="section-head">
             <div>
-              <h2>Submódulo agudo · Alerta e demanda aguda</h2>
-              <p>Este campo acompanha pressão assistencial, tempo de resposta e repercussão funcional agregada, sem expor indivíduos, unidades pequenas ou dados sensíveis identificáveis.</p>
+              <h2 id="cronico-title">Monitoramento crônico</h2>
+              <p>Submódulo voltado ao fluxo programado do PSOBM: processo, tempestividade, acompanhamento e continuidade.</p>
             </div>
-            <span class="note-pill">Alerta · Resposta · Impacto funcional</span>
+            <span class="pill">Fluxo institucional</span>
           </div>
-          <div id="agudo-kpis" class="kpi-grid"></div>
-          <div class="grid cols-3">
-            <div class="panel"><h3>Demanda urgente proporcional <span>por 1.000</span></h3><div id="chart-agudo-line" class="chart-box"></div></div>
-            <div class="panel"><h3>Velocímetro do acolhimento <span>tempo médio</span></h3><div id="chart-agudo-gauge" class="chart-box"></div></div>
-            <div class="panel"><h3>Impacto funcional agregado <span>afastamento e dias perdidos</span></h3><div id="chart-agudo-bars" class="chart-box"></div></div>
-          </div>
-          <div class="panel" style="margin-top:16px">
-            <h3>Ficha técnica do indicador <span>seleção do submódulo agudo</span></h3>
-            <div id="ficha-agudo" class="ficha-layout"></div>
+          <div class="story"><b>Leitura do monitoramento programado:</b> este submódulo verifica se o monitoramento programado funciona como fluxo institucional: conclui, demora quanto, concentra demanda e mantém continuidade do cuidado.</div>
+          <div id="cards-cronico" class="kpi-grid" aria-label="Indicadores do submódulo crônico"></div>
+          <div class="panel">
+            <h3>Evolução por indicador <span>série mensal individual</span></h3>
+            <div id="mini-cronico" class="mini-grid"></div>
           </div>
         </section>
 
-        <section id="view-prevencao" class="view" data-view-title="Prevenção e educação">
+        <section id="agudo" class="view" aria-labelledby="agudo-title">
           <div class="section-head">
             <div>
-              <h2>Campo preventivo e educativo</h2>
-              <p>Campo preservado conforme a estrutura solicitada. No recorte atual, os 8 indicadores críticos estão distribuídos nos submódulos crônico e agudo. Este campo organiza a leitura de como os achados podem orientar ações preventivas e educativas futuras.</p>
+              <h2 id="agudo-title">Alerta e demanda aguda</h2>
+              <p>Submódulo voltado à pressão assistencial, velocidade de resposta e repercussão funcional agregada.</p>
             </div>
-            <span class="note-pill">Sem novo indicador neste recorte</span>
+            <span class="pill">Alerta · resposta · impacto</span>
           </div>
-          <div class="grid cols-3">
-            <div class="panel"><h3>Dados a integrar <span>ações preventivas</span></h3><div id="chart-prev-bars" class="chart-box"></div></div>
-            <div class="panel"><h3>Fluxo de decisão <span>dados → ação</span></h3><div class="callout" style="--accent:var(--green)">Se o monitoramento crônico indicar atraso, recorrência ou baixa continuidade, e o submódulo agudo indicar aumento de pressão ou impacto funcional, a gestão pode priorizar ações preventivas por tipo de demanda, público-alvo e ciclo institucional.</div></div>
-            <div class="panel"><h3>Governança <span>uso adequado</span></h3><div class="callout" style="--accent:var(--yellow)">O campo preventivo deve usar apenas dados agregados, com atualização definida, responsável institucional, cautela ética e vedação de uso disciplinar ou individualizante.</div></div>
+          <div class="story"><b>Leitura dos alertas e demandas agudas:</b> este submódulo observa sinais de pressão assistencial, velocidade de acolhimento e repercussão funcional agregada, sem identificação individual.</div>
+          <div id="cards-agudo" class="kpi-grid" aria-label="Indicadores do submódulo agudo"></div>
+          <div class="grid two">
+            <div class="panel"><h3>Velocímetro do acolhimento <span>parâmetros demonstrativos</span></h3><div id="chart-velocimetro" class="chart"></div></div>
+            <div class="panel"><h3>Evolução por indicador <span>série mensal individual</span></h3><div id="mini-agudo" class="mini-grid"></div></div>
           </div>
-          <div class="panel" style="margin-top:16px">
-            <h3>Ficha técnica do indicador <span>consulta geral dos 8 indicadores</span></h3>
-            <div id="ficha-prevencao" class="ficha-layout"></div>
+        </section>
+
+        <section id="prevencao" class="view" aria-labelledby="prevencao-title">
+          <div class="section-head">
+            <div>
+              <h2 id="prevencao-title">Prevenção e educação</h2>
+              <p>Campo de leitura preventiva derivado dos indicadores crônicos e agudos. Nesta modelagem, não há inclusão de novos indicadores.</p>
+            </div>
+            <span class="pill">Decisão preventiva futura</span>
+          </div>
+          <div class="story"><b>Orientação para ações preventivas:</b> este campo utiliza os achados dos submódulos para orientar ações preventivas futuras, priorizando temas, públicos e períodos críticos com base em dados agregados.</div>
+          <div class="grid two">
+            <div class="panel">
+              <h3>Como os dados viram prevenção <span>fluxo decisório</span></h3>
+              <div class="decision-list">
+                <div class="decision" style="--accent: var(--blue-500)"><b>Achado crônico:</b> demora no ciclo, baixa conclusão, recorrência ou descontinuidade podem orientar revisão de fluxo, acesso, agenda e acompanhamento.</div>
+                <div class="decision" style="--accent: var(--red-500)"><b>Achado agudo:</b> aumento de demanda urgente, acolhimento tardio, afastamento ou dias perdidos pode orientar priorização de temas, públicos e períodos críticos.</div>
+                <div class="decision" style="--accent: var(--green)"><b>Ação preventiva futura:</b> planejar palestras, campanhas, rodas de conversa, capacitações e orientações com base em dados agregados e sem exposição individual.</div>
+              </div>
+            </div>
+            <div class="panel">
+              <h3>Governança da informação <span>uso adequado</span></h3>
+              <div class="callout" style="--accent: var(--yellow)">A modelagem pressupõe dados secundários, agregados e não identificáveis. A finalidade é acadêmica e gerencial, sem diagnóstico individual, comparação correcional, exposição de unidade pequena ou uso disciplinar.</div>
+              <div class="callout" style="--accent: var(--green); margin-top: 12px;">Em eventual implantação, recomenda-se base institucional auditável, controle de acesso, atualização definida, responsável pela curadoria e disponibilização preferencial em modo somente leitura.</div>
+            </div>
           </div>
         </section>
 
         <footer class="footer">
-          <span>Fonte: protótipo metodológico para o Painel Estratégico de Inteligência em Saúde Mental do PSOBM.</span>
-          <span>Dados demonstrativos, agregados e não identificáveis. Uso acadêmico e gerencial.</span>
+          <span>Fonte: protótipo metodológico do Painel Estratégico de Inteligência em Saúde Mental do PSOBM.</span>
+          <span>Dados fictícios/demonstrativos, agregados e não identificáveis.</span>
         </footer>
       </section>
     </main>
   </div>
 
+  <div id="drawerBackdrop" class="drawer-backdrop" aria-hidden="true"></div>
+  <aside id="drawer" class="drawer" aria-label="Ficha técnica do indicador" aria-hidden="true">
+    <header id="drawerHead" class="drawer-head">
+      <div>
+        <h3 id="drawerTitle">Ficha técnica</h3>
+        <p id="drawerSubtitle">Indicador selecionado</p>
+      </div>
+      <button id="drawerClose" class="drawer-close" type="button" aria-label="Fechar ficha técnica">×</button>
+    </header>
+    <div id="drawerBody" class="drawer-body"></div>
+  </aside>
+
   <script>
     "use strict";
 
     const indicadores = [
-      {
-        id: "i1",
-        nome: "Taxa de conclusão do monitoramento PSOBM",
-        submodulo: "Crônico / Monitoramento programado",
-        dimensao: "Processo / fluxo programado",
-        finalidade: "Medir a capacidade de finalização do monitoramento programado do PSOBM.",
-        definicao: "Percentual de registros do PSOBM que chegaram à avaliação psicológica concluída no período analisado.",
-        formula: "Avaliações psicológicas concluídas / registros do PSOBM × 100.",
-        tipo: "Processo; eficiência operacional do fluxo.",
-        fonte: "Registros do PSOBM/Psicologia; avaliações psicológicas concluídas; status do atendimento.",
-        periodicidade: "Mensal, com consolidação trimestral ou anual.",
-        unidade: "Percentual.",
-        polaridade: "Quanto maior, melhor.",
-        interpretacao: "Valores inferiores ao parâmetro institucional sugerem possível gargalo de agenda, adesão, retorno ou capacidade de conclusão.",
-        limitacoes: "Depende da padronização do status de atendimento e da consistência dos registros de conclusão.",
-        etica: "Utilizar apenas dados agregados e não identificáveis; vedar exposição individual, identificação de unidade pequena ou uso disciplinar.",
-        valor: 72.7,
-        display: "72,7%",
-        hint: "Fluxo concluído no período",
-        color: "#1d75c2",
-        grupo: "cronico",
-        trend: [61, 64, 63, 66, 68, 67, 69, 70, 71, 72, 72, 72.7]
-      },
-      {
-        id: "i2",
-        nome: "Tempo médio do ciclo de monitoramento",
-        submodulo: "Crônico / Monitoramento programado",
-        dimensao: "Processo / tempestividade do fluxo crônico",
-        finalidade: "Mensurar a velocidade do fluxo entre convocação e avaliação psicológica.",
-        definicao: "Tempo médio, em dias, entre a data de convocação e a data da avaliação psicológica.",
-        formula: "Média de (data da avaliação psicológica - data da convocação).",
-        tipo: "Processo; tempestividade.",
-        fonte: "Data da convocação; data da avaliação psicológica.",
-        periodicidade: "Mensal, com leitura de tendência.",
-        unidade: "Dias.",
-        polaridade: "Quanto menor, melhor.",
-        interpretacao: "Aumento persistente indica espera, fila, limitação de agenda ou atraso no ciclo programado.",
-        limitacoes: "Depende de datas completas, padronizadas e confiáveis em ambos os marcos do fluxo.",
-        etica: "Utilizar apenas dados agregados e não identificáveis; vedar exposição individual, identificação de unidade pequena ou uso disciplinar.",
-        valor: 18.4,
-        display: "18,4 dias",
-        hint: "Convocação até avaliação",
-        color: "#14b8d4",
-        grupo: "cronico",
-        trend: [22, 21, 20, 21, 19, 20, 18, 18, 19, 18, 18.5, 18.4]
-      },
-      {
-        id: "i3",
-        nome: "Índice de recorrência assistencial por beneficiário",
-        submodulo: "Crônico / Monitoramento programado",
-        dimensao: "Acompanhamento / recorrência assistencial",
-        finalidade: "Diferenciar demanda pontual de demanda recorrente e apoiar planejamento de agenda, equipe e continuidade do cuidado.",
-        definicao: "Razão entre o total de registros de atendimentos psicológicos e o número de beneficiários únicos atendidos no período.",
-        formula: "Registros de atendimentos psicológicos / beneficiários únicos atendidos.",
-        tipo: "Acompanhamento; concentração da demanda; gestão de capacidade.",
-        fonte: "Registros de atendimentos psicológicos; beneficiários únicos atendidos; recorrência de atendimentos por beneficiário.",
-        periodicidade: "Mensal, com consolidação trimestral ou anual.",
-        unidade: "Razão.",
-        polaridade: "Análise contextual.",
-        interpretacao: "Valor elevado pode indicar maior concentração de atendimentos em parte dos beneficiários, necessidade de continuidade assistencial ou pressão sobre a capacidade de acompanhamento.",
-        limitacoes: "Não permite inferir gravidade clínica individual; pode ser influenciado por protocolos de acompanhamento, retornos programados ou disponibilidade de agenda.",
-        etica: "Utilizar apenas dados agregados e não identificáveis; vedar exposição individual, identificação de unidade pequena ou uso disciplinar.",
-        valor: 1.42,
-        display: "1,42",
-        hint: "Atendimentos por beneficiário",
-        color: "#f4b740",
-        grupo: "cronico",
-        trend: [1.10, 1.16, 1.22, 1.18, 1.25, 1.28, 1.33, 1.31, 1.35, 1.39, 1.40, 1.42]
-      },
-      {
-        id: "i4",
-        nome: "Taxa de continuidade assistencial concluída",
-        submodulo: "Crônico / Monitoramento programado",
-        dimensao: "Resultado / continuidade do cuidado",
-        finalidade: "Verificar se o encaminhamento realizado gerou acesso efetivo ao cuidado indicado.",
-        definicao: "Proporção de encaminhamentos concluídos em relação ao total de encaminhamentos realizados.",
-        formula: "Encaminhamentos concluídos / encaminhamentos realizados × 100.",
-        tipo: "Resultado; continuidade assistencial.",
-        fonte: "Encaminhamentos realizados; encaminhamento concluído; encaminhamento pendente.",
-        periodicidade: "Mensal ou trimestral.",
-        unidade: "Percentual.",
-        polaridade: "Quanto maior, melhor.",
-        interpretacao: "Baixo percentual indica risco de descontinuidade e necessidade de acompanhamento gerencial do encaminhamento.",
-        limitacoes: "Depende da existência do campo “encaminhamento concluído” e da definição institucional do que caracteriza conclusão.",
-        etica: "Utilizar apenas dados agregados e não identificáveis; vedar exposição individual, identificação de unidade pequena ou uso disciplinar.",
-        valor: 68.1,
-        display: "68,1%",
-        hint: "Encaminhamentos concluídos",
-        color: "#22a06b",
-        grupo: "cronico",
-        trend: [55, 58, 59, 60, 61, 63, 64, 64, 66, 67, 67, 68.1]
-      },
-      {
-        id: "i5",
-        nome: "Taxa de demandas psicológicas urgentes registradas por 1.000 militares",
-        submodulo: "Agudo / Alerta e demanda aguda",
-        dimensao: "Alerta / pressão assistencial aguda",
-        finalidade: "Acompanhar a pressão assistencial aguda registrada institucionalmente, permitindo comparação proporcional entre períodos.",
-        definicao: "Número de demandas psicológicas urgentes registradas no período em relação ao efetivo de referência, padronizado por 1.000 militares.",
-        formula: "Demandas psicológicas urgentes registradas / efetivo de referência × 1.000.",
-        tipo: "Alerta; taxa proporcional; pressão assistencial.",
-        fonte: "Demandas psicológicas urgentes; efetivo de referência; tipo de demanda aguda; procedência da demanda.",
-        periodicidade: "Mensal, com consolidação trimestral ou anual.",
-        unidade: "Taxa por 1.000 militares.",
-        polaridade: "Análise contextual.",
-        interpretacao: "Crescimento da taxa demanda análise por procedência, tipo de demanda, prioridade, canal de acesso e capacidade de resposta institucional.",
-        limitacoes: "Depende de registro institucional da demanda aguda; não deve ser interpretado como prevalência clínica, pois pode haver subnotificação.",
-        etica: "Utilizar apenas dados agregados e não identificáveis; vedar exposição individual, identificação de unidade pequena ou uso disciplinar.",
-        valor: 12.7,
-        display: "12,7‰",
-        hint: "Demandas urgentes por 1.000",
-        color: "#ef3340",
-        grupo: "agudo",
-        trend: [7.1, 7.8, 8.4, 8.9, 9.6, 10.2, 10.6, 11.2, 11.7, 12.0, 12.5, 12.7]
-      },
-      {
-        id: "i6",
-        nome: "Tempo médio até acolhimento",
-        submodulo: "Agudo / Alerta e demanda aguda",
-        dimensao: "Alerta / tempestividade da resposta",
-        finalidade: "Medir a rapidez da resposta institucional diante de demanda aguda registrada.",
-        definicao: "Tempo médio entre o registro da demanda e o primeiro acolhimento institucional.",
-        formula: "Média de (data/hora do primeiro acolhimento - data/hora da demanda registrada), em horas.",
-        tipo: "Tempestividade; alerta operacional.",
-        fonte: "Data e hora da demanda; data e hora do primeiro acolhimento; meta de tempo para acolhimento.",
-        periodicidade: "Mensal, com acompanhamento por faixas de prioridade.",
-        unidade: "Horas.",
-        polaridade: "Quanto menor, melhor.",
-        interpretacao: "Tempo elevado indica risco de resposta tardia e necessidade de revisão de fluxo, canal de acesso ou capacidade de acolhimento.",
-        limitacoes: "Exige registro temporal padronizado dos marcos de início e primeiro acolhimento.",
-        etica: "Utilizar apenas dados agregados e não identificáveis; vedar exposição individual, identificação de unidade pequena ou uso disciplinar.",
-        valor: 43.2,
-        display: "43,2 h",
-        hint: "Demanda até primeiro acolhimento",
-        color: "#f97316",
-        grupo: "agudo",
-        trend: [52, 51, 49, 48, 47, 46, 46, 45, 44.5, 44, 43.5, 43.2]
-      },
-      {
-        id: "i7",
-        nome: "Taxa de afastamento psicológico/psiquiátrico",
-        submodulo: "Agudo / Alerta e demanda aguda",
-        dimensao: "Resultado-alerta / repercussão funcional",
-        finalidade: "Dimensionar a repercussão funcional agregada dos afastamentos por saúde mental.",
-        definicao: "Percentual de militares afastados por saúde mental em relação ao efetivo de referência.",
-        formula: "Militares afastados por saúde mental / efetivo de referência × 100.",
-        tipo: "Resultado-alerta; impacto funcional.",
-        fonte: "Número de militares afastados; afastamentos psicológicos/psiquiátricos; efetivo de referência.",
-        periodicidade: "Mensal ou trimestral.",
-        unidade: "Percentual.",
-        polaridade: "Quanto menor, melhor.",
-        interpretacao: "Aumento sugere repercussão funcional relevante e demanda leitura por período, faixas agregadas e contexto ocupacional.",
-        limitacoes: "Não deve expor unidade pequena, posto/graduação isolado ou qualquer combinação que permita identificação.",
-        etica: "Utilizar apenas dados agregados e não identificáveis; vedar exposição individual, identificação de unidade pequena ou uso disciplinar.",
-        valor: 2.1,
-        display: "2,1%",
-        hint: "Militares afastados / efetivo",
-        color: "#c81e2b",
-        grupo: "agudo",
-        trend: [1.3, 1.4, 1.5, 1.5, 1.6, 1.7, 1.8, 1.8, 1.9, 2.0, 2.0, 2.1]
-      },
-      {
-        id: "i8",
-        nome: "Dias perdidos por afastamento psicológico/psiquiátrico",
-        submodulo: "Agudo / Alerta e demanda aguda",
-        dimensao: "Resultado-alerta / impacto funcional agregado",
-        finalidade: "Medir o impacto funcional agregado dos afastamentos por saúde mental na disponibilidade do efetivo.",
-        definicao: "Soma dos dias de afastamento psicológico/psiquiátrico no período analisado.",
-        formula: "Soma dos dias perdidos por afastamento psicológico/psiquiátrico.",
-        tipo: "Resultado; impacto funcional.",
-        fonte: "Dias perdidos por afastamento; eventos de afastamento; CID-10 agrupado.",
-        periodicidade: "Mensal, trimestral ou anual.",
-        unidade: "Dias.",
-        polaridade: "Quanto menor, melhor.",
-        interpretacao: "O indicador expressa repercussão funcional com maior robustez do que a simples contagem de licenças.",
-        limitacoes: "Usar apenas CID-10 agrupado e dados agregados, sem identificação individual.",
-        etica: "Utilizar apenas dados agregados e não identificáveis; vedar exposição individual, identificação de unidade pequena ou uso disciplinar.",
-        valor: 1235,
-        display: "1.235 dias",
-        hint: "Impacto funcional agregado",
-        color: "#8d1117",
-        grupo: "agudo",
-        trend: [820, 860, 900, 910, 980, 1000, 1055, 1100, 1145, 1180, 1210, 1235]
-      }
+      { id: "i1", grupo: "cronico", nome: "Taxa de conclusão do monitoramento PSOBM", display: "72,7%", valor: 72.7, unidade: "%", cor: "#1f7acb", curto: "Fluxo concluído", submodulo: "Crônico / Monitoramento programado", dimensao: "Processo / fluxo programado", finalidade: "Medir a capacidade de finalização do monitoramento programado do PSOBM.", definicao: "Percentual de registros do PSOBM que chegaram à avaliação psicológica concluída no período analisado.", formula: "Avaliações psicológicas concluídas / registros do PSOBM × 100.", tipo: "Processo; eficiência operacional do fluxo.", fonte: "Registros do PSOBM/Psicologia; avaliações psicológicas concluídas; status do atendimento.", periodicidade: "Mensal, com consolidação trimestral ou anual.", medida: "Percentual.", polaridade: "Quanto maior, melhor.", interpretacao: "Valores inferiores ao parâmetro institucional sugerem possível gargalo de agenda, adesão, retorno ou capacidade de conclusão.", limitacoes: "Depende da padronização do status de atendimento e da consistência dos registros de conclusão.", etica: "Utilizar apenas dados agregados e não identificáveis; vedar exposição individual, identificação de unidade pequena ou uso disciplinar.", serie: [61, 64, 63, 66, 68, 67, 69, 70, 71, 72, 72, 72.7] },
+      { id: "i2", grupo: "cronico", nome: "Tempo médio do ciclo de monitoramento", display: "18,4 dias", valor: 18.4, unidade: "dias", cor: "#18bad2", curto: "Convocação até avaliação", submodulo: "Crônico / Monitoramento programado", dimensao: "Processo / tempestividade do fluxo crônico", finalidade: "Mensurar a velocidade do fluxo entre convocação e avaliação psicológica.", definicao: "Tempo médio, em dias, entre a data de convocação e a data da avaliação psicológica.", formula: "Média de (data da avaliação psicológica - data da convocação).", tipo: "Processo; tempestividade.", fonte: "Data da convocação; data da avaliação psicológica.", periodicidade: "Mensal, com leitura de tendência.", medida: "Dias.", polaridade: "Quanto menor, melhor.", interpretacao: "Aumento persistente indica espera, fila, limitação de agenda ou atraso no ciclo programado.", limitacoes: "Depende de datas completas, padronizadas e confiáveis em ambos os marcos do fluxo.", etica: "Utilizar apenas dados agregados e não identificáveis; vedar exposição individual, identificação de unidade pequena ou uso disciplinar.", serie: [22, 21, 20, 21, 19, 20, 18, 18, 19, 18, 18.5, 18.4] },
+      { id: "i3", grupo: "cronico", nome: "Índice de recorrência assistencial por beneficiário", display: "1,42", valor: 1.42, unidade: "razão", cor: "#f4bd3f", curto: "Atendimentos por beneficiário", submodulo: "Crônico / Monitoramento programado", dimensao: "Acompanhamento / recorrência assistencial", finalidade: "Diferenciar demanda pontual de demanda recorrente e apoiar planejamento de agenda, equipe e continuidade do cuidado.", definicao: "Razão entre o total de registros de atendimentos psicológicos e o número de beneficiários únicos atendidos no período.", formula: "Registros de atendimentos psicológicos / beneficiários únicos atendidos.", tipo: "Acompanhamento; concentração da demanda; gestão de capacidade.", fonte: "Registros de atendimentos psicológicos; beneficiários únicos atendidos; recorrência de atendimentos por beneficiário.", periodicidade: "Mensal, com consolidação trimestral ou anual.", medida: "Razão.", polaridade: "Análise contextual.", interpretacao: "Valor elevado pode indicar maior concentração de atendimentos em parte dos beneficiários, necessidade de continuidade assistencial ou pressão sobre a capacidade de acompanhamento.", limitacoes: "Não permite inferir gravidade clínica individual; pode ser influenciado por protocolos de acompanhamento, retornos programados ou disponibilidade de agenda.", etica: "Utilizar apenas dados agregados e não identificáveis; vedar exposição individual, identificação de unidade pequena ou uso disciplinar.", serie: [1.10, 1.16, 1.22, 1.18, 1.25, 1.28, 1.33, 1.31, 1.35, 1.39, 1.40, 1.42] },
+      { id: "i4", grupo: "cronico", nome: "Taxa de continuidade assistencial concluída", display: "68,1%", valor: 68.1, unidade: "%", cor: "#1f9d67", curto: "Encaminhamentos concluídos", submodulo: "Crônico / Monitoramento programado", dimensao: "Resultado / continuidade do cuidado", finalidade: "Verificar se o encaminhamento realizado gerou acesso efetivo ao cuidado indicado.", definicao: "Proporção de encaminhamentos concluídos em relação ao total de encaminhamentos realizados.", formula: "Encaminhamentos concluídos / encaminhamentos realizados × 100.", tipo: "Resultado; continuidade assistencial.", fonte: "Encaminhamentos realizados; encaminhamento concluído; encaminhamento pendente.", periodicidade: "Mensal ou trimestral.", medida: "Percentual.", polaridade: "Quanto maior, melhor.", interpretacao: "Baixo percentual indica risco de descontinuidade e necessidade de acompanhamento gerencial do encaminhamento.", limitacoes: "Depende da existência do campo “encaminhamento concluído” e da definição institucional do que caracteriza conclusão.", etica: "Utilizar apenas dados agregados e não identificáveis; vedar exposição individual, identificação de unidade pequena ou uso disciplinar.", serie: [55, 58, 59, 60, 61, 63, 64, 64, 66, 67, 67, 68.1] },
+      { id: "i5", grupo: "agudo", nome: "Taxa de demandas psicológicas urgentes por 1.000 militares", display: "12,7‰", valor: 12.7, unidade: "por 1.000", cor: "#ef3340", curto: "Demandas urgentes proporcionais", submodulo: "Agudo / Alerta e demanda aguda", dimensao: "Alerta / pressão assistencial aguda", finalidade: "Acompanhar a pressão assistencial aguda registrada institucionalmente, permitindo comparação proporcional entre períodos.", definicao: "Número de demandas psicológicas urgentes registradas no período em relação ao efetivo de referência, padronizado por 1.000 militares.", formula: "Demandas psicológicas urgentes registradas / efetivo de referência × 1.000.", tipo: "Alerta; taxa proporcional; pressão assistencial.", fonte: "Demandas psicológicas urgentes; efetivo de referência; tipo de demanda aguda; procedência da demanda.", periodicidade: "Mensal, com consolidação trimestral ou anual.", medida: "Taxa por 1.000 militares.", polaridade: "Análise contextual.", interpretacao: "Crescimento da taxa demanda análise por procedência, tipo de demanda, prioridade, canal de acesso e capacidade de resposta institucional.", limitacoes: "Depende de registro institucional da demanda aguda; não deve ser interpretado como prevalência clínica, pois pode haver subnotificação.", etica: "Utilizar apenas dados agregados e não identificáveis; vedar exposição individual, identificação de unidade pequena ou uso disciplinar.", serie: [7.1, 7.8, 8.4, 8.9, 9.6, 10.2, 10.6, 11.2, 11.7, 12.0, 12.5, 12.7] },
+      { id: "i6", grupo: "agudo", nome: "Tempo médio até acolhimento", display: "43,2 h", valor: 43.2, unidade: "horas", cor: "#f97316", curto: "Demanda até acolhimento", submodulo: "Agudo / Alerta e demanda aguda", dimensao: "Alerta / tempestividade da resposta", finalidade: "Medir a rapidez da resposta institucional diante de demanda aguda registrada.", definicao: "Tempo médio entre o registro da demanda e o primeiro acolhimento institucional.", formula: "Média de (data/hora do primeiro acolhimento - data/hora da demanda registrada), em horas.", tipo: "Tempestividade; alerta operacional.", fonte: "Data e hora da demanda; data e hora do primeiro acolhimento; meta de tempo para acolhimento.", periodicidade: "Mensal, com acompanhamento por faixas de prioridade.", medida: "Horas.", polaridade: "Quanto menor, melhor.", interpretacao: "Tempo elevado indica risco de resposta tardia e necessidade de revisão de fluxo, canal de acesso ou capacidade de acolhimento.", limitacoes: "Exige registro temporal padronizado dos marcos de início e primeiro acolhimento.", etica: "Utilizar apenas dados agregados e não identificáveis; vedar exposição individual, identificação de unidade pequena ou uso disciplinar.", serie: [52, 51, 49, 48, 47, 46, 46, 45, 44.5, 44, 43.5, 43.2] },
+      { id: "i7", grupo: "agudo", nome: "Taxa de afastamento psicológico/psiquiátrico", display: "2,1%", valor: 2.1, unidade: "%", cor: "#cc2230", curto: "Militares afastados / efetivo", submodulo: "Agudo / Alerta e demanda aguda", dimensao: "Resultado-alerta / repercussão funcional", finalidade: "Dimensionar a repercussão funcional agregada dos afastamentos por saúde mental.", definicao: "Percentual de militares afastados por saúde mental em relação ao efetivo de referência.", formula: "Militares afastados por saúde mental / efetivo de referência × 100.", tipo: "Resultado-alerta; impacto funcional.", fonte: "Número de militares afastados; afastamentos psicológicos/psiquiátricos; efetivo de referência.", periodicidade: "Mensal ou trimestral.", medida: "Percentual.", polaridade: "Quanto menor, melhor.", interpretacao: "Aumento sugere repercussão funcional relevante e demanda leitura por período, faixas agregadas e contexto ocupacional.", limitacoes: "Não deve expor unidade pequena, posto/graduação isolado ou qualquer combinação que permita identificação.", etica: "Utilizar apenas dados agregados e não identificáveis; vedar exposição individual, identificação de unidade pequena ou uso disciplinar.", serie: [1.3, 1.4, 1.5, 1.5, 1.6, 1.7, 1.8, 1.8, 1.9, 2.0, 2.0, 2.1] },
+      { id: "i8", grupo: "agudo", nome: "Dias perdidos por afastamento psicológico/psiquiátrico", display: "1.235 dias", valor: 1235, unidade: "dias", cor: "#8a1219", curto: "Impacto funcional agregado", submodulo: "Agudo / Alerta e demanda aguda", dimensao: "Resultado-alerta / impacto funcional agregado", finalidade: "Medir o impacto funcional agregado dos afastamentos por saúde mental na disponibilidade do efetivo.", definicao: "Soma dos dias de afastamento psicológico/psiquiátrico no período analisado.", formula: "Soma dos dias perdidos por afastamento psicológico/psiquiátrico.", tipo: "Resultado; impacto funcional.", fonte: "Dias perdidos por afastamento; eventos de afastamento; CID-10 agrupado.", periodicidade: "Mensal, trimestral ou anual.", medida: "Dias.", polaridade: "Quanto menor, melhor.", interpretacao: "O indicador expressa repercussão funcional com maior robustez do que a simples contagem de licenças.", limitacoes: "Usar apenas CID-10 agrupado e dados agregados, sem identificação individual.", etica: "Utilizar apenas dados agregados e não identificáveis; vedar exposição individual, identificação de unidade pequena ou uso disciplinar.", serie: [820, 860, 900, 910, 980, 1000, 1055, 1100, 1145, 1180, 1210, 1235] }
     ];
 
     const meses = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
-    const fmt = new Intl.NumberFormat("pt-BR", { maximumFractionDigits: 1 });
+    const $ = (sel, root = document) => root.querySelector(sel);
+    const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+    const byId = (id) => indicadores.find((item) => item.id === id);
 
-    const getById = (id) => indicadores.find((item) => item.id === id);
-    const qs = (sel, root = document) => root.querySelector(sel);
-    const qsa = (sel, root = document) => [...root.querySelectorAll(sel)];
+    function normalize(series) {
+      const first = series[0] || 1;
+      return series.map((value) => +(value / first * 100).toFixed(1));
+    }
 
-    function renderCards(containerId, items) {
-      const container = qs(`#${containerId}`);
+    function setView(id) {
+      $$(".view").forEach((view) => view.classList.toggle("active", view.id === id));
+      $$(".nav-btn").forEach((btn) => btn.classList.toggle("active", btn.dataset.view === id));
+    }
+
+    function cards(containerId, items) {
+      const container = $(`#${containerId}`);
       container.innerHTML = items.map((item) => `
-        <article class="kpi-card" data-indicator="${item.id}" style="--accent:${item.color}" tabindex="0" role="button" aria-label="Abrir ficha técnica: ${item.nome}">
-          <div class="meta">${item.submodulo.split("/")[0].trim()}</div>
+        <article class="kpi" tabindex="0" role="button" data-open-ficha="${item.id}" style="--accent:${item.cor}" aria-label="Abrir ficha técnica do indicador ${item.nome}">
+          <div class="sub">${item.submodulo.split("/")[0].trim()}</div>
           <div class="value">${item.display}</div>
           <div class="name">${item.nome}</div>
-          <div class="hint">${item.hint}</div>
+          <div class="kpi-note">${item.curto}</div>
+          <span class="click">Clique para ver ficha técnica</span>
         </article>
       `).join("");
-
-      qsa(".kpi-card", container).forEach((card) => {
-        const open = () => showIndicatorFicha(card.dataset.indicator);
-        card.addEventListener("click", open);
-        card.addEventListener("keydown", (event) => {
-          if (event.key === "Enter" || event.key === " ") {
-            event.preventDefault();
-            open();
-          }
-        });
-      });
     }
 
-    function lineChart(elementId, series, color, label = "Indicador") {
-      const width = 720;
-      const height = 260;
-      const pad = 36;
-      const min = Math.min(...series) * 0.92;
-      const max = Math.max(...series) * 1.08;
-      const x = (i) => pad + (i * (width - pad * 2)) / (series.length - 1);
-      const y = (v) => height - pad - ((v - min) * (height - pad * 2)) / (max - min || 1);
-      const points = series.map((v, i) => `${x(i)},${y(v)}`).join(" ");
-      const area = `${pad},${height-pad} ${points} ${width-pad},${height-pad}`;
-      const gridLines = [0, .25, .5, .75, 1].map((t) => {
-        const gy = pad + t * (height - pad * 2);
-        return `<line x1="${pad}" y1="${gy}" x2="${width-pad}" y2="${gy}" stroke="#e5ebf4" stroke-width="1"/>`;
+    function lineSvg(series, color, label, suffix = "") {
+      const w = 560, h = 180, pad = 28;
+      const min = Math.min(...series) * 0.94;
+      const max = Math.max(...series) * 1.06;
+      const x = (i) => pad + i * (w - pad * 2) / (series.length - 1);
+      const y = (v) => h - pad - ((v - min) * (h - pad * 2)) / ((max - min) || 1);
+      const pts = series.map((v, i) => `${x(i)},${y(v)}`).join(" ");
+      const grid = [0, .5, 1].map((t) => `<line x1="${pad}" y1="${pad + t * (h - pad * 2)}" x2="${w-pad}" y2="${pad + t * (h - pad * 2)}" stroke="#e8eef6"/>`).join("");
+      const dots = series.map((v, i) => i % 2 === 0 || i === series.length - 1 ? `<circle cx="${x(i)}" cy="${y(v)}" r="3.5" fill="${color}" stroke="#fff" stroke-width="2"><title>${meses[i]}: ${v}${suffix}</title></circle>` : "").join("");
+      const labels = meses.map((m, i) => i % 3 === 0 ? `<text x="${x(i)}" y="${h-7}" text-anchor="middle" font-size="10" fill="#65738a">${m}</text>` : "").join("");
+      return `<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Gráfico de linha: ${label}">${grid}<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>${dots}${labels}</svg>`;
+    }
+
+    function multiNormalChart(containerId, items) {
+      const w = 660, h = 230, pad = 34;
+      const allSeries = items.map((item) => normalize(item.serie));
+      const all = allSeries.flat();
+      const min = Math.min(...all) * 0.96;
+      const max = Math.max(...all) * 1.04;
+      const x = (i) => pad + i * (w - pad * 2) / 11;
+      const y = (v) => h - pad - ((v - min) * (h - pad * 2)) / ((max - min) || 1);
+      const grid = [0, .5, 1].map((t) => `<line x1="${pad}" y1="${pad + t * (h - pad * 2)}" x2="${w-pad}" y2="${pad + t * (h - pad * 2)}" stroke="#e8eef6"/>`).join("");
+      const lines = items.map((item, idx) => {
+        const pts = allSeries[idx].map((v, i) => `${x(i)},${y(v)}`).join(" ");
+        return `<polyline points="${pts}" fill="none" stroke="${item.cor}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><title>${item.nome}</title></polyline>`;
       }).join("");
-      const dots = series.map((v, i) => `<circle cx="${x(i)}" cy="${y(v)}" r="4" fill="${color}" stroke="#fff" stroke-width="2"><title>${meses[i]}: ${fmt.format(v)}</title></circle>`).join("");
-      const monthLabels = series.map((_, i) => i % 2 === 0 ? `<text x="${x(i)}" y="${height-10}" font-size="11" text-anchor="middle" fill="#667085">${meses[i]}</text>` : "").join("");
-
-      qs(`#${elementId}`).innerHTML = `
-        <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Gráfico de linha: ${label}">
-          ${gridLines}
-          <polygon points="${area}" fill="${color}" opacity="0.10"></polygon>
-          <polyline points="${points}" fill="none" stroke="${color}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></polyline>
-          ${dots}
-          ${monthLabels}
-        </svg>`;
+      const legend = items.map((item, idx) => `<g transform="translate(${pad + (idx % 2) * 290}, ${12 + Math.floor(idx / 2) * 18})"><rect width="10" height="10" rx="3" fill="${item.cor}"/><text x="15" y="10" font-size="10.5" fill="#39475c">${item.nome.slice(0, 38)}${item.nome.length > 38 ? "…" : ""}</text></g>`).join("");
+      $(`#${containerId}`).innerHTML = `<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Índice normalizado base 100">${legend}<g transform="translate(0 42)">${grid}${lines}</g></svg>`;
     }
 
-    function multiLineChart(elementId, items) {
-      const width = 760;
-      const height = 300;
-      const pad = 42;
-      const all = items.flatMap((item) => item.trend);
-      const min = Math.min(...all) * 0.88;
-      const max = Math.max(...all) * 1.08;
-      const x = (i) => pad + (i * (width - pad * 2)) / 11;
-      const y = (v) => height - pad - ((v - min) * (height - pad * 2)) / (max - min || 1);
-      const grid = [0, .25, .5, .75, 1].map((t) => {
-        const gy = pad + t * (height - pad * 2);
-        return `<line x1="${pad}" y1="${gy}" x2="${width-pad}" y2="${gy}" stroke="#e5ebf4"/>`;
-      }).join("");
-      const lines = items.map((item) => {
-        const points = item.trend.map((v, i) => `${x(i)},${y(v)}`).join(" ");
-        return `<polyline points="${points}" fill="none" stroke="${item.color}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><title>${item.nome}</title></polyline>`;
-      }).join("");
-      const legend = items.map((item, i) => `<g transform="translate(${pad + i * 170}, 18)"><rect width="12" height="12" rx="3" fill="${item.color}"></rect><text x="18" y="11" font-size="11" fill="#39465a">${item.nome.slice(0, 22)}${item.nome.length > 22 ? "…" : ""}</text></g>`).join("");
-      const labels = meses.map((m, i) => i % 2 === 0 ? `<text x="${x(i)}" y="${height-10}" font-size="11" text-anchor="middle" fill="#667085">${m}</text>` : "").join("");
-      qs(`#${elementId}`).innerHTML = `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Gráfico de linhas comparativas">${legend}${grid}${lines}${labels}</svg>`;
+    function donut(containerId) {
+      const w = 420, h = 228, cx = 122, cy = 114, r = 68, c = 2 * Math.PI * r, half = c / 2;
+      $(`#${containerId}`).innerHTML = `<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Composição dos indicadores por submódulo">
+        <g transform="rotate(-90 ${cx} ${cy})"><circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#edf1f7" stroke-width="30"/><circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#1f7acb" stroke-width="30" stroke-dasharray="${half} ${c}"/><circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#ef3340" stroke-width="30" stroke-dasharray="${half} ${c}" stroke-dashoffset="-${half}"/></g>
+        <text x="${cx}" y="106" text-anchor="middle" font-size="38" font-weight="900" fill="#06264b">8</text><text x="${cx}" y="131" text-anchor="middle" font-size="12" font-weight="800" fill="#65738a">indicadores</text>
+        <g transform="translate(235 82)"><rect width="14" height="14" rx="4" fill="#1f7acb"/><text x="22" y="12" font-size="13" fill="#39475c">Crônico: 4</text><rect y="34" width="14" height="14" rx="4" fill="#ef3340"/><text x="22" y="46" font-size="13" fill="#39475c">Agudo: 4</text></g>
+      </svg>`;
     }
 
-    function barChart(elementId, items) {
-      const width = 720;
-      const height = 290;
-      const pad = 42;
-      const max = Math.max(...items.map((item) => item.valor)) * 1.12;
-      const barW = (width - pad * 2) / items.length - 18;
-      const bars = items.map((item, i) => {
-        const h = ((item.valor) * (height - pad * 2)) / (max || 1);
-        const x = pad + i * ((width - pad * 2) / items.length) + 9;
-        const y = height - pad - h;
-        const label = item.display.length > 8 ? item.display : item.display;
-        return `
-          <g>
-            <rect x="${x}" y="${y}" width="${barW}" height="${h}" rx="8" fill="${item.color}"><title>${item.nome}: ${item.display}</title></rect>
-            <text x="${x + barW / 2}" y="${y - 8}" font-size="12" text-anchor="middle" font-weight="800" fill="#162033">${label}</text>
-            <text x="${x + barW / 2}" y="${height - 16}" font-size="10" text-anchor="middle" fill="#667085">${item.nome.split(" ").slice(0,2).join(" ")}</text>
-          </g>`;
-      }).join("");
-      qs(`#${elementId}`).innerHTML = `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Gráfico de barras">${bars}</svg>`;
+    function miniCharts(containerId, items) {
+      const container = $(`#${containerId}`);
+      container.innerHTML = items.map((item) => `<article class="mini-chart"><h4>${item.nome}</h4><small>${item.display} · ${item.medida}</small>${lineSvg(item.serie, item.cor, item.nome, item.unidade === "%" ? "%" : "")}</article>`).join("");
     }
 
-    function donutChart(elementId, items) {
-      const cronico = items.filter((item) => item.grupo === "cronico").length;
-      const agudo = items.filter((item) => item.grupo === "agudo").length;
-      const total = cronico + agudo;
-      const cronPct = cronico / total;
-      const radius = 78;
-      const circumference = 2 * Math.PI * radius;
-      const dashCron = circumference * cronPct;
-      const dashAgudo = circumference - dashCron;
-      qs(`#${elementId}`).innerHTML = `
-        <svg viewBox="0 0 420 260" role="img" aria-label="Gráfico de rosca dos submódulos">
-          <g transform="translate(140 130) rotate(-90)">
-            <circle r="${radius}" cx="0" cy="0" fill="none" stroke="#edf1f7" stroke-width="32"></circle>
-            <circle r="${radius}" cx="0" cy="0" fill="none" stroke="#1d75c2" stroke-width="32" stroke-dasharray="${dashCron} ${circumference}" stroke-linecap="round"></circle>
-            <circle r="${radius}" cx="0" cy="0" fill="none" stroke="#ef3340" stroke-width="32" stroke-dasharray="${dashAgudo} ${circumference}" stroke-dashoffset="-${dashCron}" stroke-linecap="round"></circle>
-          </g>
-          <text x="140" y="124" text-anchor="middle" font-size="42" font-weight="900" fill="#062345">8</text>
-          <text x="140" y="150" text-anchor="middle" font-size="13" font-weight="800" fill="#667085">indicadores</text>
-          <g transform="translate(260 92)">
-            <rect width="14" height="14" rx="4" fill="#1d75c2"></rect><text x="22" y="12" font-size="13" fill="#39465a">Crônico: 4</text>
-            <rect y="34" width="14" height="14" rx="4" fill="#ef3340"></rect><text x="22" y="46" font-size="13" fill="#39465a">Agudo: 4</text>
-          </g>
-        </svg>`;
-    }
-
-    function gaugeChart(elementId, value, maxValue, color, label = "Tempo") {
-      const pct = Math.max(0, Math.min(1, value / maxValue));
+    function velocimetro(containerId, value) {
+      const max = 120;
+      const pct = Math.max(0, Math.min(1, value / max));
       const angle = -90 + pct * 180;
-      qs(`#${elementId}`).innerHTML = `
-        <svg viewBox="0 0 440 270" role="img" aria-label="Velocímetro: ${label}">
-          <defs>
-            <linearGradient id="gaugeGrad-${elementId}" x1="0" x2="1" y1="0" y2="0">
-              <stop offset="0%" stop-color="#22a06b" />
-              <stop offset="52%" stop-color="#f4b740" />
-              <stop offset="100%" stop-color="#ef3340" />
-            </linearGradient>
-          </defs>
-          <path d="M 90 205 A 130 130 0 0 1 350 205" fill="none" stroke="#e8eef6" stroke-width="34" stroke-linecap="round"></path>
-          <path d="M 90 205 A 130 130 0 0 1 350 205" fill="none" stroke="url(#gaugeGrad-${elementId})" stroke-width="34" stroke-linecap="round"></path>
-          <g transform="rotate(${angle} 220 205)">
-            <line x1="220" y1="205" x2="220" y2="93" stroke="#071421" stroke-width="7" stroke-linecap="round"></line>
-            <circle cx="220" cy="205" r="13" fill="#071421"></circle>
-          </g>
-          <text x="90" y="244" text-anchor="middle" font-size="12" font-weight="800" fill="#667085">0</text>
-          <text x="220" y="244" text-anchor="middle" font-size="12" font-weight="800" fill="#667085">meta</text>
-          <text x="350" y="244" text-anchor="middle" font-size="12" font-weight="800" fill="#667085">${maxValue}</text>
-          <text x="220" y="184" text-anchor="middle" font-size="38" font-weight="900" fill="${color}">${String(value).replace('.', ',')}</text>
-          <text x="220" y="211" text-anchor="middle" font-size="13" font-weight="800" fill="#667085">${label}</text>
-        </svg>`;
+      $(`#${containerId}`).innerHTML = `<svg viewBox="0 0 520 285" role="img" aria-label="Velocímetro do tempo médio até acolhimento">
+        <path d="M 90 210 A 170 170 0 0 1 430 210" fill="none" stroke="#edf1f7" stroke-width="34" stroke-linecap="round"/>
+        <path d="M 90 210 A 170 170 0 0 1 205 70" fill="none" stroke="#1f9d67" stroke-width="34" stroke-linecap="round"/>
+        <path d="M 205 70 A 170 170 0 0 1 315 70" fill="none" stroke="#f4bd3f" stroke-width="34" stroke-linecap="round"/>
+        <path d="M 315 70 A 170 170 0 0 1 430 210" fill="none" stroke="#ef3340" stroke-width="34" stroke-linecap="round"/>
+        <g transform="rotate(${angle} 260 210)"><line x1="260" y1="210" x2="260" y2="74" stroke="#071421" stroke-width="7" stroke-linecap="round"/><circle cx="260" cy="210" r="13" fill="#071421"/></g>
+        <text x="130" y="250" font-size="12" font-weight="900" fill="#1f9d67">Adequado</text><text x="232" y="48" font-size="12" font-weight="900" fill="#a16a00">Atenção</text><text x="350" y="250" font-size="12" font-weight="900" fill="#ef3340">Crítico</text>
+        <text x="260" y="178" text-anchor="middle" font-size="42" font-weight="950" fill="#f97316">${String(value).replace('.', ',')}</text><text x="260" y="207" text-anchor="middle" font-size="13" font-weight="900" fill="#65738a">horas</text><text x="260" y="268" text-anchor="middle" font-size="11" fill="#65738a">Faixas demonstrativas: até 24h · 24h a 72h · acima de 72h</text>
+      </svg>`;
     }
 
-    function preventionBars(elementId) {
-      const data = [
-        { label: "Ações", value: 74, color: "#22a06b" },
-        { label: "Público", value: 3219, color: "#1d75c2" },
-        { label: "Cobertura", value: 63.4, color: "#f4b740" }
-      ];
-      const width = 620;
-      const height = 260;
-      const pad = 48;
-      const max = Math.max(...data.map((d) => d.value));
-      const bars = data.map((d, i) => {
-        const barArea = width - pad * 2;
-        const h = (d.value / max) * (height - pad * 2);
-        const x = pad + i * (barArea / data.length) + 22;
-        const y = height - pad - h;
-        const bw = 92;
-        return `<g><rect x="${x}" y="${y}" width="${bw}" height="${h}" rx="9" fill="${d.color}"></rect><text x="${x + bw/2}" y="${y-8}" text-anchor="middle" font-weight="900" font-size="13" fill="#162033">${fmt.format(d.value)}</text><text x="${x + bw/2}" y="${height-18}" text-anchor="middle" font-size="12" fill="#667085">${d.label}</text></g>`;
-      }).join("");
-      qs(`#${elementId}`).innerHTML = `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Dados preventivos a integrar">${bars}</svg>`;
-    }
-
-    function fichaTable(item) {
+    function ficha(item) {
       const rows = [
-        ["Nome do indicador", item.nome],
-        ["Submódulo", item.submodulo],
-        ["Dimensão analítica", item.dimensao],
-        ["Finalidade gerencial", item.finalidade],
-        ["Definição conceitual", item.definicao],
-        ["Fórmula de cálculo", item.formula],
-        ["Tipo de indicador", item.tipo],
-        ["Fonte de dados", item.fonte],
-        ["Periodicidade", item.periodicidade],
-        ["Unidade de medida", item.unidade],
-        ["Polaridade", item.polaridade],
-        ["Forma de interpretação", item.interpretacao],
-        ["Limitações", item.limitacoes],
-        ["Cuidados éticos", item.etica]
+        ["Nome do indicador", item.nome], ["Submódulo", item.submodulo], ["Dimensão analítica", item.dimensao], ["Finalidade gerencial", item.finalidade], ["Definição conceitual", item.definicao], ["Fórmula de cálculo", item.formula], ["Tipo de indicador", item.tipo], ["Fonte de dados", item.fonte], ["Periodicidade", item.periodicidade], ["Unidade de medida", item.medida], ["Polaridade", item.polaridade], ["Forma de interpretação", item.interpretacao], ["Limitações", item.limitacoes], ["Cuidados éticos", item.etica]
       ];
-      return `<table class="ficha-table" aria-label="Ficha técnica do indicador ${item.nome}">${rows.map(([field, content]) => `<tr><th>${field}</th><td>${content}</td></tr>`).join("")}</table>`;
+      return `<table class="ficha-table" aria-label="Ficha técnica do indicador ${item.nome}">${rows.map(([a,b]) => `<tr><th>${a}</th><td>${b}</td></tr>`).join("")}</table>`;
     }
 
-    function fichaSelector(containerId, items, defaultId = null) {
-      const selected = getById(defaultId) || items[0];
-      const container = qs(`#${containerId}`);
-      container.innerHTML = `
-        <div class="ficha-picker">
-          ${items.map((item) => `
-            <button class="indicator-list-btn ${item.id === selected.id ? "active" : ""}" type="button" data-ficha="${item.id}" style="--accent:${item.color}">
-              <b>${item.nome}</b>
-              <small>${item.dimensao}</small>
-            </button>`).join("")}
-        </div>
-        <div class="ficha-content">${fichaTable(selected)}</div>
-      `;
-      qsa("[data-ficha]", container).forEach((btn) => {
-        btn.addEventListener("click", () => {
-          qsa("[data-ficha]", container).forEach((b) => b.classList.remove("active"));
-          btn.classList.add("active");
-          qs(".ficha-content", container).innerHTML = fichaTable(getById(btn.dataset.ficha));
-        });
-      });
-    }
-
-    function fichaSimple(containerId, itemId) {
-      const item = getById(itemId);
-      qs(`#${containerId}`).innerHTML = fichaTable(item);
-    }
-
-    function showIndicatorFicha(indicatorId) {
-      const item = getById(indicatorId);
+    function openFicha(id) {
+      const item = byId(id);
       if (!item) return;
-      const target = item.grupo === "cronico" ? "view-cronico" : "view-agudo";
-      if (!qs(`#${target}`).classList.contains("active")) {
-        activateView(target);
-      }
-      const containerId = item.grupo === "cronico" ? "ficha-cronico" : "ficha-agudo";
-      fichaSelector(containerId, indicadores.filter((i) => i.grupo === item.grupo), indicatorId);
-      setTimeout(() => qs(`#${containerId}`).scrollIntoView({ behavior: "smooth", block: "start" }), 80);
+      const drawer = $("#drawer");
+      const backdrop = $("#drawerBackdrop");
+      $("#drawerHead").style.setProperty("--accent", item.cor);
+      $("#drawerTitle").textContent = item.nome;
+      $("#drawerSubtitle").textContent = `${item.submodulo} · ${item.dimensao}`;
+      $("#drawerBody").innerHTML = ficha(item);
+      drawer.classList.add("open");
+      backdrop.classList.add("open");
+      drawer.setAttribute("aria-hidden", "false");
+      backdrop.setAttribute("aria-hidden", "false");
+      $("#drawerClose").focus();
     }
 
-    function activateView(targetId) {
-      qsa(".view").forEach((view) => view.classList.toggle("active", view.id === targetId));
-      qsa(".nav-btn").forEach((btn) => btn.classList.toggle("active", btn.dataset.target === targetId));
+    function closeFicha() {
+      $("#drawer").classList.remove("open");
+      $("#drawerBackdrop").classList.remove("open");
+      $("#drawer").setAttribute("aria-hidden", "true");
+      $("#drawerBackdrop").setAttribute("aria-hidden", "true");
     }
 
-    function setupNavigation() {
-      qsa(".nav-btn").forEach((btn) => {
-        btn.addEventListener("click", () => activateView(btn.dataset.target));
+    function init() {
+      const cronicos = indicadores.filter((i) => i.grupo === "cronico");
+      const agudos = indicadores.filter((i) => i.grupo === "agudo");
+      cards("cards-resumo", indicadores);
+      cards("cards-cronico", cronicos);
+      cards("cards-agudo", agudos);
+      donut("chart-donut");
+      multiNormalChart("chart-normal-cronico", cronicos);
+      multiNormalChart("chart-normal-agudo", agudos);
+      miniCharts("mini-cronico", cronicos);
+      miniCharts("mini-agudo", agudos.filter((i) => i.id !== "i6"));
+      velocimetro("chart-velocimetro", byId("i6").valor);
+
+      $$(".nav-btn").forEach((btn) => btn.addEventListener("click", () => setView(btn.dataset.view)));
+      document.body.addEventListener("click", (event) => {
+        const target = event.target.closest("[data-open-ficha]");
+        if (target) openFicha(target.dataset.openFicha);
       });
+      document.body.addEventListener("keydown", (event) => {
+        const target = event.target.closest("[data-open-ficha]");
+        if (target && (event.key === "Enter" || event.key === " ")) {
+          event.preventDefault();
+          openFicha(target.dataset.openFicha);
+        }
+        if (event.key === "Escape") closeFicha();
+      });
+      $("#drawerClose").addEventListener("click", closeFicha);
+      $("#drawerBackdrop").addEventListener("click", closeFicha);
     }
 
-    function renderAll() {
-      const cronicos = indicadores.filter((item) => item.grupo === "cronico");
-      const agudos = indicadores.filter((item) => item.grupo === "agudo");
-
-      renderCards("summary-kpis", indicadores);
-      renderCards("cronico-kpis", cronicos);
-      renderCards("agudo-kpis", agudos);
-
-      lineChart("chart-resumo-line", getById("i1").trend, getById("i1").color, getById("i1").nome);
-      donutChart("chart-resumo-donut", indicadores);
-      gaugeChart("chart-resumo-gauge", getById("i6").valor, 120, getById("i6").color, "horas");
-
-      multiLineChart("chart-cronico-line", cronicos);
-      barChart("chart-cronico-bars", cronicos);
-      lineChart("chart-agudo-line", getById("i5").trend, getById("i5").color, getById("i5").nome);
-      gaugeChart("chart-agudo-gauge", getById("i6").valor, 120, getById("i6").color, "horas");
-      barChart("chart-agudo-bars", agudos);
-      preventionBars("chart-prev-bars");
-
-      fichaSimple("ficha-resumo", "i1");
-      fichaSelector("ficha-cronico", cronicos, "i1");
-      fichaSelector("ficha-agudo", agudos, "i5");
-      fichaSelector("ficha-prevencao", indicadores, "i4");
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      setupNavigation();
-      renderAll();
-    });
+    document.addEventListener("DOMContentLoaded", init);
   </script>
 </body>
 </html>

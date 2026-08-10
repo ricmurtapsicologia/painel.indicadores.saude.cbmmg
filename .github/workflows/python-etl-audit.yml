@@ -1,0 +1,25 @@
+name: Python dashboard ETL audit
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/dashboard_etl.py'
+      - '.github/workflows/python-etl-audit.yml'
+      - 'data/source/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  formula-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile pipeline
+        run: python -m py_compile scripts/dashboard_etl.py
+      - name: Verify eight indicator formulas
+        run: python scripts/dashboard_etl.py self-test

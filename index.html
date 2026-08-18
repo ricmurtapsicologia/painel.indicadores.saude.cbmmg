@@ -1,487 +1,137 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Protótipo aplicado do Painel Estratégico de Inteligência em Saúde Mental do PSOBM, com dados agregados e pseudonimizados da AAS/CBMMG, 2020–2026." />
-  <title>Painel Estratégico de Inteligência em Saúde Mental do PSOBM</title>
-  <style>
-    :root{
-      --navy:#07182c; --navy2:#0b2c51; --blue:#1769b3; --cyan:#14a9c5;
-      --red:#b5222b; --red2:#7e161d; --green:#208a62; --amber:#c48b1a;
-      --ink:#172235; --muted:#637187; --line:#dce4ee; --soft:#f5f8fc;
-      --white:#fff; --shadow:0 18px 44px rgba(9,27,50,.10); --r:18px;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:#eef3f8}
-    button{font:inherit}
-    .app{min-height:100vh;display:grid;grid-template-columns:250px 1fr}
-    aside.sidebar{position:sticky;top:0;height:100vh;padding:24px 18px;color:#fff;background:
-      radial-gradient(circle at 15% 5%,rgba(20,169,197,.25),transparent 28%),
-      linear-gradient(180deg,#0a2d53 0%,#07182c 64%,#08111f 100%)}
-    .brand{display:flex;gap:12px;align-items:center;padding:4px 2px 22px;border-bottom:1px solid rgba(255,255,255,.12)}
-    .brand-mark{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;font-weight:900;background:linear-gradient(135deg,var(--blue),var(--red));box-shadow:0 8px 18px rgba(0,0,0,.25)}
-    .brand strong{display:block;font-size:13px;letter-spacing:.03em}
-    .brand small{display:block;margin-top:4px;color:rgba(255,255,255,.68);font-size:10px;line-height:1.25}
-    nav{padding:20px 0;display:grid;gap:8px}
-    .nav-btn{width:100%;border:0;border-radius:13px;padding:12px 13px;text-align:left;color:rgba(255,255,255,.72);background:transparent;cursor:pointer;transition:.18s}
-    .nav-btn:hover,.nav-btn.active{color:#fff;background:rgba(255,255,255,.10)}
-    .nav-btn.active{box-shadow:inset 3px 0 0 var(--cyan)}
-    .nav-btn b{font-size:12px}
-    .nav-btn span{display:block;font-size:10px;color:inherit;opacity:.68;margin-top:3px}
-    .side-note{margin-top:auto;padding:14px;border-radius:14px;background:rgba(255,255,255,.08);font-size:10px;line-height:1.45;color:rgba(255,255,255,.72)}
-    main{min-width:0}
-    .topbar{position:sticky;top:0;z-index:10;padding:15px 28px;color:#fff;background:linear-gradient(90deg,#0b2c51,#0c3a67 68%,#6f151c);box-shadow:0 8px 26px rgba(6,25,48,.18)}
-    .topbar-row{display:flex;justify-content:space-between;align-items:center;gap:18px}
-    .title h1{margin:0;font-size:19px;line-height:1.15;letter-spacing:.015em;text-transform:uppercase}
-    .title p{margin:5px 0 0;font-size:12px;color:rgba(255,255,255,.72)}
-    .chips{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
-    .chip{padding:7px 10px;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:rgba(255,255,255,.10);font-size:10px;font-weight:800}
-    .content{padding:24px 28px 34px;max-width:1640px;margin:0 auto}
-    .view{display:none}.view.active{display:block}
-    .section-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:15px}
-    .section-head h2{margin:0;color:var(--navy2);font-size:23px}
-    .section-head p{max-width:920px;margin:6px 0 0;color:var(--muted);font-size:13px;line-height:1.55}
-    .status-pill{white-space:nowrap;border-radius:999px;padding:8px 11px;font-size:10px;font-weight:900;border:1px solid #cfe0f2;background:#edf6ff;color:#174f80}
-    .story{margin-bottom:16px;padding:15px 17px;border:1px solid #cfe0f2;border-radius:var(--r);background:linear-gradient(135deg,#f8fbff,#eef7ff);font-size:13px;line-height:1.55;color:#405168}
-    .story b{color:var(--navy2)}
-    .grid{display:grid;gap:14px}
-    .grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
-    .grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}
-    .panel{min-width:0;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px;box-shadow:var(--shadow)}
-    .panel h3{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin:0 0 12px;color:var(--navy2);font-size:15px}
-    .panel h3 span{color:var(--muted);font-size:10px;text-align:right;font-weight:700}
-    .kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-bottom:16px}
-    .kpi{position:relative;min-height:154px;padding:16px;border:1px solid var(--line);border-radius:16px;background:#fff;box-shadow:0 8px 22px rgba(15,33,58,.06);overflow:hidden;cursor:pointer}
-    .kpi::before{content:"";position:absolute;left:0;top:0;right:0;height:4px;background:var(--accent)}
-    .kpi-top{display:flex;justify-content:space-between;gap:8px;align-items:center}
-    .kpi-code{font-size:10px;color:var(--muted);font-weight:900;letter-spacing:.06em}
-    .tag{font-size:9px;font-weight:900;border-radius:999px;padding:5px 8px}
-    .tag.ok{background:#eaf8f2;color:#19724f}.tag.partial{background:#fff6dd;color:#8a6413}.tag.no{background:#fdecef;color:#96212a}.tag.warn{background:#edf6ff;color:#1c5d95}
-    .kpi-value{margin:14px 0 6px;font-size:31px;line-height:1;font-weight:950;letter-spacing:-.035em;color:var(--navy2)}
-    .kpi-name{font-size:12px;font-weight:850;line-height:1.35}
-    .kpi-note{margin-top:8px;color:var(--muted);font-size:10px;line-height:1.4}
-    .kpi-hint{margin-top:10px;font-size:9px;font-weight:900;color:var(--accent)}
-    .metric-strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:14px 0 16px}
-    .metric{padding:12px 13px;border-radius:14px;background:#fff;border:1px solid var(--line)}
-    .metric small{display:block;color:var(--muted);font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.04em}
-    .metric strong{display:block;margin-top:6px;color:var(--navy2);font-size:20px}
-    .metric em{display:block;margin-top:4px;color:var(--muted);font-style:normal;font-size:9px;line-height:1.25}
-    .chart{min-height:260px;width:100%}.chart svg{width:100%;height:auto;display:block;overflow:visible}
-    .legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;color:var(--muted);font-size:9px}
-    .legend i{display:inline-block;width:10px;height:3px;border-radius:999px;margin-right:5px;vertical-align:middle;background:var(--c)}
-    .clock-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-    .clock-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px;box-shadow:var(--shadow)}
-    .clock-card h3{margin:0;color:var(--navy2);font-size:14px}.clock-card p{margin:5px 0 0;color:var(--muted);font-size:10px;line-height:1.35}
-    .clock{min-height:270px;margin-top:5px}
-    .clock-note{margin-top:4px;padding:9px 10px;border-radius:11px;background:var(--soft);color:#536378;font-size:9px;line-height:1.4}
-    .callout{padding:14px 16px;border-left:4px solid var(--blue);border-radius:12px;background:#edf6ff;color:#34516f;font-size:11px;line-height:1.5}
-    .callout.red{border-color:var(--red);background:#fff1f2;color:#6f3338}
-    .callout.amber{border-color:var(--amber);background:#fff8e7;color:#6b5725}
-    .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px}
-    table{width:100%;border-collapse:collapse;min-width:760px;background:#fff}
-    th,td{padding:10px 11px;border-bottom:1px solid var(--line);text-align:left;font-size:10px;vertical-align:top}
-    th{position:sticky;top:0;background:#f2f6fa;color:#405168;font-weight:900}
-    tr:last-child td{border-bottom:0}
-    td strong{color:var(--navy2)}
-    .quality{display:grid;gap:9px}
-    .quality-row{display:grid;grid-template-columns:95px 1fr 92px;gap:10px;align-items:center}
-    .quality-row b{font-size:10px}.qbar{height:9px;border-radius:999px;background:#e8eef5;overflow:hidden}.qbar span{display:block;height:100%;width:var(--w);background:var(--c);border-radius:inherit}.quality-row em{font-style:normal;text-align:right;font-size:9px;color:var(--muted)}
-    .flow{display:grid;gap:11px}
-    .flow-row{display:grid;grid-template-columns:minmax(155px,1fr) 130px minmax(155px,1fr);gap:12px;align-items:center}
-    .flow-node{border:1px solid var(--line);border-radius:13px;padding:11px;background:#fff;font-size:10px;line-height:1.3}
-    .flow-node b{display:block;color:var(--navy2);font-size:11px}
-    .flow-link{position:relative;text-align:center;font-size:18px;font-weight:950;color:var(--blue)}
-    .flow-link small{display:block;font-size:9px;color:var(--muted);font-weight:800}
-    .decision-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-    .decision{border:1px solid var(--line);border-radius:14px;padding:13px;background:#fff}
-    .decision b{display:block;color:var(--navy2);font-size:11px}.decision p{margin:6px 0 0;color:var(--muted);font-size:10px;line-height:1.4}
-    .footer{padding:18px 28px 30px;color:#68778b;font-size:9px;text-align:center}
-    .drawer-backdrop{position:fixed;inset:0;background:rgba(4,15,28,.48);z-index:30;display:none}.drawer-backdrop.open{display:block}
-    .drawer{position:fixed;z-index:31;top:0;right:0;width:min(620px,96vw);height:100vh;transform:translateX(102%);transition:.24s;background:#fff;box-shadow:-18px 0 48px rgba(0,0,0,.22);overflow:auto}
-    .drawer.open{transform:none}.drawer-head{position:sticky;top:0;z-index:2;padding:18px 20px;color:#fff;background:linear-gradient(90deg,#0b2c51,#6f151c);display:flex;justify-content:space-between;gap:12px}
-    .drawer-head h3{margin:0;font-size:17px}.drawer-head p{margin:5px 0 0;color:rgba(255,255,255,.72);font-size:10px}
-    .drawer-close{border:1px solid rgba(255,255,255,.28);border-radius:10px;background:rgba(255,255,255,.1);color:#fff;width:36px;height:36px;cursor:pointer}
-    .drawer-body{padding:18px 20px 28px}
-    .fdi{display:grid;grid-template-columns:160px 1fr;border:1px solid var(--line);border-bottom:0}
-    .fdi div{padding:10px 11px;border-bottom:1px solid var(--line);font-size:10px;line-height:1.4}
-    .fdi div:nth-child(odd){background:#f3f7fb;color:#405168;font-weight:900}
-    .smallprint{color:var(--muted);font-size:9px;line-height:1.45}
-    @media(max-width:1200px){.app{grid-template-columns:90px 1fr}.brand div:last-child,.nav-btn span,.nav-btn b{display:none}.nav-btn{text-align:center;padding:14px 8px}.brand{justify-content:center}.side-note{display:none}.kpi-grid{grid-template-columns:repeat(2,1fr)}.metric-strip{grid-template-columns:repeat(3,1fr)}}
-    @media(max-width:900px){.app{display:block}.sidebar{display:none}.topbar{position:static}.topbar-row{align-items:flex-start;flex-direction:column}.chips{justify-content:flex-start}.content{padding:18px}.grid.two,.grid.three,.grid.four,.clock-grid,.decision-grid{grid-template-columns:1fr}.metric-strip{grid-template-columns:repeat(2,1fr)}.flow-row{grid-template-columns:1fr}.flow-link{transform:rotate(90deg)}}
-    @media(max-width:560px){.kpi-grid,.metric-strip{grid-template-columns:1fr}.title h1{font-size:15px}.content{padding:14px}.topbar{padding:14px}.section-head{display:block}.status-pill{display:inline-block;margin-top:10px}.fdi{grid-template-columns:1fr}.fdi div:nth-child(odd){border-bottom:0}}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="description" content="Painel Estratégico de Inteligência em Saúde Mental do PSOBM — dados reais agregados AAS + DRH, gestão orientada por dados." />
+<title>Painel Estratégico de Inteligência em Saúde Mental do PSOBM</title>
+<link rel="stylesheet" href="assets/dashboard.css" />
 </head>
 <body>
 <div class="app">
-  <aside class="sidebar">
-    <div class="brand">
-      <div class="brand-mark">PS</div>
-      <div><strong>PAINEL PSOBM</strong><small>Inteligência em saúde mental<br>Produto técnico • CGEPP 2026</small></div>
-    </div>
-    <nav>
-      <button class="nav-btn active" data-view="executivo"><b>Visão executiva</b><span>KPIs, maturidade e relógios</span></button>
-      <button class="nav-btn" data-view="longitudinal"><b>Longitudinal</b><span>Séries reais 2020–2026</span></button>
-      <button class="nav-btn" data-view="integracao"><b>Integração</b><span>Vínculo entre bases</span></button>
-      <button class="nav-btn" data-view="qualidade"><b>Qualidade</b><span>Calculabilidade e governança</span></button>
-      <button class="nav-btn" data-view="decisao"><b>Decisão</b><span>Como o painel apoia gestão</span></button>
-    </nav>
-    <div class="side-note">Dados administrativos agregados e pseudonimizados. Corte: 30/06/2026. 2026 é semestre parcial. O protótipo demonstra arquitetura de inteligência; não substitui sistema institucional em produção.</div>
-  </aside>
-
-  <main>
-    <header class="topbar">
-      <div class="topbar-row">
-        <div class="title">
-          <h1>Painel estratégico de inteligência em saúde mental do PSOBM</h1>
-          <p>Indicadores qualificados para apoio à decisão e aperfeiçoamento da gestão</p>
-        </div>
-        <div class="chips">
-          <span class="chip">AAS/CBMMG</span>
-          <span class="chip">2020–2026*</span>
-          <span class="chip">corte 30/06/2026</span>
-          <span class="chip">dados agregados/pseudonimizados</span>
-        </div>
-      </div>
-    </header>
-
-    <div class="content">
-      <section id="executivo" class="view active">
-        <div class="section-head">
-          <div><h2>Visão executiva</h2><p>O painel mostra simultaneamente o valor observado, a tendência histórica, a qualidade da informação e o que ainda não pode ser calculado. Assim, dado ausente deixa de ser “vazio” e passa a ser informação de governança.</p></div>
-          <span class="status-pill">8 indicadores estratégicos preservados</span>
-        </div>
-
-        <div class="story"><b>Leitura correta do protótipo:</b> quatro indicadores já são sustentados pelos dados recebidos; um é parcial por ausência do denominador institucional da DRH; três permanecem não calculáveis por falta de desfecho/atributos da Q3 e indisponibilidade da Q4. Nenhum valor é estimado por proxy.</div>
-
-        <div id="kpis" class="kpi-grid"></div>
-
-        <div class="grid two">
-          <div class="panel">
-            <h3>Maturidade informacional <span>8 indicadores estratégicos</span></h3>
-            <div id="maturityChart" class="chart"></div>
-            <div class="legend"><span><i style="--c:#208a62"></i>4 calculáveis</span><span><i style="--c:#c48b1a"></i>1 parcial</span><span><i style="--c:#b5222b"></i>3 não calculáveis</span></div>
-          </div>
-          <div class="panel">
-            <h3>Base empírica consolidada <span>linhas analíticas após tratamento</span></h3>
-            <div class="metric-strip" style="grid-template-columns:repeat(2,minmax(0,1fr));margin:0">
-              <div class="metric"><small>Q1 • monitoramento</small><strong>9.307</strong><em>5.821 pseudônimos únicos</em></div>
-              <div class="metric"><small>Q2 • atendimentos</small><strong>37.604</strong><em>8.579 beneficiários únicos</em></div>
-              <div class="metric"><small>Q3 • encaminhamentos</small><strong>1.188</strong><em>620 beneficiários; desfecho ausente</em></div>
-              <div class="metric"><small>Q5 • afastamentos</small><strong>2.854</strong><em>985 militares; 23.012 dias únicos</em></div>
-            </div>
-            <div class="callout amber" style="margin-top:12px"><b>Q4 não disponibilizada.</b> A base assistencial Q2 contém 294 registros classificados como “urgentes” (0,78%), mas eles não são usados como substitutos da Q4 específica de demanda aguda.</div>
-          </div>
-        </div>
-
-        <div style="height:14px"></div>
-        <div class="section-head">
-          <div><h2>Relógios longitudinais</h2><p>O relógio deixa de ser um mostrador isolado. Cada camada representa um ano real, permitindo ver simultaneamente nível atual, trajetória, amplitude histórica e ressalvas de qualidade.</p></div>
-          <span class="status-pill">camadas anuais reais</span>
-        </div>
-        <div class="clock-grid">
-          <div class="clock-card"><h3>Conclusão do monitoramento</h3><p>Taxa de conclusão por ciclo/ano.</p><div id="clockCompletion" class="clock"></div><div class="clock-note">2026*: 68,4%. Série: 100,0 • 100,0 • 100,0 • 86,3 • 87,5 • 72,6 • 68,4%. O declínio recente é um sinal gerencial de fluxo, não evidência de adoecimento.</div></div>
-          <div class="clock-card"><h3>Tempo do ciclo de monitoramento</h3><p>Mediana anual em dias; menor tende a ser melhor.</p><div id="clockCycle" class="clock"></div><div class="clock-note">2020–2022 concentram intervalos zero atípicos. Para leitura comparativa, a camada visual destaca 2023–2026: 2 • 22 • 15 • 18 dias; P90 em 2026 = 54 dias.</div></div>
-          <div class="clock-card"><h3>Recorrência assistencial anual</h3><p>Atendimentos por beneficiário único no ano.</p><div id="clockRecurrence" class="clock"></div><div class="clock-note">2026*: 1,92. A razão global de 4,38 usa beneficiários únicos no período completo e não é diretamente comparável às razões anuais. Interpretação é de concentração/capacidade, não de gravidade clínica.</div></div>
-        </div>
-      </section>
-
-      <section id="longitudinal" class="view">
-        <div class="section-head">
-          <div><h2>Camada longitudinal 2020–2026*</h2><p>Séries descritivas reais por domínio. O ano de 2026 representa apenas 1º de janeiro a 30 de junho e é visualmente diferenciado para impedir comparação ingênua com anos completos.</p></div>
-          <span class="status-pill">2026* = 1º semestre</span>
-        </div>
-
-        <div class="grid two">
-          <div class="panel"><h3>Q1 • Monitoramento PSOBM <span>registros, concluídos e taxa</span></h3><div id="q1Chart" class="chart"></div><div class="legend"><span><i style="--c:#1769b3"></i>Registros</span><span><i style="--c:#14a9c5"></i>Concluídos</span><span><i style="--c:#b5222b"></i>Taxa de conclusão</span></div></div>
-          <div class="panel"><h3>Q1 • Tempo do ciclo <span>mediana e P90; qualidade das datas</span></h3><div id="q1TimeChart" class="chart"></div><div class="callout amber">Os ciclos 2020–2022 têm 96,7%–100% de intervalos iguais a zero. A série é mostrada para transparência, mas o tempo histórico exige validação semântica antes de uso gerencial pleno.</div></div>
-        </div>
-
-        <div style="height:14px"></div>
-        <div class="grid two">
-          <div class="panel"><h3>Q2 • Produção e alcance assistencial <span>atendimentos e beneficiários únicos no ano</span></h3><div id="q2Chart" class="chart"></div><div class="callout">2024 é o pico de produção observado. Isso pode refletir capacidade, registro, acesso e oferta; o gráfico não autoriza inferir aumento de adoecimento.</div></div>
-          <div class="panel"><h3>Q2 • Recorrência e urgência descritiva <span>razão anual + % “urgente” da Q2</span></h3><div id="q2RatioChart" class="chart"></div><div class="smallprint">A classificação “urgente” existente na Q2 é uma característica do banco assistencial e não substitui a Q4 específica de demanda aguda.</div></div>
-        </div>
-
-        <div style="height:14px"></div>
-        <div class="grid two">
-          <div class="panel"><h3>Q3 • Encaminhamentos <span>volume calculável; desfecho não calculável</span></h3><div id="q3Chart" class="chart"></div><div class="callout red">1.188 encaminhamentos / 620 beneficiários. Situação e data de conclusão: 0% de completude. O painel pode mostrar fluxo, mas não “taxa de continuidade concluída”.</div></div>
-          <div class="panel"><h3>Q5 • Afastamentos e repercussão funcional <span>eventos, militares únicos e dias únicos</span></h3><div id="q5Chart" class="chart"></div><div class="smallprint">Sem o efetivo mensal da DRH, não se calcula taxa populacional de afastamento nem dias perdidos por mil. Os valores absolutos permanecem úteis e auditáveis.</div></div>
-        </div>
-
-        <div style="height:14px"></div>
-        <div class="panel">
-          <h3>Resumo anual integrado <span>mesma janela temporal, diferentes unidades de análise</span></h3>
-          <div class="table-wrap"><table>
-            <thead><tr><th>Ano</th><th>Q1 registros</th><th>Q1 conclusão</th><th>Q2 atendimentos</th><th>Q2 beneficiários</th><th>Q3 encaminh.</th><th>Q5 eventos</th><th>Q5 militares</th><th>Q5 dias únicos</th></tr></thead>
-            <tbody id="annualTable"></tbody>
-          </table></div>
-        </div>
-      </section>
-
-      <section id="integracao" class="view">
-        <div class="section-head">
-          <div><h2>Integração longitudinal entre bases</h2><p>O pseudônimo estável permite reconhecer presença do mesmo beneficiário em diferentes domínios sem usar nome ou identificação nominal. As interseções demonstram potencial de inteligência longitudinal agregada; não provam causalidade nem conclusão de fluxo.</p></div>
-          <span class="status-pill">vinculação pseudonimizada</span>
-        </div>
-
-        <div class="panel">
-          <h3>Interseções observadas <span>proporção sobre a base de origem</span></h3>
-          <div class="flow">
-            <div class="flow-row"><div class="flow-node"><b>Q1 • PSOBM</b>5.821 pseudônimos</div><div class="flow-link">95,4% →<small>5.551 encontrados</small></div><div class="flow-node"><b>Q2 • Atendimentos</b>presença assistencial</div></div>
-            <div class="flow-row"><div class="flow-node"><b>Q3 • Encaminhamentos</b>620 beneficiários</div><div class="flow-link">100,0% →<small>620 encontrados</small></div><div class="flow-node"><b>Q2 • Atendimentos</b>todos aparecem na base assistencial</div></div>
-            <div class="flow-row"><div class="flow-node"><b>Q5 • Afastamentos</b>985 militares</div><div class="flow-link">95,7% →<small>943 encontrados</small></div><div class="flow-node"><b>Q2 • Atendimentos</b>alta interseção assistência–repercussão</div></div>
-            <div class="flow-row"><div class="flow-node"><b>Q5 • Afastamentos</b>985 militares</div><div class="flow-link">86,2% →<small>849 encontrados</small></div><div class="flow-node"><b>Q1 • PSOBM</b>parte relevante também monitorada</div></div>
-          </div>
-        </div>
-
-        <div style="height:14px"></div>
-        <div class="grid two">
-          <div class="panel"><h3>Proximidade temporal Q5 ↔ Q2 <span>descritiva; não causal</span></h3><div id="temporalLinkChart" class="chart"></div><div class="callout amber">56,4% dos eventos válidos de Q5 tinham atendimento Q2 em ±30 dias; 65,1% em ±90 dias. A janela sugere oportunidade de coordenação assistencial, não efeito causal.</div></div>
-          <div class="panel"><h3>O que a integração permite perguntar <span>sem reidentificar</span></h3><div class="decision-grid" style="grid-template-columns:1fr 1fr">
-            <div class="decision"><b>Continuidade</b><p>Qual proporção dos grupos acompanhados reaparece na assistência ao longo do tempo?</p></div>
-            <div class="decision"><b>Capacidade</b><p>Onde aumento de produção coincide com maior recorrência ou espera?</p></div>
-            <div class="decision"><b>Repercussão funcional</b><p>Como eventos de afastamento se distribuem em relação à presença assistencial?</p></div>
-            <div class="decision"><b>Governança</b><p>Quais elos do fluxo não podem ser medidos por ausência de campos, fonte ou denominador?</p></div>
-          </div></div>
-        </div>
-      </section>
-
-      <section id="qualidade" class="view">
-        <div class="section-head">
-          <div><h2>Qualidade, calculabilidade e governança</h2><p>O painel qualificado não apresenta apenas números. Cada KPI carrega fonte, fórmula, polaridade, periodicidade, status de calculabilidade, limitações e requisitos para implantação futura.</p></div>
-          <span class="status-pill">lacuna também é achado</span>
-        </div>
-
-        <div class="grid two">
-          <div class="panel">
-            <h3>Matriz de calculabilidade <span>oito indicadores do modelo</span></h3>
-            <div class="table-wrap"><table style="min-width:620px">
-              <thead><tr><th>KPI</th><th>Status</th><th>Base</th><th>Motivo</th></tr></thead>
-              <tbody>
-                <tr><td>Conclusão do monitoramento</td><td><span class="tag ok">Calculável</span></td><td>Q1</td><td>7.618/9.307 = 81,9%; série anual disponível</td></tr>
-                <tr><td>Tempo do ciclo</td><td><span class="tag warn">Calculável c/ ressalva</span></td><td>Q1</td><td>Mediana global 14 dias; semântica histórica das datas exige cautela</td></tr>
-                <tr><td>Recorrência assistencial</td><td><span class="tag ok">Calculável</span></td><td>Q2</td><td>37.604 registros / 8.579 únicos = 4,38 no período</td></tr>
-                <tr><td>Continuidade assistencial concluída</td><td><span class="tag no">Não calculável</span></td><td>Q3</td><td>0% de situação e data de conclusão</td></tr>
-                <tr><td>Demandas urgentes por 1.000</td><td><span class="tag no">Não calculável</span></td><td>Q4 + DRH</td><td>Q4 não disponibilizada e denominador DRH ausente</td></tr>
-                <tr><td>Tempo até acolhimento</td><td><span class="tag no">Não calculável</span></td><td>Q4</td><td>Marcos temporais da demanda aguda não disponíveis</td></tr>
-                <tr><td>Taxa de afastamento</td><td><span class="tag partial">Parcial</span></td><td>Q5 + DRH</td><td>Numerador existe; falta efetivo mensal institucional</td></tr>
-                <tr><td>Dias perdidos</td><td><span class="tag ok">Calculável</span></td><td>Q5</td><td>23.012 dias únicos após descontar sobreposição</td></tr>
-              </tbody>
-            </table></div>
-          </div>
-
-          <div class="panel">
-            <h3>Qualidade por domínio <span>leitura operacional do dado</span></h3>
-            <div class="quality">
-              <div class="quality-row"><b>Q1 monitoramento</b><div class="qbar"><span style="--w:72%;--c:#c48b1a"></span></div><em>útil c/ ressalvas</em></div>
-              <div class="quality-row"><b>Q2 atendimentos</b><div class="qbar"><span style="--w:94%;--c:#208a62"></span></div><em>alta utilidade</em></div>
-              <div class="quality-row"><b>Q3 encaminh.</b><div class="qbar"><span style="--w:48%;--c:#c48b1a"></span></div><em>volume sim; desfecho não</em></div>
-              <div class="quality-row"><b>Q4 agudo</b><div class="qbar"><span style="--w:8%;--c:#b5222b"></span></div><em>base ausente</em></div>
-              <div class="quality-row"><b>Q5 afastamentos</b><div class="qbar"><span style="--w:92%;--c:#208a62"></span></div><em>alta utilidade</em></div>
-              <div class="quality-row"><b>DRH efetivo</b><div class="qbar"><span style="--w:8%;--c:#b5222b"></span></div><em>denominador pendente</em></div>
-            </div>
-            <div class="callout" style="margin-top:14px"><b>Regra de implantação:</b> não estimar o efetivo, não substituir Q4 por proxy e não apagar o indicador. Manter fórmula e fonte esperada, com selo “parcial” ou “não calculável” até integração institucional.</div>
-          </div>
-        </div>
-
-        <div style="height:14px"></div>
-        <div class="panel">
-          <h3>Requisitos de governança para transformar o protótipo em rotina institucional <span>camada futura</span></h3>
-          <div class="decision-grid">
-            <div class="decision"><b>Fonte oficial</b><p>Pactuar AAS/DRH, responsável, periodicidade, data de corte e unidade de análise de cada indicador.</p></div>
-            <div class="decision"><b>Dicionário de dados</b><p>Definir status, motivo, conclusão, urgência, datas válidas, duplicidade e regras de exclusão.</p></div>
-            <div class="decision"><b>Denominadores</b><p>Integrar efetivo mensal da DRH sem criar aproximações ou substitutos artificiais.</p></div>
-            <div class="decision"><b>Privacidade</b><p>Manter agregação, pseudonimização estável, supressão de células pequenas e vedação de uso disciplinar.</p></div>
-            <div class="decision"><b>Qualidade</b><p>Exibir completude, validade, consistência e atualidade ao lado do valor do KPI.</p></div>
-            <div class="decision"><b>Auditabilidade</b><p>Versionar regras de cálculo e registrar corte, filtros e transformações usados na atualização.</p></div>
-          </div>
-        </div>
-      </section>
-
-      <section id="decisao" class="view">
-        <div class="section-head">
-          <div><h2>Como o painel pode ser útil à decisão</h2><p>O produto não pretende diagnosticar pessoas nem explicar causalidade. Ele organiza informação institucional para que a gestão saiba onde olhar, que pergunta fazer e qual decisão precisa de dado adicional.</p></div>
-          <span class="status-pill">inteligência gerencial</span>
-        </div>
-
-        <div class="decision-grid">
-          <div class="decision"><b>1. Fluxo do PSOBM</b><p>Se a conclusão cai e pendências aumentam, revisar agenda, retorno, adesão, capacidade e semântica do fluxo antes de atribuir causa.</p></div>
-          <div class="decision"><b>2. Capacidade assistencial</b><p>Comparar produção anual, alcance e recorrência para dimensionar pressão de agenda e concentração de uso.</p></div>
-          <div class="decision"><b>3. Continuidade do cuidado</b><p>Identificar que o volume de encaminhamentos existe, mas o desfecho não é rastreável; transformar isso em agenda de governança.</p></div>
-          <div class="decision"><b>4. Demanda aguda</b><p>Evitar falsa precisão: sem Q4 não há taxa de urgência específica nem tempo até acolhimento. O painel evidencia a lacuna.</p></div>
-          <div class="decision"><b>5. Repercussão funcional</b><p>Usar eventos, militares únicos e dias perdidos para dimensionar impacto agregado, sem divulgar diagnósticos individualizados.</p></div>
-          <div class="decision"><b>6. Integração longitudinal</b><p>Observar interseções entre monitoramento, assistência e afastamento como sinal de coordenação possível, sem inferir causalidade.</p></div>
-        </div>
-
-        <div style="height:14px"></div>
-        <div class="grid two">
-          <div class="panel"><h3>Pergunta gerencial → evidência → decisão <span>exemplo de camada de ação</span></h3>
-            <div class="table-wrap"><table style="min-width:680px">
-              <thead><tr><th>Pergunta</th><th>Evidência no painel</th><th>Decisão possível</th></tr></thead>
-              <tbody>
-                <tr><td>A conclusão do monitoramento está piorando?</td><td>Taxa anual + registros + concluídos + selo de qualidade</td><td>Revisar causas de pendência e capacidade do fluxo</td></tr>
-                <tr><td>A assistência está concentrada?</td><td>Razão anual + global 4,38 + concentração do top 10%</td><td>Planejar agenda, continuidade e distribuição de capacidade</td></tr>
-                <tr><td>O encaminhamento está resolvendo?</td><td>Resposta: ainda não mensurável</td><td>Implantar status/data de conclusão antes de cobrar resultado</td></tr>
-                <tr><td>Qual o impacto funcional agregado?</td><td>Eventos + militares únicos + 23.012 dias únicos</td><td>Priorizar prevenção, retorno ao trabalho e coordenação assistencial</td></tr>
-                <tr><td>É possível comparar taxas populacionais?</td><td>Resposta: parcial</td><td>Integrar efetivo mensal DRH como denominador oficial</td></tr>
-              </tbody>
-            </table></div>
-          </div>
-          <div class="panel"><h3>Arquitetura de uso <span>do dado ao conhecimento</span></h3><div id="decisionArchitecture" class="chart"></div><div class="callout">A utilidade do painel não depende de “ter todos os dados”. Ela depende de distinguir o que é mensurável, o que é comparável, o que é apenas descritivo e o que exige nova governança para ser calculado.</div></div>
-        </div>
-      </section>
-    </div>
-
-    <div class="footer">TCC CGEPP/ABM • Painel Estratégico de Inteligência em Saúde Mental do PSOBM • Fonte: AAS/CBMMG • Dados administrativos agregados/pseudonimizados • Corte em 30/06/2026 • 2026* = período parcial</div>
-  </main>
-</div>
-
-<div id="drawerBackdrop" class="drawer-backdrop"></div>
-<aside id="drawer" class="drawer" aria-hidden="true">
-  <header class="drawer-head"><div><h3 id="drawerTitle">Ficha técnica</h3><p id="drawerSubtitle">Indicador qualificado</p></div><button id="drawerClose" class="drawer-close">×</button></header>
-  <div id="drawerBody" class="drawer-body"></div>
+<aside class="sidebar">
+  <div class="brand"><div class="brandmark">PSOBM</div><div><strong>PAINEL ESTRATÉGICO</strong><small>Inteligência em saúde mental<br>Gestão orientada por dados</small></div></div>
+  <nav>
+    <button class="nav active" data-view="executivo"><b>Visão estratégica</b><span>Sinais, KPIs e decisões</span></button>
+    <button class="nav" data-view="cronico"><b>Módulo crônico</b><span>Monitoramento longitudinal</span></button>
+    <button class="nav" data-view="agudo"><b>Módulo agudo</b><span>Alerta e repercussão funcional</span></button>
+    <button class="nav" data-view="dados"><b>Dados & qualidade</b><span>AAS, DRH e calculabilidade</span></button>
+    <button class="nav" data-view="governanca"><b>Governança</b><span>Do dado à decisão</span></button>
+  </nav>
+  <div class="sidebar-note"><b>Uso:</b> apoio à decisão estratégica. Dados agregados. Sem inferência clínica individual, sem uso disciplinar e sem metas artificiais.</div>
 </aside>
+<main>
+<header class="topbar"><div class="toprow"><div class="title"><h1>Painel Estratégico de Inteligência em Saúde Mental do PSOBM</h1><p>Indicadores qualificados para apoio à decisão e aperfeiçoamento da gestão</p></div><div class="chips"><span class="chip">Corte analítico: 30/06/2026</span><span class="chip">Fontes: AAS + DRH</span><span class="chip">5/8 KPIs calculáveis</span><span class="chip">Atualizado: 17/08/2026</span></div></div></header>
+<div class="content">
 
-<script>
-"use strict";
+<section id="executivo" class="view active">
+  <div class="section-head"><div><h2>Visão estratégica</h2><p>Leitura executiva dos dados reais. O painel combina valor atual, tendência, qualidade da informação e pergunta gerencial. A referência principal é 2025, último ano completo; 2026 é exibido separadamente como janeiro–junho.</p></div><span class="pill">gestão orientada por evidências</span></div>
+  <div class="story"><strong>Leitura central:</strong> 2024 concentrou o maior volume assistencial e a maior taxa de militares afastados; 2023 apresentou a maior carga de dias perdidos. Em 2025 houve redução de produção assistencial e repercussão funcional em relação a 2024, simultaneamente a uma queda importante na conclusão do monitoramento PSOBM. Essas variações são sinais gerenciais e não demonstram causalidade ou melhora/piora clínica por si sós.</div>
+  <div class="headline-grid">
+    <div class="headline"><small>Conclusão PSOBM • 2025</small><strong>72,6%</strong><em><span class="delta red">−14,9 p.p.</span> vs 2024 (87,5%). Menor taxa entre 2023–2025.</em></div>
+    <div class="headline"><small>Atendimentos • por 1.000 ativos</small><strong>1.221,2</strong><em><span class="delta blue">−31,6%</span> vs 2024; ainda acima de 2023 (871,6).</em></div>
+    <div class="headline"><small>Militares afastados • por 1.000</small><strong>39,9</strong><em><span class="delta blue">−12,1%</span> vs 2024 (45,4). Sinal contextual.</em></div>
+    <div class="headline"><small>Dias perdidos • por 1.000</small><strong>528,7</strong><em><span class="delta blue">−28,7%</span> vs 2024 (742,0); acima de 2022 (443,4).</em></div>
+  </div>
+  <div class="insight-grid">
+    <div class="insight"><div class="ico">1</div><div><b>Gargalo do monitoramento</b><p>A conclusão caiu de 87,5% para 72,6% entre 2024 e 2025. A gestão deve investigar capacidade, pendências, adesão, retorno e qualidade do registro antes de atribuir causa.</p></div></div>
+    <div class="insight"><div class="ico">2</div><div><b>Pico assistencial e funcional</b><p>2024 teve 1.784,3 atendimentos/1.000 e 45,4 afastados/1.000; 2023 teve 750,5 dias perdidos/1.000. O biênio 2023–2024 merece análise contextual.</p></div></div>
+    <div class="insight"><div class="ico">3</div><div><b>Pontos cegos de governança</b><p>Continuidade do encaminhamento e demanda aguda específica seguem não mensuráveis. A ausência deve orientar melhoria do registro, não ser convertida em zero ou proxy.</p></div></div>
+  </div>
+  <div class="grid two">
+    <div class="panel"><div class="module-title blue">Módulo 1 — Monitoramento programado e longitudinal</div><div id="kpisCronico" class="kpi-grid"></div></div>
+    <div class="panel"><div class="module-title red">Módulo 2 — Alerta, demanda aguda e repercussão funcional</div><div id="kpisAgudo" class="kpi-grid"></div></div>
+  </div>
+  <div style="height:13px"></div>
+  <div class="grid two">
+    <div class="panel"><h3>Trajetória do monitoramento e da assistência <span>anos completos 2022–2025</span></h3><div id="chartExecutiveChronic" class="chart"></div><div class="legend"><span><i style="--c:#1769b3"></i>Conclusão PSOBM (%)</span><span><i style="--c:#18a7bf"></i>Atendimentos / 1.000 ativos</span></div></div>
+    <div class="panel"><h3>Repercussão funcional <span>anos completos 2022–2025</span></h3><div id="chartExecutiveAcute" class="chart"></div><div class="legend"><span><i style="--c:#b32631"></i>Afastados / 1.000 ativos</span><span><i style="--c:#8d1c25"></i>Dias perdidos / 1.000 ativos</span></div></div>
+  </div>
+  <div class="status-strip"><div class="statusbox"><strong>5</strong>indicadores calculáveis</div><div class="statusbox"><strong>3</strong>indicadores não calculáveis</div><div class="statusbox info"><strong>2026 parcial</strong>Efetivo médio 6.035,2 • conclusão 68,4% • 720,4 atend./1.000 • 20,4 afastados/1.000 • 212,8 dias/1.000. Não comparar diretamente com anos completos.</div></div>
+  <div class="panel"><h3>Matriz de decisão estratégica <span>do sinal à ação gerencial</span></h3><div class="table-wrap"><table><thead><tr><th>Sinal observado</th><th>Evidência</th><th>Pergunta gerencial</th><th>Próximo passo orientado por dados</th></tr></thead><tbody>
+    <tr><td><strong>Queda da conclusão do PSOBM</strong></td><td>87,5% (2024) → 72,6% (2025)</td><td>O problema está em capacidade, adesão, retorno ou registro?</td><td>Estratificar pendências e motivos; revisar fluxo e capacidade antes de definir intervenção.</td></tr>
+    <tr><td><strong>Redução do volume assistencial após pico</strong></td><td>1.784,3 → 1.221,2 atend./1.000</td><td>Houve mudança de demanda, acesso, oferta ou registro?</td><td>Confrontar volume, beneficiários únicos, recorrência e capacidade instalada.</td></tr>
+    <tr><td><strong>Redução da repercussão funcional em 2025</strong></td><td>45,4 → 39,9 afastados/1.000; 742,0 → 528,7 dias/1.000</td><td>É tendência sustentável ou oscilação anual?</td><td>Manter série histórica e contextualizar com perfil CID, retorno ao trabalho e capacidade assistencial.</td></tr>
+    <tr><td><strong>Continuidade assistencial não mensurável</strong></td><td>Q3 sem situação/data de conclusão</td><td>Os encaminhamentos resultam em cuidado efetivo?</td><td>Estruturar status e data de conclusão; só então definir meta/limiar.</td></tr>
+    <tr><td><strong>Demanda aguda não mensurável</strong></td><td>Q4 não disponibilizada</td><td>Qual a pressão aguda e o tempo de resposta?</td><td>Criar registro mínimo de entrada, tipo de demanda e primeiro acolhimento.</td></tr>
+  </tbody></table></div></div>
+</section>
 
-const years=["2020","2021","2022","2023","2024","2025","2026*"];
-const data={
- q1:{reg:[96,10,881,576,4020,1586,2138],done:[96,10,881,497,3519,1152,1463],rate:[100,100,100,86.3,87.5,72.6,68.4],median:[0,0,0,2,22,15,18],p90:[0,0,0,52.6,113,88.9,54],zero:[99,100,96.7,44.3,4.3,16.4,8.2]},
- q2:{att:[3416,2917,3776,5033,10737,7377,4348],uniq:[1303,1062,1869,2026,5033,2914,2260],ratio:[2.62,2.75,2.02,2.48,2.13,2.53,1.92],urgent:[30,40,27,58,64,52,23],urgentPct:[.88,1.37,.72,1.15,.60,.70,.53]},
- q3:{ref:[null,null,null,162,465,406,155]},
- q5:{events:[355,444,337,512,580,438,188],uniq:[187,235,194,259,273,241,123],days:[3082,4087,2566,4334,4465,3194,1284]}
-};
+<section id="cronico" class="view">
+  <div class="section-head"><div><h2>Módulo crônico — monitoramento programado e longitudinal</h2><p>Foco em execução do PSOBM, tempestividade, utilização assistencial e continuidade do cuidado. Os indicadores de processo devem ser lidos em conjunto, não isoladamente.</p></div><span class="pill">4 indicadores estratégicos</span></div>
+  <div class="kpi-grid" id="kpisCronico2"></div><div style="height:13px"></div>
+  <div class="grid two">
+    <div class="panel"><h3>Conclusão do monitoramento PSOBM <span>2020–2026*</span></h3><div id="chartCompletion" class="chart"></div><div class="callout amber">2020–2022 apresentam 100% de conclusão, porém com volumes e padrões de data historicamente atípicos. Para gestão, a comparação mais estável deve privilegiar 2023–2025 e manter nota de qualidade.</div></div>
+    <div class="panel"><h3>Tempo do ciclo <span>mediana, média e P90</span></h3><div class="headline-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:10px"><div class="headline"><small>Mediana global</small><strong>14 dias</strong><em>medida robusta do centro da distribuição</em></div><div class="headline"><small>Média global</small><strong>32,2 dias</strong><em>sensível a valores extremos</em></div><div class="headline"><small>P90</small><strong>79 dias</strong><em>90% dos ciclos válidos abaixo deste valor</em></div></div><div id="chartCycle" class="chart"></div><div class="callout amber">Série anual exibida apenas para 2023–2026*, onde a semântica temporal é mais interpretável. O indicador requer auditoria histórica contínua das datas.</div></div>
+  </div><div style="height:13px"></div>
+  <div class="grid two">
+    <div class="panel"><h3>Produção assistencial normalizada <span>atendimentos e beneficiários por 1.000 ativos</span></h3><div id="chartAssistance" class="chart"></div><div class="callout">2024 foi um ponto fora do padrão recente: 1.784,3 atendimentos/1.000 e 836,4 beneficiários/1.000. O painel sinaliza a mudança; a explicação exige contexto sobre oferta, registro, acesso e demanda.</div></div>
+    <div class="panel"><h3>Encaminhamentos e continuidade <span>Q3</span></h3><div id="chartReferrals" class="chart"></div><div class="callout red"><b>Limitação decisiva:</b> 1.188 encaminhamentos são contabilizáveis, mas 0% dos registros possuem situação e data de conclusão úteis. É possível medir fluxo; não é possível medir continuidade concluída ou tempo de resolução.</div></div>
+  </div>
+</section>
 
-const indicators=[
- {id:"i1",code:"KPI 01",name:"Taxa de conclusão do monitoramento PSOBM",display:"81,9%",status:"Calculável",tag:"ok",accent:"#1769b3",note:"7.618 concluídos / 9.307 registros; 2026*: 68,4%.",fonte:"Q1 – Monitoramento PSOBM",formula:"Avaliações concluídas ÷ registros elegíveis × 100",unidade:"Percentual",polaridade:"Quanto maior, melhor",periodicidade:"Mensal, com consolidação trimestral/anual",decisao:"Revisar agenda, adesão, pendências e capacidade de conclusão",limitacao:"A série é calculável, mas o comportamento temporal dos campos de data em ciclos antigos exige leitura qualificada.",qualidade:"Calculável; série anual real 2020–2026*."},
- {id:"i2",code:"KPI 02",name:"Tempo do ciclo de monitoramento",display:"14 dias",status:"C/ ressalva",tag:"warn",accent:"#14a9c5",note:"Mediana global; média 32,2; P90 79 dias.",fonte:"Q1 – datas de convocação e avaliação",formula:"Mediana de (data da avaliação − data da convocação)",unidade:"Dias",polaridade:"Quanto menor, melhor",periodicidade:"Mensal/trimestral com tendência",decisao:"Identificar espera, fila, atraso de retorno ou necessidade de revisão do fluxo",limitacao:"2020–2022 concentram intervalos zero atípicos (96,7%–100%); requer validação semântica para comparação histórica.",qualidade:"Calculável com ressalva metodológica."},
- {id:"i3",code:"KPI 03",name:"Índice de recorrência assistencial por beneficiário",display:"4,38",status:"Calculável",tag:"ok",accent:"#208a62",note:"37.604 atendimentos / 8.579 únicos no período.",fonte:"Q2 – Atendimentos psicológicos",formula:"Atendimentos válidos ÷ beneficiários únicos no período",unidade:"Razão",polaridade:"Contextual",periodicidade:"Mensal/anual",decisao:"Planejar capacidade, continuidade e concentração de uso",limitacao:"Razão global usa pessoa única no período completo; não deve ser comparada diretamente às razões anuais nem interpretada como gravidade clínica.",qualidade:"Calculável; 46 duplicidades exatas removidas."},
- {id:"i4",code:"KPI 04",name:"Taxa de continuidade assistencial concluída",display:"N/C",status:"Não calculável",tag:"no",accent:"#b5222b",note:"Q3: 0% de situação e data de conclusão.",fonte:"Q3 – Encaminhamentos",formula:"Encaminhamentos concluídos ÷ encaminhamentos realizados × 100",unidade:"Percentual",polaridade:"Quanto maior, melhor",periodicidade:"Mensal/trimestral",decisao:"Avaliar acesso efetivo ao cuidado indicado",limitacao:"1.188 encaminhamentos são contabilizáveis, mas os campos necessários ao desfecho estão ausentes.",qualidade:"Não calculável nesta etapa; não imputar."},
- {id:"i5",code:"KPI 05",name:"Taxa de demandas psicológicas urgentes por 1.000 militares",display:"N/C",status:"Não calculável",tag:"no",accent:"#b5222b",note:"Q4 ausente + efetivo DRH pendente.",fonte:"Q4 – Demanda aguda + DRH – efetivo",formula:"Demandas urgentes ÷ efetivo de referência × 1.000",unidade:"Por 1.000 militares",polaridade:"Contextual",periodicidade:"Mensal",decisao:"Dimensionar pressão assistencial aguda proporcional",limitacao:"A Q4 não foi disponibilizada. Os 294 'urgentes' da Q2 não substituem a Q4. Também falta o denominador oficial da DRH.",qualidade:"Não calculável; não usar proxy."},
- {id:"i6",code:"KPI 06",name:"Tempo médio até acolhimento da demanda aguda",display:"N/C",status:"Não calculável",tag:"no",accent:"#7e161d",note:"Marcos temporais da Q4 indisponíveis.",fonte:"Q4 – Demanda aguda",formula:"Data/hora do 1º acolhimento − data/hora da demanda",unidade:"Horas",polaridade:"Quanto menor, melhor",periodicidade:"Mensal",decisao:"Avaliar tempestividade da resposta institucional",limitacao:"Sem Q4 e sem marcos temporais padronizados, o indicador não pode ser reconstruído.",qualidade:"Não calculável nesta etapa."},
- {id:"i7",code:"KPI 07",name:"Taxa de afastamento psicológico/psiquiátrico",display:"Parcial",status:"Parcial",tag:"partial",accent:"#c48b1a",note:"985 militares únicos; denominador DRH ausente.",fonte:"Q5 – Afastamentos + DRH – efetivo",formula:"Militares afastados ÷ efetivo de referência × 100",unidade:"Percentual",polaridade:"Quanto menor, melhor",periodicidade:"Mensal/trimestral",decisao:"Dimensionar repercussão funcional proporcional",limitacao:"Numerador é conhecido, mas o efetivo mensal da DRH não foi recebido. Não estimar denominador.",qualidade:"Parcial; aguarda integração DRH."},
- {id:"i8",code:"KPI 08",name:"Dias perdidos por afastamento psicológico/psiquiátrico",display:"23.012",status:"Calculável",tag:"ok",accent:"#7e161d",note:"Dias únicos após descontar 102 dias de sobreposição.",fonte:"Q5 – Afastamentos",formula:"Soma dos dias de afastamento após truncamento e eliminação de sobreposição por militar",unidade:"Dias",polaridade:"Quanto menor, melhor",periodicidade:"Mensal/anual",decisao:"Medir impacto funcional agregado e apoiar prevenção/retorno",limitacao:"Uso apenas agregado; 2026 é período parcial.",qualidade:"Calculável; eventos válidos = 2.854."}
-];
+<section id="agudo" class="view">
+  <div class="section-head"><div><h2>Módulo agudo — alerta, demanda aguda e repercussão funcional</h2><p>Foco em pressão assistencial aguda, tempestividade e impacto funcional. A base específica Q4 ainda é uma lacuna; os indicadores de afastamento já são comparáveis porque a DRH forneceu o denominador populacional.</p></div><span class="pill">4 indicadores estratégicos</span></div>
+  <div class="kpi-grid" id="kpisAgudo2"></div><div style="height:13px"></div>
+  <div class="grid two">
+    <div class="panel"><h3>Militares afastados por 1.000 ativos <span>taxa anual</span></h3><div id="chartLeave" class="chart"></div><div class="callout">Nos anos completos, a taxa variou de 32,7/1.000 (2020) a 45,4/1.000 (2024). A queda para 39,9/1.000 em 2025 deve ser monitorada como tendência, não interpretada isoladamente como melhora clínica.</div></div>
+    <div class="panel"><h3>Dias perdidos por 1.000 ativos <span>carga funcional anual</span></h3><div id="chartDays" class="chart"></div><div class="callout">A maior carga ocorreu em 2023 (750,5 dias/1.000), permanecendo elevada em 2024 (742,0) e reduzindo para 528,7 em 2025.</div></div>
+  </div><div style="height:13px"></div>
+  <div class="grid three">
+    <div class="panel"><h3>Eventos de afastamento <span>métrica auxiliar por 1.000 ativos</span></h3><div id="chartEvents" class="chart"></div></div>
+    <div class="panel"><h3>Perfil CID agregado <span>contextual, não KPI</span></h3><div id="cidDonut" class="chart"></div><div class="callout gray">F41, F43 e F32 concentram 86,4% dos eventos analíticos. O painel usa apenas grupos amplos, sem inferência diagnóstica individual ou causalidade ocupacional.</div></div>
+    <div class="panel"><h3>Lacunas da demanda aguda <span>Q4</span></h3><div class="decision-grid" style="grid-template-columns:1fr"><div class="decision"><b>KPI 05 — demandas urgentes / 1.000</b><p>N/D. O denominador DRH existe, mas o numerador específico Q4 não foi disponibilizado.</p></div><div class="decision"><b>KPI 06 — tempo até acolhimento</b><p>N/D. Não há registro estruturado de entrada e primeiro acolhimento.</p></div><div class="decision"><b>Requisito mínimo futuro</b><p>Data/hora da demanda, data/hora do primeiro acolhimento, classificação ampla e desfecho operacional.</p></div></div></div>
+  </div>
+</section>
 
-const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
-const fmt=(n,d=0)=>n==null?"—":new Intl.NumberFormat("pt-BR",{minimumFractionDigits:d,maximumFractionDigits:d}).format(n);
+<section id="dados" class="view">
+  <div class="section-head"><div><h2>Dados, qualidade e calculabilidade</h2><p>A gestão orientada por dados depende de conhecer a qualidade da evidência. O painel torna visíveis fonte, completude, restrições, denominadores e período de cobertura.</p></div><span class="pill">governança visível</span></div>
+  <div class="maturity">
+    <div class="source"><b>Q1 • Monitoramento</b><strong>9.307</strong><p>registros • 5.821 pseudônimos • útil com ressalvas de datas</p><div class="bar"><span style="--w:74%;--c:#b9851c"></span></div></div>
+    <div class="source"><b>Q2 • Atendimentos</b><strong>37.604</strong><p>registros válidos • 8.579 beneficiários únicos • alta utilidade</p><div class="bar"><span style="--w:95%;--c:#24825f"></span></div></div>
+    <div class="source"><b>Q3 • Encaminhamentos</b><strong>1.188</strong><p>volume disponível • desfecho indisponível</p><div class="bar"><span style="--w:52%;--c:#b9851c"></span></div></div>
+    <div class="source"><b>Q4 • Demanda aguda</b><strong>N/D</strong><p>base específica não disponibilizada</p><div class="bar"><span style="--w:10%;--c:#b32631"></span></div></div>
+    <div class="source"><b>Q5 • Afastamentos</b><strong>2.854</strong><p>eventos analíticos • 985 militares únicos • 23.012 dias únicos</p><div class="bar"><span style="--w:93%;--c:#24825f"></span></div></div>
+    <div class="source"><b>DRH • Efetivo</b><strong>78</strong><p>observações mensais • jan/2020–jun/2026 • denominador validado</p><div class="bar"><span style="--w:98%;--c:#24825f"></span></div></div>
+  </div><div style="height:13px"></div>
+  <div class="grid two">
+    <div class="panel"><h3>Efetivo médio anual — DRH <span>denominador das taxas</span></h3><div id="chartEff" class="chart"></div><div class="callout">A integração AAS + DRH ocorre por período, não por identificação individual. A DRH fornece exclusivamente o denominador agregado necessário às taxas institucionais.</div></div>
+    <div class="panel"><h3>Calculabilidade dos oito indicadores <span>estado atual</span></h3><div class="table-wrap"><table><thead><tr><th>KPI</th><th>Fonte</th><th>Estado</th><th>Regra de publicação</th></tr></thead><tbody>
+      <tr><td>Conclusão do monitoramento</td><td>Q1</td><td><span class="tag ok">Calculável</span></td><td>Publicar valor + período + nota de qualidade.</td></tr>
+      <tr><td>Tempo do ciclo</td><td>Q1</td><td><span class="tag warn">Calculável c/ ressalva</span></td><td>Mediana, média, P90 e ressalva das datas.</td></tr>
+      <tr><td>Recorrência assistencial</td><td>Q2</td><td><span class="tag ok">Calculável</span></td><td>Razão + beneficiários únicos; não confundir com gravidade.</td></tr>
+      <tr><td>Continuidade assistencial</td><td>Q3</td><td><span class="tag no">Não calculável</span></td><td>Exibir N/D até estruturação do desfecho.</td></tr>
+      <tr><td>Demandas urgentes / 1.000</td><td>Q4 + DRH</td><td><span class="tag no">Não calculável</span></td><td>DRH disponível; Q4 ausente. Não usar “urgente” da Q2 como proxy.</td></tr>
+      <tr><td>Tempo até acolhimento</td><td>Q4</td><td><span class="tag no">Não calculável</span></td><td>Exibir N/D até criação do registro mínimo.</td></tr>
+      <tr><td>Afastados / 1.000</td><td>Q5 + DRH</td><td><span class="tag ok">Calculável</span></td><td>Militares únicos do ano ÷ efetivo médio anual × 1.000.</td></tr>
+      <tr><td>Dias perdidos / 1.000</td><td>Q5 + DRH</td><td><span class="tag ok">Calculável</span></td><td>Dias únicos do ano ÷ efetivo médio anual × 1.000.</td></tr>
+    </tbody></table></div></div>
+  </div><div style="height:13px"></div>
+  <div class="panel"><h3>Matriz anual integrada AAS + DRH <span>base comparativa</span></h3><div class="table-wrap"><table><thead><tr><th>Ano</th><th>Efetivo médio</th><th>Atendimentos</th><th>Beneficiários</th><th>Atend./1.000</th><th>Afastados</th><th>Afast./1.000</th><th>Eventos/1.000</th><th>Dias/1.000</th></tr></thead><tbody id="matrixRows"></tbody></table></div><div class="callout amber" style="margin-top:10px">2026* corresponde a janeiro–junho. Não anualizar automaticamente nem comparar diretamente com anos completos sem método explicitado.</div></div>
+</section>
 
-function renderKpis(){
- $("#kpis").innerHTML=indicators.map(x=>`<article class="kpi" data-fdi="${x.id}" style="--accent:${x.accent}">
-  <div class="kpi-top"><span class="kpi-code">${x.code}</span><span class="tag ${x.tag}">${x.status}</span></div>
-  <div class="kpi-value">${x.display}</div><div class="kpi-name">${x.name}</div><div class="kpi-note">${x.note}</div><div class="kpi-hint">abrir ficha técnica →</div>
- </article>`).join("");
- $$('[data-fdi]').forEach(el=>el.onclick=()=>openFDI(el.dataset.fdi));
-}
-
-function donut(el,vals,colors,labels,centerTop,centerBottom){
- const w=520,h=250,cx=180,cy=128,r=84,sw=30,total=vals.reduce((a,b)=>a+b,0); let acc=0;
- const circ=2*Math.PI*r;
- const arcs=vals.map((v,i)=>{const len=circ*(v/total),off=-circ*(acc/total);acc+=v;return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${colors[i]}" stroke-width="${sw}" stroke-dasharray="${len} ${circ-len}" stroke-dashoffset="${off}" transform="rotate(-90 ${cx} ${cy})"/>`}).join("");
- const legend=labels.map((l,i)=>`<g transform="translate(310 ${68+i*48})"><circle cx="0" cy="0" r="6" fill="${colors[i]}"/><text x="16" y="4" font-size="12" fill="#506077">${l}</text><text x="156" y="4" text-anchor="end" font-size="14" font-weight="900" fill="#0b2c51">${vals[i]}</text></g>`).join("");
- el.innerHTML=`<svg viewBox="0 0 ${w} ${h}" role="img"><g>${arcs}</g><text x="${cx}" y="${cy-2}" text-anchor="middle" font-size="30" font-weight="950" fill="#0b2c51">${centerTop}</text><text x="${cx}" y="${cy+22}" text-anchor="middle" font-size="11" fill="#637187">${centerBottom}</text>${legend}</svg>`;
-}
-
-function comboChart(el,{labels,bar1,bar2,line,line2,colors=["#1769b3","#14a9c5","#b5222b","#c48b1a"],barNames=["A","B"],lineNames=["C","D"],lineScale=null,formatBar=x=>fmt(x),formatLine=x=>fmt(x,1),partialIndex=6}){
- const W=760,H=310,p={l:52,r:52,t:24,b:48},pw=W-p.l-p.r,ph=H-p.t-p.b;
- const bars=[...(bar1||[]),...(bar2||[])].filter(v=>v!=null), maxB=Math.max(1,...bars)*1.12;
- const lines=[...(line||[]),...(line2||[])].filter(v=>v!=null), minL=lineScale?.[0]??Math.min(...lines,0), maxL=lineScale?.[1]??Math.max(...lines,1)*1.08;
- const x=i=>p.l+(pw/(labels.length))*i+pw/labels.length/2, bw=Math.min(30,pw/labels.length*.26);
- const yB=v=>p.t+ph-(v/maxB)*ph, yL=v=>p.t+ph-((v-minL)/(maxL-minL||1))*ph;
- let s=`<svg viewBox="0 0 ${W} ${H}">`;
- for(let k=0;k<=4;k++){let y=p.t+ph*k/4;s+=`<line x1="${p.l}" y1="${y}" x2="${W-p.r}" y2="${y}" stroke="#e8eef5"/><text x="${p.l-8}" y="${y+4}" text-anchor="end" font-size="9" fill="#7b8798">${formatBar(maxB*(1-k/4))}</text>`}
- labels.forEach((lab,i)=>{const xx=x(i); if(i===partialIndex)s+=`<rect x="${xx-pw/labels.length/2}" y="${p.t}" width="${pw/labels.length}" height="${ph}" fill="#f6f0f0" opacity=".65"/>`; s+=`<text x="${xx}" y="${H-18}" text-anchor="middle" font-size="9" fill="#66758a">${lab}</text>`});
- if(bar1)bar1.forEach((v,i)=>{if(v!=null){let xx=x(i)-bw-2,yy=yB(v);s+=`<rect x="${xx}" y="${yy}" width="${bw}" height="${p.t+ph-yy}" rx="3" fill="${colors[0]}" opacity=".88"/>`}});
- if(bar2)bar2.forEach((v,i)=>{if(v!=null){let xx=x(i)+2,yy=yB(v);s+=`<rect x="${xx}" y="${yy}" width="${bw}" height="${p.t+ph-yy}" rx="3" fill="${colors[1]}" opacity=".88"/>`}});
- const path=(arr,color)=>{const pts=arr.map((v,i)=>v==null?null:[x(i),yL(v)]); let d="",started=false;pts.forEach(pt=>{if(!pt){started=false;return}d+=(started?" L ":"M ")+pt[0]+" "+pt[1];started=true});let out=`<path d="${d}" fill="none" stroke="${color}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>`;pts.forEach(pt=>{if(pt)out+=`<circle cx="${pt[0]}" cy="${pt[1]}" r="4" fill="#fff" stroke="${color}" stroke-width="3"/>`});return out};
- if(line)s+=path(line,colors[2]); if(line2)s+=path(line2,colors[3]);
- if(line||line2){for(let k=0;k<=4;k++){let y=p.t+ph*k/4,val=maxL-(maxL-minL)*k/4;s+=`<text x="${W-p.r+7}" y="${y+4}" font-size="9" fill="#7b8798">${formatLine(val)}</text>`}}
- s+=`</svg>`;el.innerHTML=s;
-}
-
-function barsChart(el,{labels,series,max=null,partialIndex=6}){
- const W=760,H=300,p={l:52,r:18,t:24,b:45},pw=W-p.l-p.r,ph=H-p.t-p.b; const all=series.flatMap(s=>s.data.filter(v=>v!=null)),mx=max||Math.max(...all)*1.12;
- const groupW=pw/labels.length, bw=Math.min(28,groupW/(series.length+1));
- let s=`<svg viewBox="0 0 ${W} ${H}">`;
- for(let k=0;k<=4;k++){let y=p.t+ph*k/4;s+=`<line x1="${p.l}" y1="${y}" x2="${W-p.r}" y2="${y}" stroke="#e8eef5"/><text x="${p.l-8}" y="${y+4}" text-anchor="end" font-size="9" fill="#7b8798">${fmt(mx*(1-k/4))}</text>`}
- labels.forEach((lab,i)=>{let cx=p.l+groupW*i+groupW/2;if(i===partialIndex)s+=`<rect x="${p.l+groupW*i}" y="${p.t}" width="${groupW}" height="${ph}" fill="#f6f0f0" opacity=".65"/>`;s+=`<text x="${cx}" y="${H-16}" text-anchor="middle" font-size="9" fill="#66758a">${lab}</text>`;series.forEach((sr,j)=>{let v=sr.data[i];if(v==null)return;let x=cx-(series.length*bw)/2+j*bw,y=p.t+ph-(v/mx)*ph;s+=`<rect x="${x}" y="${y}" width="${bw-3}" height="${p.t+ph-y}" rx="3" fill="${sr.color}" opacity="${j===0?.9:.78}"/>`})});
- s+=`</svg><div class="legend">${series.map(sr=>`<span><i style="--c:${sr.color}"></i>${sr.name}</span>`).join("")}</div>`; el.innerHTML=s;
-}
-
-function lineChart(el,{labels,series,yMin=0,yMax=null,partialIndex=6,suffix=""}){
- const W=760,H=300,p={l:48,r:20,t:24,b:45},pw=W-p.l-p.r,ph=H-p.t-p.b; const vals=series.flatMap(s=>s.data.filter(v=>v!=null)),mx=yMax??Math.max(...vals)*1.12,mn=yMin;
- const x=i=>p.l+(pw/(labels.length-1||1))*i,y=v=>p.t+ph-((v-mn)/(mx-mn||1))*ph;
- let s=`<svg viewBox="0 0 ${W} ${H}">`;
- for(let k=0;k<=4;k++){let yy=p.t+ph*k/4,val=mx-(mx-mn)*k/4;s+=`<line x1="${p.l}" y1="${yy}" x2="${W-p.r}" y2="${yy}" stroke="#e8eef5"/><text x="${p.l-7}" y="${yy+4}" text-anchor="end" font-size="9" fill="#7b8798">${fmt(val,1)}${suffix}</text>`}
- labels.forEach((lab,i)=>{let xx=x(i);if(i===partialIndex)s+=`<rect x="${xx-(pw/(labels.length-1||1))/2}" y="${p.t}" width="${pw/(labels.length-1||1)}" height="${ph}" fill="#f6f0f0" opacity=".65"/>`;s+=`<text x="${xx}" y="${H-16}" text-anchor="middle" font-size="9" fill="#66758a">${lab}</text>`});
- series.forEach(sr=>{let d="",active=false;sr.data.forEach((v,i)=>{if(v==null){active=false;return}d+=(active?" L ":"M ")+x(i)+" "+y(v);active=true});s+=`<path d="${d}" fill="none" stroke="${sr.color}" stroke-width="3" stroke-linecap="round"/>`;sr.data.forEach((v,i)=>{if(v!=null)s+=`<circle cx="${x(i)}" cy="${y(v)}" r="4" fill="#fff" stroke="${sr.color}" stroke-width="3"/>`})});
- s+=`</svg><div class="legend">${series.map(sr=>`<span><i style="--c:${sr.color}"></i>${sr.name}</span>`).join("")}</div>`; el.innerHTML=s;
-}
-
-function layeredGauge(el,{rings,current,label,max=100,unit="",invert=false,centerSub=""}){
- const W=460,H=300,cx=230,cy=212,r0=145,th=9,start=200,end=340,span=end-start;
- const polar=(r,a)=>{const rad=(a-90)*Math.PI/180;return [cx+r*Math.cos(rad),cy+r*Math.sin(rad)]};
- const arc=(r,a1,a2)=>{let [x1,y1]=polar(r,a1),[x2,y2]=polar(r,a2),large=(a2-a1)>180?1:0;return `M ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2}`};
- let s=`<svg viewBox="0 0 ${W} ${H}">`;
- rings.forEach((rg,i)=>{let r=r0-i*15,ratio=Math.max(0,Math.min(1,rg.value/max)),a=start+span*ratio; s+=`<path d="${arc(r,start,end)}" fill="none" stroke="#e8eef5" stroke-width="${th}" stroke-linecap="round"/><path d="${arc(r,start,a)}" fill="none" stroke="${rg.color}" stroke-width="${th}" stroke-linecap="round" opacity="${.96-i*.06}"/>`;let [dx,dy]=polar(r,a);s+=`<circle cx="${dx}" cy="${dy}" r="4.4" fill="${rg.color}"/><text x="${25}" y="${42+i*20}" font-size="9" fill="#68778b">${rg.year}</text><text x="${72}" y="${42+i*20}" font-size="9" font-weight="900" fill="${rg.color}">${fmt(rg.value,rg.dec??1)}${unit}</text>`});
- s+=`<text x="${cx}" y="176" text-anchor="middle" font-size="11" fill="#637187">${label}</text><text x="${cx}" y="205" text-anchor="middle" font-size="31" font-weight="950" fill="#0b2c51">${fmt(current, current%1?2:0)}${unit}</text><text x="${cx}" y="226" text-anchor="middle" font-size="9" fill="#637187">${centerSub}</text>`;
- s+=`<text x="76" y="257" font-size="9" fill="#8a97a8">0</text><text x="366" y="257" font-size="9" text-anchor="end" fill="#8a97a8">${fmt(max)}${unit}</text></svg>`; el.innerHTML=s;
-}
-
-function openFDI(id){
- const x=indicators.find(i=>i.id===id); if(!x)return;
- $("#drawerTitle").textContent=x.name; $("#drawerSubtitle").textContent=`${x.code} • ${x.status}`;
- $("#drawerBody").innerHTML=`<div class="fdi">
- <div>Valor / status</div><div><strong>${x.display}</strong> • ${x.status}</div>
- <div>Fonte</div><div>${x.fonte}</div>
- <div>Fórmula-síntese</div><div>${x.formula}</div>
- <div>Unidade</div><div>${x.unidade}</div>
- <div>Polaridade</div><div>${x.polaridade}</div>
- <div>Periodicidade</div><div>${x.periodicidade}</div>
- <div>Decisão apoiada</div><div>${x.decisao}</div>
- <div>Qualidade</div><div>${x.qualidade}</div>
- <div>Limitações</div><div>${x.limitacao}</div>
- <div>Regra ética</div><div>Usar apenas dados agregados/pseudonimizados; evitar células pequenas e combinações que permitam reidentificação; não usar para inferência disciplinar individual.</div>
- </div>`;
- $("#drawer").classList.add("open");$("#drawerBackdrop").classList.add("open");$("#drawer").setAttribute("aria-hidden","false");
-}
-function closeFDI(){$("#drawer").classList.remove("open");$("#drawerBackdrop").classList.remove("open");$("#drawer").setAttribute("aria-hidden","true")}
-
-function render(){
- renderKpis();
- donut($("#maturityChart"),[4,1,3],["#208a62","#c48b1a","#b5222b"],["Calculáveis","Parcial","Não calculáveis"],"4/8","calculáveis hoje");
- layeredGauge($("#clockCompletion"),{rings:years.map((y,i)=>({year:y,value:data.q1.rate[i],color:["#adc7df","#95bbd9","#78accf","#5a9cc6","#3d89ba","#2475ac","#b5222b"][i],dec:1})),current:68.4,label:"2026* • conclusão",max:100,unit:"%",centerSub:"camadas = ciclos anuais reais"});
- layeredGauge($("#clockCycle"),{rings:years.slice(3).map((y,j)=>({year:y,value:data.q1.median[j+3],color:["#8bc8d6","#55b6ca","#279fb9","#b5222b"][j],dec:0})),current:18,label:"2026* • mediana",max:30,unit:" d",centerSub:"2023–2026 destacados"});
- layeredGauge($("#clockRecurrence"),{rings:years.map((y,i)=>({year:y,value:data.q2.ratio[i],color:["#bdd8cc","#a6cfbe","#8cc5ae","#72b99e","#57aa8c","#3c9b79","#b5222b"][i],dec:2})),current:1.92,label:"2026* • razão anual",max:3.2,unit:"",centerSub:"atendimentos / beneficiário no ano"});
- comboChart($("#q1Chart"),{labels:years,bar1:data.q1.reg,bar2:data.q1.done,line:data.q1.rate,colors:["#1769b3","#14a9c5","#b5222b"],formatLine:x=>fmt(x,0)+"%",lineScale:[0,110]});
- lineChart($("#q1TimeChart"),{labels:years,series:[{name:"Mediana (dias)",data:data.q1.median,color:"#1769b3"},{name:"P90 (dias)",data:data.q1.p90,color:"#b5222b"}],yMax:125});
- barsChart($("#q2Chart"),{labels:years,series:[{name:"Atendimentos",data:data.q2.att,color:"#1769b3"},{name:"Beneficiários únicos",data:data.q2.uniq,color:"#14a9c5"}]});
- lineChart($("#q2RatioChart"),{labels:years,series:[{name:"Razão atend./beneficiário",data:data.q2.ratio,color:"#208a62"},{name:"% urgente na Q2",data:data.q2.urgentPct,color:"#b5222b"}],yMax:3.1});
- barsChart($("#q3Chart"),{labels:years,series:[{name:"Encaminhamentos",data:data.q3.ref,color:"#1769b3"}],max:520});
- comboChart($("#q5Chart"),{labels:years,bar1:data.q5.events,bar2:data.q5.uniq,line:data.q5.days,colors:["#b5222b","#c48b1a","#1769b3"],formatLine:x=>fmt(x),lineScale:[0,5000]});
- $("#annualTable").innerHTML=years.map((y,i)=>`<tr><td><strong>${y}</strong></td><td>${fmt(data.q1.reg[i])}</td><td>${fmt(data.q1.rate[i],1)}%</td><td>${fmt(data.q2.att[i])}</td><td>${fmt(data.q2.uniq[i])}</td><td>${fmt(data.q3.ref[i])}</td><td>${fmt(data.q5.events[i])}</td><td>${fmt(data.q5.uniq[i])}</td><td>${fmt(data.q5.days[i])}</td></tr>`).join("");
- barsChart($("#temporalLinkChart"),{labels:["±30 dias","±90 dias"],series:[{name:"Eventos Q5 com atendimento Q2",data:[56.4,65.1],color:"#1769b3"}],max:100,partialIndex:-1});
- $("#decisionArchitecture").innerHTML=`<svg viewBox="0 0 760 300">
-  <defs><marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#688099"/></marker></defs>
-  ${[
-    [40,"Dado","AAS / DRH","registros + denominadores","#1769b3"],
-    [190,"Qualidade","Completude • validade","selo antes do KPI","#14a9c5"],
-    [340,"Indicador","Fórmula • polaridade","tendência + limite","#208a62"],
-    [490,"Pergunta","O que mudou?","o que ainda não sei?","#c48b1a"],
-    [640,"Decisão","Priorizar • revisar","governar • acompanhar","#b5222b"]
-   ].map(([x,t,s1,s2,c])=>`<g><rect x="${x}" y="92" width="110" height="94" rx="14" fill="#fff" stroke="${c}" stroke-width="2"/><rect x="${x}" y="92" width="110" height="7" rx="4" fill="${c}"/><text x="${x+55}" y="123" text-anchor="middle" font-size="12" font-weight="900" fill="#0b2c51">${t}</text><text x="${x+55}" y="145" text-anchor="middle" font-size="9" fill="#637187">${s1}</text><text x="${x+55}" y="162" text-anchor="middle" font-size="9" fill="#637187">${s2}</text></g>`).join("")}
-  ${[150,300,450,600].map(x=>`<line x1="${x}" y1="139" x2="${x+34}" y2="139" stroke="#688099" stroke-width="2" marker-end="url(#arr)"/>`).join("")}
-  <text x="380" y="240" text-anchor="middle" font-size="11" font-weight="900" fill="#0b2c51">O painel transforma dados administrativos em decisão auditável sem converter associação em causalidade.</text>
- </svg>`;
-}
-
-$$('.nav-btn').forEach(btn=>btn.onclick=()=>{const id=btn.dataset.view;$$('.view').forEach(v=>v.classList.toggle('active',v.id===id));$$('.nav-btn').forEach(b=>b.classList.toggle('active',b===btn));window.scrollTo({top:0,behavior:'smooth'})});
-$("#drawerClose").onclick=closeFDI;$("#drawerBackdrop").onclick=closeFDI;document.addEventListener("keydown",e=>{if(e.key==="Escape")closeFDI()});
-render();
-</script>
+<section id="governanca" class="view">
+  <div class="section-head"><div><h2>Governança e inteligência gerencial</h2><p>O painel não encerra a decisão; ele estrutura o ciclo de aprendizagem. Indicadores devem produzir perguntas, orientar análise, registrar decisões e acompanhar efeitos ao longo do tempo.</p></div><span class="pill">dados → conhecimento → decisão</span></div>
+  <div class="panel"><h3>Ciclo de gestão orientada por dados <span>arquitetura de uso</span></h3><div class="flow"><div class="flowbox"><b>1. Pergunta</b><span>Qual problema gerencial precisa ser compreendido?</span></div><div class="flowbox"><b>2. Evidência</b><span>Qual indicador e qual fonte respondem?</span></div><div class="flowbox"><b>3. Qualidade</b><span>O dado é completo, comparável e atual?</span></div><div class="flowbox"><b>4. Contexto</b><span>Que explicações alternativas precisam ser testadas?</span></div><div class="flowbox"><b>5. Decisão</b><span>Qual ação proporcional é justificável?</span></div><div class="flowbox"><b>6. Aprendizagem</b><span>O efeito será acompanhado no próximo ciclo?</span></div></div></div>
+  <div style="height:13px"></div>
+  <div class="decision-grid">
+    <div class="decision"><b>Semáforos sem meta oficial: não usar</b><p>Enquanto não houver parâmetros institucionais pactuados, o painel mostra tendência e variação, mas não classifica automaticamente desempenho como “bom” ou “ruim”.</p></div>
+    <div class="decision"><b>Variação não é causalidade</b><p>Alterações em atendimentos, afastamentos ou conclusão podem refletir demanda, acesso, capacidade, registro ou contexto organizacional. Exigem investigação.</p></div>
+    <div class="decision"><b>Ausência é informação</b><p>Q3 e Q4 revelam lacunas de governança. O correto é tornar o N/D visível e criar a estrutura de dados necessária.</p></div>
+    <div class="decision"><b>Taxas usam população de referência</b><p>Afastamentos e dias perdidos são normalizados pelo efetivo médio anual da DRH, permitindo comparação temporal responsável.</p></div>
+    <div class="decision"><b>Privacidade por desenho</b><p>A interface trabalha com agregados. Pseudônimos permanecem apenas na camada restrita de processamento e nunca são exibidos no painel público.</p></div>
+    <div class="decision"><b>Versão e auditabilidade</b><p>Cada atualização deve registrar data de corte, fonte, fórmula, filtros, transformações e limitações.</p></div>
+  </div><div style="height:13px"></div>
+  <div class="grid two">
+    <div class="panel"><h3>Agenda de melhoria de dados <span>prioridades de implementação</span></h3><div class="table-wrap"><table style="min-width:620px"><thead><tr><th>Prioridade</th><th>Lacuna</th><th>Produto esperado</th></tr></thead><tbody><tr><td><strong>P1</strong></td><td>Q3 sem status/data de conclusão</td><td>Taxa de continuidade e tempo de resolução calculáveis.</td></tr><tr><td><strong>P1</strong></td><td>Q4 sem registro estruturado</td><td>Taxa de demanda aguda e tempo até acolhimento.</td></tr><tr><td><strong>P2</strong></td><td>Datas históricas Q1 com semântica heterogênea</td><td>Série temporal do tempo de ciclo plenamente comparável.</td></tr><tr><td><strong>P2</strong></td><td>Atualização manual entre AAS e DRH</td><td>Rotina periódica com denominador e versão documentados.</td></tr></tbody></table></div></div>
+    <div class="panel"><h3>Uso estratégico recomendado <span>perguntas que o painel deve responder</span></h3><div class="decision-grid" style="grid-template-columns:1fr"><div class="decision"><b>Execução</b><p>O PSOBM está concluindo no ritmo esperado e em tempo adequado?</p></div><div class="decision"><b>Capacidade</b><p>A oferta assistencial acompanha a demanda e a recorrência observadas?</p></div><div class="decision"><b>Continuidade</b><p>Os encaminhamentos geram cuidado efetivo e rastreável?</p></div><div class="decision"><b>Repercussão</b><p>Qual é a carga funcional agregada e como ela evolui ao longo do tempo?</p></div></div></div>
+  </div>
+</section>
+</div>
+<div class="footer">TCC CGEPP/ABM • Painel Estratégico de Inteligência em Saúde Mental do PSOBM • Fontes: AAS/CBMMG e DRH/CBMMG • Dados agregados e pseudonimizados • Corte 30/06/2026 • 2026* = janeiro–junho</div>
+</main>
+</div>
+<div id="drawerBg" class="drawer-bg"></div><aside id="drawer" class="drawer" aria-hidden="true"><header class="drawer-head"><div><h3 id="drawerTitle">Ficha técnica</h3><p id="drawerSub">Indicador qualificado</p></div><button id="close" class="close">×</button></header><div id="drawerBody" class="drawer-body"></div></aside>
+<script src="assets/dashboard.js"></script>
 </body>
 </html>

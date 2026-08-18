@@ -1,137 +1,145 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<meta name="description" content="Painel Estratégico de Inteligência em Saúde Mental do PSOBM — dados reais agregados AAS + DRH, gestão orientada por dados." />
-<title>Painel Estratégico de Inteligência em Saúde Mental do PSOBM</title>
-<link rel="stylesheet" href="assets/dashboard.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Protótipo demonstrativo do Painel Estratégico de Inteligência em Saúde Mental do PSOBM, com dados agregados AAS + DRH e oito indicadores qualificados para apoio à decisão." />
+  <meta name="theme-color" content="#10263a" />
+  <title>Painel Estratégico de Inteligência em Saúde Mental do PSOBM</title>
+  <link rel="stylesheet" href="assets/dashboard.css" />
 </head>
 <body>
-<div class="app">
-<aside class="sidebar">
-  <div class="brand"><div class="brandmark">PSOBM</div><div><strong>PAINEL ESTRATÉGICO</strong><small>Inteligência em saúde mental<br>Gestão orientada por dados</small></div></div>
-  <nav>
-    <button class="nav active" data-view="executivo"><b>Visão estratégica</b><span>Sinais, KPIs e decisões</span></button>
-    <button class="nav" data-view="cronico"><b>Módulo crônico</b><span>Monitoramento longitudinal</span></button>
-    <button class="nav" data-view="agudo"><b>Módulo agudo</b><span>Alerta e repercussão funcional</span></button>
-    <button class="nav" data-view="dados"><b>Dados & qualidade</b><span>AAS, DRH e calculabilidade</span></button>
-    <button class="nav" data-view="governanca"><b>Governança</b><span>Do dado à decisão</span></button>
-  </nav>
-  <div class="sidebar-note"><b>Uso:</b> apoio à decisão estratégica. Dados agregados. Sem inferência clínica individual, sem uso disciplinar e sem metas artificiais.</div>
-</aside>
-<main>
-<header class="topbar"><div class="toprow"><div class="title"><h1>Painel Estratégico de Inteligência em Saúde Mental do PSOBM</h1><p>Indicadores qualificados para apoio à decisão e aperfeiçoamento da gestão</p></div><div class="chips"><span class="chip">Corte analítico: 30/06/2026</span><span class="chip">Fontes: AAS + DRH</span><span class="chip">5/8 KPIs calculáveis</span><span class="chip">Atualizado: 17/08/2026</span></div></div></header>
-<div class="content">
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navegação principal">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">PSOBM</div>
+        <div><strong>Painel Estratégico</strong><small>Inteligência gerencial em saúde mental</small></div>
+      </div>
+      <nav class="nav-list">
+        <button class="nav-item active" data-view="executivo" type="button"><span class="nav-index">01</span><span><b>Visão executiva</b><small>Storytelling e sinais</small></span></button>
+        <button class="nav-item" data-view="bsc" type="button"><span class="nav-index">02</span><span><b>Mapa estratégico</b><small>BSC adaptado</small></span></button>
+        <button class="nav-item" data-view="cronico" type="button"><span class="nav-index">03</span><span><b>Monitoramento</b><small>Programado e longitudinal</small></span></button>
+        <button class="nav-item" data-view="agudo" type="button"><span class="nav-index">04</span><span><b>Alerta & impacto</b><small>Demanda aguda e afastamentos</small></span></button>
+        <button class="nav-item" data-view="qualidade" type="button"><span class="nav-index">05</span><span><b>Dados & qualidade</b><small>Calculabilidade e denominadores</small></span></button>
+        <button class="nav-item" data-view="governanca" type="button"><span class="nav-index">06</span><span><b>Governança</b><small>Do registro à decisão</small></span></button>
+      </nav>
+      <div class="sidebar-foot"><span class="status-dot" aria-hidden="true"></span><div><b>Protótipo demonstrativo</b><small>Uso agregado, analítico e gerencial. Sem inferência clínica individual, ranking de pessoas ou finalidade disciplinar.</small></div></div>
+    </aside>
 
-<section id="executivo" class="view active">
-  <div class="section-head"><div><h2>Visão estratégica</h2><p>Leitura executiva dos dados reais. O painel combina valor atual, tendência, qualidade da informação e pergunta gerencial. A referência principal é 2025, último ano completo; 2026 é exibido separadamente como janeiro–junho.</p></div><span class="pill">gestão orientada por evidências</span></div>
-  <div class="story"><strong>Leitura central:</strong> 2024 concentrou o maior volume assistencial e a maior taxa de militares afastados; 2023 apresentou a maior carga de dias perdidos. Em 2025 houve redução de produção assistencial e repercussão funcional em relação a 2024, simultaneamente a uma queda importante na conclusão do monitoramento PSOBM. Essas variações são sinais gerenciais e não demonstram causalidade ou melhora/piora clínica por si sós.</div>
-  <div class="headline-grid">
-    <div class="headline"><small>Conclusão PSOBM • 2025</small><strong>72,6%</strong><em><span class="delta red">−14,9 p.p.</span> vs 2024 (87,5%). Menor taxa entre 2023–2025.</em></div>
-    <div class="headline"><small>Atendimentos • por 1.000 ativos</small><strong>1.221,2</strong><em><span class="delta blue">−31,6%</span> vs 2024; ainda acima de 2023 (871,6).</em></div>
-    <div class="headline"><small>Militares afastados • por 1.000</small><strong>39,9</strong><em><span class="delta blue">−12,1%</span> vs 2024 (45,4). Sinal contextual.</em></div>
-    <div class="headline"><small>Dias perdidos • por 1.000</small><strong>528,7</strong><em><span class="delta blue">−28,7%</span> vs 2024 (742,0); acima de 2022 (443,4).</em></div>
-  </div>
-  <div class="insight-grid">
-    <div class="insight"><div class="ico">1</div><div><b>Gargalo do monitoramento</b><p>A conclusão caiu de 87,5% para 72,6% entre 2024 e 2025. A gestão deve investigar capacidade, pendências, adesão, retorno e qualidade do registro antes de atribuir causa.</p></div></div>
-    <div class="insight"><div class="ico">2</div><div><b>Pico assistencial e funcional</b><p>2024 teve 1.784,3 atendimentos/1.000 e 45,4 afastados/1.000; 2023 teve 750,5 dias perdidos/1.000. O biênio 2023–2024 merece análise contextual.</p></div></div>
-    <div class="insight"><div class="ico">3</div><div><b>Pontos cegos de governança</b><p>Continuidade do encaminhamento e demanda aguda específica seguem não mensuráveis. A ausência deve orientar melhoria do registro, não ser convertida em zero ou proxy.</p></div></div>
-  </div>
-  <div class="grid two">
-    <div class="panel"><div class="module-title blue">Módulo 1 — Monitoramento programado e longitudinal</div><div id="kpisCronico" class="kpi-grid"></div></div>
-    <div class="panel"><div class="module-title red">Módulo 2 — Alerta, demanda aguda e repercussão funcional</div><div id="kpisAgudo" class="kpi-grid"></div></div>
-  </div>
-  <div style="height:13px"></div>
-  <div class="grid two">
-    <div class="panel"><h3>Trajetória do monitoramento e da assistência <span>anos completos 2022–2025</span></h3><div id="chartExecutiveChronic" class="chart"></div><div class="legend"><span><i style="--c:#1769b3"></i>Conclusão PSOBM (%)</span><span><i style="--c:#18a7bf"></i>Atendimentos / 1.000 ativos</span></div></div>
-    <div class="panel"><h3>Repercussão funcional <span>anos completos 2022–2025</span></h3><div id="chartExecutiveAcute" class="chart"></div><div class="legend"><span><i style="--c:#b32631"></i>Afastados / 1.000 ativos</span><span><i style="--c:#8d1c25"></i>Dias perdidos / 1.000 ativos</span></div></div>
-  </div>
-  <div class="status-strip"><div class="statusbox"><strong>5</strong>indicadores calculáveis</div><div class="statusbox"><strong>3</strong>indicadores não calculáveis</div><div class="statusbox info"><strong>2026 parcial</strong>Efetivo médio 6.035,2 • conclusão 68,4% • 720,4 atend./1.000 • 20,4 afastados/1.000 • 212,8 dias/1.000. Não comparar diretamente com anos completos.</div></div>
-  <div class="panel"><h3>Matriz de decisão estratégica <span>do sinal à ação gerencial</span></h3><div class="table-wrap"><table><thead><tr><th>Sinal observado</th><th>Evidência</th><th>Pergunta gerencial</th><th>Próximo passo orientado por dados</th></tr></thead><tbody>
-    <tr><td><strong>Queda da conclusão do PSOBM</strong></td><td>87,5% (2024) → 72,6% (2025)</td><td>O problema está em capacidade, adesão, retorno ou registro?</td><td>Estratificar pendências e motivos; revisar fluxo e capacidade antes de definir intervenção.</td></tr>
-    <tr><td><strong>Redução do volume assistencial após pico</strong></td><td>1.784,3 → 1.221,2 atend./1.000</td><td>Houve mudança de demanda, acesso, oferta ou registro?</td><td>Confrontar volume, beneficiários únicos, recorrência e capacidade instalada.</td></tr>
-    <tr><td><strong>Redução da repercussão funcional em 2025</strong></td><td>45,4 → 39,9 afastados/1.000; 742,0 → 528,7 dias/1.000</td><td>É tendência sustentável ou oscilação anual?</td><td>Manter série histórica e contextualizar com perfil CID, retorno ao trabalho e capacidade assistencial.</td></tr>
-    <tr><td><strong>Continuidade assistencial não mensurável</strong></td><td>Q3 sem situação/data de conclusão</td><td>Os encaminhamentos resultam em cuidado efetivo?</td><td>Estruturar status e data de conclusão; só então definir meta/limiar.</td></tr>
-    <tr><td><strong>Demanda aguda não mensurável</strong></td><td>Q4 não disponibilizada</td><td>Qual a pressão aguda e o tempo de resposta?</td><td>Criar registro mínimo de entrada, tipo de demanda e primeiro acolhimento.</td></tr>
-  </tbody></table></div></div>
-</section>
+    <main class="main">
+      <header class="topbar">
+        <div><p class="eyebrow">CGEPP 2026 · TCC aplicado</p><h1>Painel Estratégico de Inteligência em Saúde Mental do PSOBM</h1><p class="subtitle">Indicadores qualificados para apoio à decisão e aperfeiçoamento da gestão</p></div>
+        <div class="header-meta" aria-label="Metadados do painel"><span>Corte: <b>30/06/2026</b></span><span>Fontes: <b>AAS + DRH</b></span><span>Calculabilidade: <b>5/8</b></span><span>Protótipo: <b>18/08/2026</b></span></div>
+      </header>
 
-<section id="cronico" class="view">
-  <div class="section-head"><div><h2>Módulo crônico — monitoramento programado e longitudinal</h2><p>Foco em execução do PSOBM, tempestividade, utilização assistencial e continuidade do cuidado. Os indicadores de processo devem ser lidos em conjunto, não isoladamente.</p></div><span class="pill">4 indicadores estratégicos</span></div>
-  <div class="kpi-grid" id="kpisCronico2"></div><div style="height:13px"></div>
-  <div class="grid two">
-    <div class="panel"><h3>Conclusão do monitoramento PSOBM <span>2020–2026*</span></h3><div id="chartCompletion" class="chart"></div><div class="callout amber">2020–2022 apresentam 100% de conclusão, porém com volumes e padrões de data historicamente atípicos. Para gestão, a comparação mais estável deve privilegiar 2023–2025 e manter nota de qualidade.</div></div>
-    <div class="panel"><h3>Tempo do ciclo <span>mediana, média e P90</span></h3><div class="headline-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:10px"><div class="headline"><small>Mediana global</small><strong>14 dias</strong><em>medida robusta do centro da distribuição</em></div><div class="headline"><small>Média global</small><strong>32,2 dias</strong><em>sensível a valores extremos</em></div><div class="headline"><small>P90</small><strong>79 dias</strong><em>90% dos ciclos válidos abaixo deste valor</em></div></div><div id="chartCycle" class="chart"></div><div class="callout amber">Série anual exibida apenas para 2023–2026*, onde a semântica temporal é mais interpretável. O indicador requer auditoria histórica contínua das datas.</div></div>
-  </div><div style="height:13px"></div>
-  <div class="grid two">
-    <div class="panel"><h3>Produção assistencial normalizada <span>atendimentos e beneficiários por 1.000 ativos</span></h3><div id="chartAssistance" class="chart"></div><div class="callout">2024 foi um ponto fora do padrão recente: 1.784,3 atendimentos/1.000 e 836,4 beneficiários/1.000. O painel sinaliza a mudança; a explicação exige contexto sobre oferta, registro, acesso e demanda.</div></div>
-    <div class="panel"><h3>Encaminhamentos e continuidade <span>Q3</span></h3><div id="chartReferrals" class="chart"></div><div class="callout red"><b>Limitação decisiva:</b> 1.188 encaminhamentos são contabilizáveis, mas 0% dos registros possuem situação e data de conclusão úteis. É possível medir fluxo; não é possível medir continuidade concluída ou tempo de resolução.</div></div>
-  </div>
-</section>
+      <div class="content">
+        <section id="executivo" class="view active" aria-labelledby="titulo-executivo">
+          <div class="section-head"><div><p class="eyebrow">Leitura em 90 segundos</p><h2 id="titulo-executivo">Do dado administrativo ao sinal gerencial</h2><p>O painel não procura “diagnosticar a corporação”. Ele organiza sinais comparáveis, explicita a qualidade do dado e transforma lacunas de informação em agenda de gestão.</p></div><span class="pill">referência executiva: 2025</span></div>
 
-<section id="agudo" class="view">
-  <div class="section-head"><div><h2>Módulo agudo — alerta, demanda aguda e repercussão funcional</h2><p>Foco em pressão assistencial aguda, tempestividade e impacto funcional. A base específica Q4 ainda é uma lacuna; os indicadores de afastamento já são comparáveis porque a DRH forneceu o denominador populacional.</p></div><span class="pill">4 indicadores estratégicos</span></div>
-  <div class="kpi-grid" id="kpisAgudo2"></div><div style="height:13px"></div>
-  <div class="grid two">
-    <div class="panel"><h3>Militares afastados por 1.000 ativos <span>taxa anual</span></h3><div id="chartLeave" class="chart"></div><div class="callout">Nos anos completos, a taxa variou de 32,7/1.000 (2020) a 45,4/1.000 (2024). A queda para 39,9/1.000 em 2025 deve ser monitorada como tendência, não interpretada isoladamente como melhora clínica.</div></div>
-    <div class="panel"><h3>Dias perdidos por 1.000 ativos <span>carga funcional anual</span></h3><div id="chartDays" class="chart"></div><div class="callout">A maior carga ocorreu em 2023 (750,5 dias/1.000), permanecendo elevada em 2024 (742,0) e reduzindo para 528,7 em 2025.</div></div>
-  </div><div style="height:13px"></div>
-  <div class="grid three">
-    <div class="panel"><h3>Eventos de afastamento <span>métrica auxiliar por 1.000 ativos</span></h3><div id="chartEvents" class="chart"></div></div>
-    <div class="panel"><h3>Perfil CID agregado <span>contextual, não KPI</span></h3><div id="cidDonut" class="chart"></div><div class="callout gray">F41, F43 e F32 concentram 86,4% dos eventos analíticos. O painel usa apenas grupos amplos, sem inferência diagnóstica individual ou causalidade ocupacional.</div></div>
-    <div class="panel"><h3>Lacunas da demanda aguda <span>Q4</span></h3><div class="decision-grid" style="grid-template-columns:1fr"><div class="decision"><b>KPI 05 — demandas urgentes / 1.000</b><p>N/D. O denominador DRH existe, mas o numerador específico Q4 não foi disponibilizado.</p></div><div class="decision"><b>KPI 06 — tempo até acolhimento</b><p>N/D. Não há registro estruturado de entrada e primeiro acolhimento.</p></div><div class="decision"><b>Requisito mínimo futuro</b><p>Data/hora da demanda, data/hora do primeiro acolhimento, classificação ampla e desfecho operacional.</p></div></div></div>
-  </div>
-</section>
+          <div class="story-rail" aria-label="Storytelling analítico">
+            <article><span>1</span><div><b>Capturar</b><p>AAS: 50.953 linhas analíticas. DRH: 78 observações mensais de efetivo ativo.</p></div></article>
+            <article><span>2</span><div><b>Qualificar</b><p>Limpeza, pseudonimização, regras de qualidade, corte temporal e documentação de fórmula.</p></div></article>
+            <article><span>3</span><div><b>Normalizar</b><p>O efetivo médio mensal passa a ser o denominador anual para comparação proporcional.</p></div></article>
+            <article><span>4</span><div><b>Interpretar</b><p>2024 concentra pico assistencial; 2023–2024 concentram maior repercussão funcional.</p></div></article>
+            <article><span>5</span><div><b>Decidir</b><p>2025 reduz impacto funcional, mas a conclusão do monitoramento cai: o sinal pede investigação, não causalidade.</p></div></article>
+          </div>
 
-<section id="dados" class="view">
-  <div class="section-head"><div><h2>Dados, qualidade e calculabilidade</h2><p>A gestão orientada por dados depende de conhecer a qualidade da evidência. O painel torna visíveis fonte, completude, restrições, denominadores e período de cobertura.</p></div><span class="pill">governança visível</span></div>
-  <div class="maturity">
-    <div class="source"><b>Q1 • Monitoramento</b><strong>9.307</strong><p>registros • 5.821 pseudônimos • útil com ressalvas de datas</p><div class="bar"><span style="--w:74%;--c:#b9851c"></span></div></div>
-    <div class="source"><b>Q2 • Atendimentos</b><strong>37.604</strong><p>registros válidos • 8.579 beneficiários únicos • alta utilidade</p><div class="bar"><span style="--w:95%;--c:#24825f"></span></div></div>
-    <div class="source"><b>Q3 • Encaminhamentos</b><strong>1.188</strong><p>volume disponível • desfecho indisponível</p><div class="bar"><span style="--w:52%;--c:#b9851c"></span></div></div>
-    <div class="source"><b>Q4 • Demanda aguda</b><strong>N/D</strong><p>base específica não disponibilizada</p><div class="bar"><span style="--w:10%;--c:#b32631"></span></div></div>
-    <div class="source"><b>Q5 • Afastamentos</b><strong>2.854</strong><p>eventos analíticos • 985 militares únicos • 23.012 dias únicos</p><div class="bar"><span style="--w:93%;--c:#24825f"></span></div></div>
-    <div class="source"><b>DRH • Efetivo</b><strong>78</strong><p>observações mensais • jan/2020–jun/2026 • denominador validado</p><div class="bar"><span style="--w:98%;--c:#24825f"></span></div></div>
-  </div><div style="height:13px"></div>
-  <div class="grid two">
-    <div class="panel"><h3>Efetivo médio anual — DRH <span>denominador das taxas</span></h3><div id="chartEff" class="chart"></div><div class="callout">A integração AAS + DRH ocorre por período, não por identificação individual. A DRH fornece exclusivamente o denominador agregado necessário às taxas institucionais.</div></div>
-    <div class="panel"><h3>Calculabilidade dos oito indicadores <span>estado atual</span></h3><div class="table-wrap"><table><thead><tr><th>KPI</th><th>Fonte</th><th>Estado</th><th>Regra de publicação</th></tr></thead><tbody>
-      <tr><td>Conclusão do monitoramento</td><td>Q1</td><td><span class="tag ok">Calculável</span></td><td>Publicar valor + período + nota de qualidade.</td></tr>
-      <tr><td>Tempo do ciclo</td><td>Q1</td><td><span class="tag warn">Calculável c/ ressalva</span></td><td>Mediana, média, P90 e ressalva das datas.</td></tr>
-      <tr><td>Recorrência assistencial</td><td>Q2</td><td><span class="tag ok">Calculável</span></td><td>Razão + beneficiários únicos; não confundir com gravidade.</td></tr>
-      <tr><td>Continuidade assistencial</td><td>Q3</td><td><span class="tag no">Não calculável</span></td><td>Exibir N/D até estruturação do desfecho.</td></tr>
-      <tr><td>Demandas urgentes / 1.000</td><td>Q4 + DRH</td><td><span class="tag no">Não calculável</span></td><td>DRH disponível; Q4 ausente. Não usar “urgente” da Q2 como proxy.</td></tr>
-      <tr><td>Tempo até acolhimento</td><td>Q4</td><td><span class="tag no">Não calculável</span></td><td>Exibir N/D até criação do registro mínimo.</td></tr>
-      <tr><td>Afastados / 1.000</td><td>Q5 + DRH</td><td><span class="tag ok">Calculável</span></td><td>Militares únicos do ano ÷ efetivo médio anual × 1.000.</td></tr>
-      <tr><td>Dias perdidos / 1.000</td><td>Q5 + DRH</td><td><span class="tag ok">Calculável</span></td><td>Dias únicos do ano ÷ efetivo médio anual × 1.000.</td></tr>
-    </tbody></table></div></div>
-  </div><div style="height:13px"></div>
-  <div class="panel"><h3>Matriz anual integrada AAS + DRH <span>base comparativa</span></h3><div class="table-wrap"><table><thead><tr><th>Ano</th><th>Efetivo médio</th><th>Atendimentos</th><th>Beneficiários</th><th>Atend./1.000</th><th>Afastados</th><th>Afast./1.000</th><th>Eventos/1.000</th><th>Dias/1.000</th></tr></thead><tbody id="matrixRows"></tbody></table></div><div class="callout amber" style="margin-top:10px">2026* corresponde a janeiro–junho. Não anualizar automaticamente nem comparar diretamente com anos completos sem método explicitado.</div></div>
-</section>
+          <div class="story-callout"><div class="story-kicker">Leitura central</div><p><strong>O biênio 2023–2024 concentra os maiores sinais de pressão assistencial e repercussão funcional.</strong> Em 2025, atendimentos e afastamentos diminuem em relação a 2024, enquanto a conclusão do monitoramento PSOBM recua de 87,5% para 72,6%. A leitura correta é de sinais simultâneos que exigem contexto sobre acesso, capacidade, adesão, registro e retorno — não de prova de melhora ou piora clínica.</p></div>
 
-<section id="governanca" class="view">
-  <div class="section-head"><div><h2>Governança e inteligência gerencial</h2><p>O painel não encerra a decisão; ele estrutura o ciclo de aprendizagem. Indicadores devem produzir perguntas, orientar análise, registrar decisões e acompanhar efeitos ao longo do tempo.</p></div><span class="pill">dados → conhecimento → decisão</span></div>
-  <div class="panel"><h3>Ciclo de gestão orientada por dados <span>arquitetura de uso</span></h3><div class="flow"><div class="flowbox"><b>1. Pergunta</b><span>Qual problema gerencial precisa ser compreendido?</span></div><div class="flowbox"><b>2. Evidência</b><span>Qual indicador e qual fonte respondem?</span></div><div class="flowbox"><b>3. Qualidade</b><span>O dado é completo, comparável e atual?</span></div><div class="flowbox"><b>4. Contexto</b><span>Que explicações alternativas precisam ser testadas?</span></div><div class="flowbox"><b>5. Decisão</b><span>Qual ação proporcional é justificável?</span></div><div class="flowbox"><b>6. Aprendizagem</b><span>O efeito será acompanhado no próximo ciclo?</span></div></div></div>
-  <div style="height:13px"></div>
-  <div class="decision-grid">
-    <div class="decision"><b>Semáforos sem meta oficial: não usar</b><p>Enquanto não houver parâmetros institucionais pactuados, o painel mostra tendência e variação, mas não classifica automaticamente desempenho como “bom” ou “ruim”.</p></div>
-    <div class="decision"><b>Variação não é causalidade</b><p>Alterações em atendimentos, afastamentos ou conclusão podem refletir demanda, acesso, capacidade, registro ou contexto organizacional. Exigem investigação.</p></div>
-    <div class="decision"><b>Ausência é informação</b><p>Q3 e Q4 revelam lacunas de governança. O correto é tornar o N/D visível e criar a estrutura de dados necessária.</p></div>
-    <div class="decision"><b>Taxas usam população de referência</b><p>Afastamentos e dias perdidos são normalizados pelo efetivo médio anual da DRH, permitindo comparação temporal responsável.</p></div>
-    <div class="decision"><b>Privacidade por desenho</b><p>A interface trabalha com agregados. Pseudônimos permanecem apenas na camada restrita de processamento e nunca são exibidos no painel público.</p></div>
-    <div class="decision"><b>Versão e auditabilidade</b><p>Cada atualização deve registrar data de corte, fonte, fórmula, filtros, transformações e limitações.</p></div>
-  </div><div style="height:13px"></div>
-  <div class="grid two">
-    <div class="panel"><h3>Agenda de melhoria de dados <span>prioridades de implementação</span></h3><div class="table-wrap"><table style="min-width:620px"><thead><tr><th>Prioridade</th><th>Lacuna</th><th>Produto esperado</th></tr></thead><tbody><tr><td><strong>P1</strong></td><td>Q3 sem status/data de conclusão</td><td>Taxa de continuidade e tempo de resolução calculáveis.</td></tr><tr><td><strong>P1</strong></td><td>Q4 sem registro estruturado</td><td>Taxa de demanda aguda e tempo até acolhimento.</td></tr><tr><td><strong>P2</strong></td><td>Datas históricas Q1 com semântica heterogênea</td><td>Série temporal do tempo de ciclo plenamente comparável.</td></tr><tr><td><strong>P2</strong></td><td>Atualização manual entre AAS e DRH</td><td>Rotina periódica com denominador e versão documentados.</td></tr></tbody></table></div></div>
-    <div class="panel"><h3>Uso estratégico recomendado <span>perguntas que o painel deve responder</span></h3><div class="decision-grid" style="grid-template-columns:1fr"><div class="decision"><b>Execução</b><p>O PSOBM está concluindo no ritmo esperado e em tempo adequado?</p></div><div class="decision"><b>Capacidade</b><p>A oferta assistencial acompanha a demanda e a recorrência observadas?</p></div><div class="decision"><b>Continuidade</b><p>Os encaminhamentos geram cuidado efetivo e rastreável?</p></div><div class="decision"><b>Repercussão</b><p>Qual é a carga funcional agregada e como ela evolui ao longo do tempo?</p></div></div></div>
+          <div class="headline-grid" aria-label="Indicadores executivos de 2025">
+            <article class="headline-card"><div class="headline-label">Conclusão do monitoramento</div><div class="headline-value">72,6%</div><div class="headline-delta down">−14,9 p.p. vs. 2024</div><p>1.152 concluídos em 1.586 registros de 2025.</p></article>
+            <article class="headline-card"><div class="headline-label">Atendimentos / 1.000 ativos</div><div class="headline-value">1.221,2</div><div class="headline-delta neutral">−31,6% vs. 2024</div><p>Ainda acima de 2023 (871,6/1.000).</p></article>
+            <article class="headline-card"><div class="headline-label">Militares afastados / 1.000</div><div class="headline-value">39,9</div><div class="headline-delta neutral">−12,1% vs. 2024</div><p>241 militares únicos; indicador de repercussão funcional.</p></article>
+            <article class="headline-card"><div class="headline-label">Dias perdidos / 1.000 ativos</div><div class="headline-value">528,7</div><div class="headline-delta neutral">−28,7% vs. 2024</div><p>3.194 dias únicos; sobreposições do mesmo militar descontadas.</p></article>
+          </div>
+
+          <div class="signal-grid">
+            <article class="signal-card attention"><span class="signal-number">01</span><div><b>Gargalo a investigar</b><p>A conclusão do PSOBM cai em 2025. Investigar capacidade, pendências, adesão, retorno e qualidade do registro.</p></div></article>
+            <article class="signal-card"><span class="signal-number">02</span><div><b>Pico a contextualizar</b><p>2024 registra 1.784,3 atendimentos/1.000 e 45,4 militares afastados/1.000. Volume não equivale a prevalência.</p></div></article>
+            <article class="signal-card data-gap"><span class="signal-number">03</span><div><b>Ponto cego a corrigir</b><p>Continuidade do encaminhamento e demanda aguda específica permanecem não calculáveis: ausência é achado de governança.</p></div></article>
+          </div>
+
+          <div class="panel"><div class="panel-head"><div><p class="eyebrow">Portfólio estratégico</p><h3>Oito indicadores — 4 × 4</h3></div><div class="legend-inline"><span><i class="dot ok"></i>calculável</span><span><i class="dot warn"></i>calculável com ressalva</span><span><i class="dot no"></i>não calculável</span></div></div><div id="indicatorGrid" class="indicator-grid"></div></div>
+
+          <div class="grid two">
+            <article class="panel"><div class="panel-head"><div><p class="eyebrow">Acesso e utilização</p><h3>Produção assistencial normalizada</h3></div><span class="micro-badge">por 1.000 ativos</span></div><div id="chartAssistanceExecutive" class="chart" role="img" aria-label="Série anual de atendimentos e beneficiários por mil militares ativos"></div><p class="chart-note"><b>2024</b> se destaca tanto em atendimentos quanto em beneficiários alcançados. Isso pode refletir demanda, oferta, acesso, mudança de registro ou combinação desses fatores.</p></article>
+            <article class="panel"><div class="panel-head"><div><p class="eyebrow">Disponibilidade operacional</p><h3>Repercussão funcional</h3></div><span class="micro-badge">por 1.000 ativos</span></div><div id="chartImpactExecutive" class="chart" role="img" aria-label="Série anual de militares afastados e eventos por mil militares ativos"></div><p class="chart-note"><b>Pessoas, eventos e dias não são equivalentes.</b> A separação evita que frequência e impacto funcional sejam confundidos.</p></article>
+          </div>
+
+          <div class="panel"><div class="panel-head"><div><p class="eyebrow">BI orientado à decisão</p><h3>Matriz sinal → pergunta → ação</h3></div><span class="micro-badge">sem metas artificiais</span></div><div class="table-wrap"><table class="decision-table"><thead><tr><th>Sinal</th><th>Evidência</th><th>Pergunta gerencial</th><th>Ação orientada por dados</th></tr></thead><tbody id="decisionRows"></tbody></table></div></div>
+
+          <div class="partial-banner"><strong>2026 é parcial — janeiro a junho.</strong><span>Efetivo médio 6.035,2 · conclusão 68,4% · 720,4 atendimentos/1.000 · 20,4 afastados/1.000 · 212,8 dias/1.000.</span><span>Não aplicar meta anual, semáforo automático ou comparação direta com anos completos.</span></div>
+        </section>
+
+        <section id="bsc" class="view" aria-labelledby="titulo-bsc">
+          <div class="section-head"><div><p class="eyebrow">Arquitetura de estratégia</p><h2 id="titulo-bsc">Mapa estratégico — BSC adaptado ao PSOBM</h2><p>O BSC é usado aqui como lógica de encadeamento gerencial, não como novo conjunto de indicadores. Os oito KPIs permanecem os mesmos; as perspectivas organizam como eles sustentam decisão e melhoria.</p></div><span class="pill">4 perspectivas · 8 KPIs</span></div>
+          <div class="strategy-map">
+            <article class="perspective p4"><header><span>04</span><div><b>Resultado institucional</b><small>Disponibilidade e repercussão funcional</small></div></header><p>Compreender a carga funcional agregada e acompanhar sua trajetória sem converter afastamento em julgamento individual.</p><div class="kpi-tags"><button data-open-kpi="k7">KPI 07</button><button data-open-kpi="k8">KPI 08</button></div></article>
+            <div class="map-arrow" aria-hidden="true">↑</div>
+            <article class="perspective p3"><header><span>03</span><div><b>Acesso e cuidado</b><small>Utilização, continuidade e resposta</small></div></header><p>Qualificar utilização da assistência, acesso efetivo ao encaminhamento e capacidade de resposta a demandas agudas.</p><div class="kpi-tags"><button data-open-kpi="k3">KPI 03</button><button data-open-kpi="k4">KPI 04</button><button data-open-kpi="k5">KPI 05</button><button data-open-kpi="k6">KPI 06</button></div></article>
+            <div class="map-arrow" aria-hidden="true">↑</div>
+            <article class="perspective p2"><header><span>02</span><div><b>Processos internos</b><small>Execução e tempestividade do monitoramento</small></div></header><p>Acompanhar capacidade de conclusão, filas e tempo do ciclo para identificar gargalos do processo programado.</p><div class="kpi-tags"><button data-open-kpi="k1">KPI 01</button><button data-open-kpi="k2">KPI 02</button></div></article>
+            <div class="map-arrow" aria-hidden="true">↑</div>
+            <article class="perspective p1"><header><span>01</span><div><b>Aprendizado & governança de dados</b><small>Base habilitadora</small></div></header><p>Padronizar registros, integrar AAS–DRH, versionar fórmulas e transformar lacunas em requisitos de melhoria informacional.</p><div class="governance-metrics"><span><b>62,5%</b> calculabilidade atual</span><span><b>78/78</b> meses de denominador</span><span><b>3</b> lacunas críticas</span></div></article>
+          </div>
+          <div class="panel"><div class="panel-head"><div><p class="eyebrow">Alinhamento</p><h3>Perspectiva → objetivo → evidência → decisão</h3></div></div><div class="table-wrap"><table><thead><tr><th>Perspectiva</th><th>Objetivo gerencial</th><th>Evidência acompanhada</th><th>Pergunta de decisão</th></tr></thead><tbody><tr><td>Resultado institucional</td><td>Monitorar repercussão funcional agregada</td><td>KPI 07 e KPI 08</td><td>A carga funcional está mudando de modo consistente ou oscilando?</td></tr><tr><td>Acesso e cuidado</td><td>Qualificar utilização, continuidade e resposta</td><td>KPI 03–06</td><td>A rede está acessível, contínua e tempestiva?</td></tr><tr><td>Processos internos</td><td>Executar o monitoramento com consistência</td><td>KPI 01 e KPI 02</td><td>Onde estão fila, atraso, pendência ou perda de seguimento?</td></tr><tr><td>Aprendizado & governança</td><td>Aumentar confiabilidade e calculabilidade</td><td>5/8 calculáveis; completude Q3/Q4</td><td>Quais campos precisam existir para responder às perguntas da gestão?</td></tr></tbody></table></div></div>
+          <div class="principle-strip"><div><b>Não é score de pessoas</b><span>BSC organiza objetivos institucionais, não desempenho individual.</span></div><div><b>Não inventa metas</b><span>Limiares só devem surgir após validação histórica e pactuação institucional.</span></div><div><b>Não confunde correlação com causa</b><span>O painel sinaliza onde investigar; não explica sozinho por que ocorreu.</span></div></div>
+        </section>
+
+        <section id="cronico" class="view" aria-labelledby="titulo-cronico">
+          <div class="section-head"><div><p class="eyebrow">Submódulo 1</p><h2 id="titulo-cronico">Monitoramento programado e longitudinal</h2><p>Quatro indicadores conectam execução do PSOBM, tempestividade, utilização assistencial e continuidade do cuidado.</p></div><span class="pill">4 indicadores</span></div>
+          <div id="chronicKpis" class="indicator-grid module-grid"></div>
+          <div class="grid two">
+            <article class="panel"><div class="panel-head"><div><h3>Conclusão do monitoramento</h3><p>percentual por ciclo/ano</p></div></div><div id="chartCompletion" class="chart"></div><p class="chart-note quality"><b>Nota de qualidade:</b> 2020–2022 apresentam concentração atípica de intervalos de zero dia. A comparação longitudinal deve privilegiar 2023–2025 enquanto a semântica histórica é auditada.</p></article>
+            <article class="panel"><div class="panel-head"><div><h3>Tempo do ciclo</h3><p>mediana e P90, 2023–2026*</p></div></div><div class="metric-trio"><div><small>Mediana global</small><b>14 dias</b></div><div><small>Média global</small><b>32,2 dias</b></div><div><small>P90 global</small><b>79 dias</b></div></div><div id="chartCycle" class="chart"></div></article>
+          </div>
+          <div class="grid two">
+            <article class="panel"><div class="panel-head"><div><h3>Atendimentos e beneficiários</h3><p>produção normalizada pelo efetivo</p></div></div><div id="chartAssistance" class="chart"></div><p class="chart-note">Métricas normalizadas de produção apoiam contexto, mas não substituem os oito KPIs estratégicos.</p></article>
+            <article class="panel"><div class="panel-head"><div><h3>Encaminhamentos registrados</h3><p>Q3 · volume disponível, desfecho ausente</p></div><span class="micro-badge warn">N/D para continuidade</span></div><div id="chartReferrals" class="chart"></div><p class="chart-note gap"><b>1.188 encaminhamentos podem ser contados.</b> Sem situação e data de conclusão, não é possível dizer quantos produziram continuidade assistencial concluída.</p></article>
+          </div>
+        </section>
+
+        <section id="agudo" class="view" aria-labelledby="titulo-agudo">
+          <div class="section-head"><div><p class="eyebrow">Submódulo 2</p><h2 id="titulo-agudo">Alerta, demanda aguda e repercussão funcional</h2><p>A DRH resolveu o denominador populacional dos afastamentos. A base específica da demanda aguda (Q4) continua sendo a principal lacuna do módulo.</p></div><span class="pill">4 indicadores</span></div>
+          <div id="acuteKpis" class="indicator-grid module-grid"></div>
+          <div class="grid two">
+            <article class="panel"><div class="panel-head"><div><h3>Militares afastados</h3><p>militares únicos por 1.000 ativos</p></div></div><div id="chartLeave" class="chart"></div><p class="chart-note">Nos anos completos, a taxa varia de 32,7/1.000 (2020) a 45,4/1.000 (2024). Não representa prevalência de transtorno.</p></article>
+            <article class="panel"><div class="panel-head"><div><h3>Dias perdidos</h3><p>dias únicos por 1.000 ativos</p></div></div><div id="chartDays" class="chart"></div><p class="chart-note">Maior carga em 2023: 750,5 dias/1.000, seguida de 742,0 em 2024.</p></article>
+          </div>
+          <div class="grid two">
+            <article class="panel"><div class="panel-head"><div><h3>Eventos de afastamento</h3><p>métrica auxiliar por 1.000 ativos</p></div></div><div id="chartEvents" class="chart"></div><p class="chart-note">O pico de eventos ocorre em 2024 (96,4/1.000). Eventos não devem ser usados como substituto de militares únicos ou dias perdidos.</p></article>
+            <article class="panel q4-panel"><div class="panel-head"><div><h3>Q4 — o ponto cego da resposta aguda</h3><p>o que ainda não é mensurável</p></div><span class="micro-badge no">base não disponível</span></div><div class="q4-grid"><div><b>KPI 05</b><span>Demandas psicológicas urgentes / 1.000</span><strong>N/D</strong><p>O denominador DRH existe; falta o numerador específico da Q4.</p></div><div><b>KPI 06</b><span>Tempo até primeiro acolhimento</span><strong>N/D</strong><p>Faltam marcos estruturados de entrada e de primeiro acolhimento.</p></div></div><div class="minimum-data"><b>Registro mínimo futuro</b><span>data/hora da demanda</span><span>tipo/prioridade</span><span>data/hora do 1º acolhimento</span><span>desfecho inicial</span></div><p class="chart-note gap"><b>Regra:</b> a classificação “urgente” existente na Q2 é apenas métrica assistencial auxiliar e não pode ser usada como proxy da Q4.</p></article>
+          </div>
+        </section>
+
+        <section id="qualidade" class="view" aria-labelledby="titulo-qualidade">
+          <div class="section-head"><div><p class="eyebrow">Confiança antes de performance</p><h2 id="titulo-qualidade">Dados, calculabilidade e qualidade</h2><p>Um indicador só entra na decisão quando fonte, fórmula, denominador, cobertura e limitações estão explícitos.</p></div><span class="pill">qualidade é parte do indicador</span></div>
+          <div class="quality-kpis">
+            <article class="dial-card"><div class="dial" style="--pct:62.5"><div><strong>62,5%</strong><span>5 de 8</span></div></div><div><b>Velocímetro de calculabilidade</b><p>Cinco indicadores possuem hoje fonte e regra suficientes para cálculo empírico.</p></div></article>
+            <article class="dial-card"><div class="dial good" style="--pct:100"><div><strong>100%</strong><span>78/78 meses</span></div></div><div><b>Cobertura do denominador DRH</b><p>Janeiro de 2020 a junho de 2026 possui observação mensal consolidada de efetivo ativo.</p></div></article>
+            <article class="dial-card"><div class="dial muted" style="--pct:0"><div><strong>N/D</strong><span>Q4</span></div></div><div><b>Cobertura da demanda aguda</b><p>A ausência é mostrada como lacuna informacional, nunca convertida em zero.</p></div></article>
+          </div>
+          <div class="grid two">
+            <article class="panel"><div class="panel-head"><div><h3>Denominador populacional da DRH</h3><p>média anual e intervalo mensal mínimo–máximo</p></div></div><div id="chartDenominator" class="chart tall"></div><p class="chart-note"><b>Regra metodológica:</b> taxa anual = numerador anual ÷ média aritmética dos efetivos mensais do mesmo ano × 1.000. Em 2026, seis meses compõem a média parcial.</p></article>
+            <article class="panel"><div class="panel-head"><div><h3>Inventário das fontes</h3><p>cobertura e uso analítico</p></div></div><div class="source-list"><div><span>Q1</span><b>Monitoramento</b><strong>9.307</strong><small>ciclos/registros · 2020–jun/2026</small></div><div><span>Q2</span><b>Atendimentos</b><strong>37.604</strong><small>atendimentos válidos · 2020–jun/2026</small></div><div><span>Q3</span><b>Encaminhamentos</b><strong>1.188</strong><small>desfecho ausente · 2023–jun/2026</small></div><div><span>Q4</span><b>Demanda aguda</b><strong>N/D</strong><small>base específica não disponível</small></div><div><span>Q5</span><b>Afastamentos</b><strong>2.854</strong><small>eventos · 2020–jun/2026</small></div><div><span>DRH</span><b>Efetivo ativo</b><strong>78</strong><small>snapshots mensais · 2020–jun/2026</small></div></div></article>
+          </div>
+          <div class="panel"><div class="panel-head"><div><h3>Matriz de calculabilidade dos oito indicadores</h3><p>resultado empírico, restrição e regra de publicação</p></div></div><div class="table-wrap"><table class="calc-table"><thead><tr><th>KPI</th><th>Resultado atual</th><th>Situação</th><th>Restrição / uso</th></tr></thead><tbody id="calcRows"></tbody></table></div></div>
+          <div class="quality-rules"><article><b>1. Ausente ≠ zero</b><p>Campo ou base inexistente permanece N/D.</p></article><article><b>2. 2026 ≠ ano completo</b><p>Janeiro–junho recebe marca visual própria.</p></article><article><b>3. Fórmula versionada</b><p>Mudança conceitual exige nova versão e nota de comparabilidade.</p></article><article><b>4. Denominador contextualizado</b><p>Alterações abruptas do efetivo devem receber anotação administrativa.</p></article><article><b>5. Sem causalidade automática</b><p>O painel aponta sinais; investigação contextual explica.</p></article></div>
+        </section>
+
+        <section id="governanca" class="view" aria-labelledby="titulo-governanca">
+          <div class="section-head"><div><p class="eyebrow">Arquitetura de informação</p><h2 id="titulo-governanca">Governança: do registro à decisão</h2><p>A utilidade do painel depende menos do desenho gráfico e mais da cadeia de custódia, qualidade, integração, documentação e responsabilização.</p></div><span class="pill">AAS ↔ DRH</span></div>
+          <div class="pipeline" aria-label="Fluxo de governança do dado"><article><span>01</span><b>Fontes</b><p>Q1–Q5 AAS + efetivo consolidado DRH.</p></article><i>→</i><article><span>02</span><b>Curadoria</b><p>Corte, limpeza, tipagem, duplicidades e minimização.</p></article><i>→</i><article><span>03</span><b>Qualidade</b><p>Completude, consistência, semântica e cobertura temporal.</p></article><i>→</i><article><span>04</span><b>Indicadores</b><p>Fórmula, denominador, polaridade, periodicidade e versão.</p></article><i>→</i><article><span>05</span><b>Inteligência</b><p>Série, contexto, storytelling, pergunta e decisão.</p></article></div>
+          <div class="grid two"><article class="panel"><div class="panel-head"><div><h3>Contrato mínimo do indicador</h3><p>o que cada ficha precisa declarar</p></div></div><div class="contract-grid"><span>definição</span><span>finalidade gerencial</span><span>fórmula</span><span>fonte</span><span>unidade</span><span>polaridade</span><span>periodicidade</span><span>denominador</span><span>completude</span><span>estabilidade semântica</span><span>limitação</span><span>versão/data</span></div></article><article class="panel"><div class="panel-head"><div><h3>Agenda de maturidade informacional</h3><p>três bloqueios, duas entregas de dados</p></div></div><ol class="maturity-list"><li><span>Q3</span><div><b>Registrar situação do encaminhamento</b><p>Status padronizado + data de conclusão para tornar KPI 04 calculável.</p></div></li><li><span>Q4</span><div><b>Estruturar demanda aguda</b><p>Entrada, prioridade e primeiro acolhimento para habilitar KPI 05 e KPI 06.</p></div></li><li><span>DRH</span><div><b>Automatizar denominador consolidado</b><p>Fornecimento periódico, agregado e documentado do efetivo de referência.</p></div></li><li><span>AAS</span><div><b>Versionar dicionário e regras</b><p>Manter significado, cobertura, alterações de processo e qualidade rastreáveis.</p></div></li></ol></article></div>
+          <div class="panel future-panel"><div><p class="eyebrow">Arquitetura futura</p><h3>Automação sem perder governança</h3><p>A implantação futura pode operar em fluxo somente leitura: fontes institucionais → extração agregada → validação → cálculo versionado → painel → registro de atualização. O drill-down deve chegar até períodos e categorias suficientemente agregadas, nunca até identificação nominal.</p></div><div class="future-stack"><span>fonte institucional</span><i>↓</i><span>ETL / qualidade</span><i>↓</i><span>camada analítica agregada</span><i>↓</i><span>indicadores versionados</span><i>↓</i><span>painel decisório</span></div></div>
+          <div class="governance-banner"><b>Princípio de uso:</b> o dado deve ser suficiente para orientar a gestão e insuficiente para expor a pessoa.</div>
+        </section>
+      </div>
+
+      <footer class="footer"><span>Protótipo técnico-metodológico · CGEPP 2026</span><span>Dados agregados tratados no estudo · AAS/CBMMG + DRH/CBMMG</span></footer>
+    </main>
   </div>
-</section>
-</div>
-<div class="footer">TCC CGEPP/ABM • Painel Estratégico de Inteligência em Saúde Mental do PSOBM • Fontes: AAS/CBMMG e DRH/CBMMG • Dados agregados e pseudonimizados • Corte 30/06/2026 • 2026* = janeiro–junho</div>
-</main>
-</div>
-<div id="drawerBg" class="drawer-bg"></div><aside id="drawer" class="drawer" aria-hidden="true"><header class="drawer-head"><div><h3 id="drawerTitle">Ficha técnica</h3><p id="drawerSub">Indicador qualificado</p></div><button id="close" class="close">×</button></header><div id="drawerBody" class="drawer-body"></div></aside>
-<script src="assets/dashboard.js"></script>
+  <dialog id="kpiDialog" class="kpi-dialog"><form method="dialog"><button class="dialog-close" aria-label="Fechar ficha técnica">×</button></form><div id="dialogContent"></div></dialog>
+  <script src="assets/dashboard.js"></script>
 </body>
 </html>

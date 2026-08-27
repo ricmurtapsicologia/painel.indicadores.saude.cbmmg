@@ -1,0 +1,22 @@
+name: Rebuild dashboard
+on:
+  push:
+    paths:
+      - 'buildparts/READY'
+permissions:
+  contents: write
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Assemble dashboard
+        run: |
+          cat buildparts/part_*.txt > index.html
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Atualiza painel real orientado à decisão"
+          git push

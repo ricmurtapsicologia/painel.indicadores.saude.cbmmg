@@ -1,39 +1,26 @@
-# Camada Python — Painel de Indicadores de Saúde
+# Contrato científico do painel
 
-## Estado de segurança
+Referência autoritativa: artigo científico do CGEPP 2026, versão final depositada V14.5. A página pública é uma **representação ilustrativa**, congelada no corte de 30/06/2026, e não sistema institucional implantado.
 
-A ETL foi adicionada em paralelo. `index.html` permanece intacto e continua exibindo o protótipo demonstrativo atual.
+## Resultados
 
-Ponto de rollback: `backup/pre-python-20260809`.
+- Oito indicadores: cinco calculáveis, três N/D.
+- I1: registros concluídos válidos / elegíveis × 100; 81,9% global e 83,6% na janela comparável 2023–2025.
+- I2: distribuição válida de dias convocação–avaliação; média, mediana e P90, com ressalva histórica e normativa.
+- I3: atendimentos válidos / beneficiários distintos no mesmo horizonte; não somar pessoas distintas entre períodos.
+- I4: N/D (Q3 sem situação e data de desfecho).
+- I5–I6: N/D (Q4 indisponível e ausência de marcos de episódio).
+- I7: militares distintos com início de afastamento no ano / efetivo médio ativo do mesmo ano × 1.000.
+- I8: dias únicos anuais consolidados, sem sobreposições de mesma chave técnica / efetivo médio ativo × 1.000.
 
-## Contrato dos oito indicadores
+## Engenharia de dados
 
-A camada Python implementa as fórmulas metodológicas já exibidas pelo painel:
+O script `scripts/dashboard_etl.py` valida **exclusivamente agregados pré-qualificados** (CSV, JSON ou XLSX). Campos pessoais e clínicos são recusados. Nenhuma medida inexistente é imputada; divisões sem denominador válido retornam N/D. Médias não substituem medianas e o programa exige resumos estatísticos da distribuição previamente validados.
 
-1. conclusão do monitoramento;
-2. tempo médio do ciclo;
-3. recorrência assistencial;
-4. continuidade assistencial;
-5. demandas urgentes por 1.000 militares;
-6. tempo médio até acolhimento;
-7. taxa de afastamento psicológico/psiquiátrico;
-8. dias perdidos.
+O comando `python scripts/dashboard_etl.py self-test` verifica o contrato; `build --source arquivo.csv` produz apenas um **artefato candidato**. Não altera a publicação nem autentica os dados institucionais de origem.
 
-O pipeline recebe somente dados agregados. Colunas identificáveis (nome, matrícula, CPF, telefone, paciente etc.) são recusadas.
+## Validação de release
 
-## Saída segura
+O workflow `.github/workflows/painel-quality.yml` executa: teste de contrato, auditoria estática 30/30, teste do navegador com Playwright, teclado, responsividade e impressão. Alterações devem passar nesses gates antes da atualização pública.
 
-`build` gera `artifacts/dashboard.generated.json`. Ele não substitui dados nem altera o frontend automaticamente.
-
-Formatos aceitos: CSV, JSON agregado e XLSX/XLSM.
-
-```bash
-python scripts/dashboard_etl.py self-test
-python scripts/dashboard_etl.py build --source dados_agregados.csv
-```
-
-O workflow `Python dashboard ETL audit` compila o pipeline e executa um teste contratual das oito fórmulas antes de qualquer futura integração.
-
-## Próxima promoção
-
-Somente após uma base institucional agregada estar disponível e os valores produzidos serem conferidos com a baseline do painel deve o frontend passar a consumir `dashboard.json`.
+Não reproduzir no GitHub dados individuais, chaves de identificação, datas de eventos por pessoa, diagnósticos ou credenciais.

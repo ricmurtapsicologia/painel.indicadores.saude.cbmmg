@@ -1,0 +1,46 @@
+name: Qualidade do painel CGEPP V14.5
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  scientific-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validacao sintatica
+        run: python -m py_compile scripts/dashboard_etl.py tests/audit30.py
+      - name: Oito contratos e ND
+        run: python scripts/dashboard_etl.py self-test
+      - name: Auditoria publica 30 de 30
+        run: python tests/audit30.py
+  browser-smoke-e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Instalar Playwright Chromium
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+      - name: Smoke e E2E
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/painel-http.log 2>&1 &
+          PID=$!
+          trap 'kill $PID || true' EXIT
+          node tests/panel_smoke.mjs
+      - name: Evidencias visuais desktop e mobile
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidencias-visuais-painel
+          path: artifacts/*.png
+          if-no-files-found: ignore

@@ -1,22 +1,14 @@
-name: Rebuild dashboard
+name: Legacy rebuild retired
 on:
-  push:
-    paths:
-      - 'buildparts/READY'
+  workflow_dispatch:
 permissions:
-  contents: write
+  contents: read
 jobs:
-  rebuild:
+  guard:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Assemble dashboard
+      - name: Validar entrada publicada
         run: |
-          cat buildparts/part_*.txt > index.html
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html
-          git diff --cached --quiet || git commit -m "Atualiza painel real orientado à decisão"
-          git push
+          test -f index.html
+          grep -q 'url=v070.html' index.html
+          echo "Publicacao mantida em V07; nenhuma reconstrucao automatica de buildparts."

@@ -1,5 +1,6 @@
 import { chromium } from 'playwright';
 import assert from 'node:assert/strict';
+import { mkdirSync } from 'node:fs';
 const base='http://127.0.0.1:8765/';
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
 const problems=[];
@@ -13,6 +14,8 @@ try {
  assert.equal(await page.locator('.kpi-interactive').count(),8);
  assert.equal(await page.locator('.status.nd').count(),3);
  assert.match(await page.locator('#exploreName').innerText(),/Conclusão/);
+ mkdirSync('artifacts',{recursive:true});
+ await page.screenshot({path:'artifacts/painel-desktop.png',fullPage:true});
  const values=['81,9%','14 dias','4,38','N/D','N/D','N/D','39,9','528,7'];
  for(let i=1;i<=8;i++){
     await page.locator('#selIndicador').selectOption(String(i));
@@ -31,6 +34,7 @@ try {
  assert.ok(await page.locator('#selIndicador').isVisible());
  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth > window.innerWidth+5);
  assert.equal(overflow,false,'Rolagem horizontal indevida no celular');
+ await page.screenshot({path:'artifacts/painel-mobile.png',fullPage:true});
  await page.emulateMedia({media:'print'});
  assert.equal(await page.locator('.quick-nav').isVisible(),false);
  assert.deepEqual(problems,[]);

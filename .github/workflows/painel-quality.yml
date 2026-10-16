@@ -37,3 +37,10 @@ jobs:
           PID=$!
           trap 'kill $PID || true' EXIT
           node tests/panel_smoke.mjs
+      - name: Evidencias visuais desktop e mobile
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidencias-visuais-painel
+          path: artifacts/*.png
+          if-no-files-found: ignore

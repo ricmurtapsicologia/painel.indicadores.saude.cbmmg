@@ -38,7 +38,7 @@ FIELDS = {
 }
 PERSONAL = re.compile(
     r"(?:^|_)(?:nome|name|cpf|rg|matricula|email|phone|telefone|address|"
-    r"endereco|patient|paciente|birth|nascimento|diagnos|cid|person_id|individual)(?:_|$)",
+    r"endereco|patient|paciente|birth|nascimento|diagnos\w*|cid|person_id|individual)(?:_|$)",
     re.IGNORECASE,
 )
 
